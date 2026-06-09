@@ -1,17 +1,18 @@
 // Functions
 // /////////////
 
-document.getElementById("normalButton").addEventListener("click", normalFunction);
-document.getElementById("normalButton2").addEventListener("click", getNormalValue);
-
-function normalFunction() {
-    document.getElementById("normalH2").textContent = "Hello World!";
-    document.getElementById("normalP").textContent = "This is a paragraph.";
+document.getElementById("Button1").addEventListener("click", changeText);
+document.getElementById("Button2").addEventListener("click", getValue);
+document.getElementById("Button3").onclick = function() {
+    document.getElementById("H2").textContent = "This page is dedicated to working with functions in JavaScript.";
 }
 
-function getNormalValue() {
-    let inputValue = document.getElementById("normalInput").value;
+function changeText() {
+    document.getElementById("H2").textContent = "This page is dedicated to working with functions in JavaScript.";
+}
+
+function getValue() {
+    let inputValue = document.getElementById("Input").value;
     console.log(inputValue);
-    document.getElementById("normalH2").textContent = inputValue;
-    document.getElementById("normalP").textContent = inputValue;
+    document.getElementById("H2").textContent = inputValue;
 }
