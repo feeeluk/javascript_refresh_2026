@@ -13,7 +13,9 @@ function forLoop(){
 }
 
 // ++ is the increment operator, it adds 1 to the variable
+// += is the addition assignment operator, it adds a specified value to the variable and assigns the result back to the variable
 // -- is the decrement operator, it subtracts 1 from the variable
+// -= is the subtraction assignment operator, it subtracts a specified value from the variable and assigns the result back to the variable
 
 // For Loop with Continue
 
