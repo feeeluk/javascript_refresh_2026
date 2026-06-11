@@ -43,6 +43,8 @@ function isEven(number){
 
 console.log(`Return - Is Even? = ` + isEven(9));
 
+// Return with ternary operator
+
 function isEvenTernary(number){
     return number % 2 === 0 ? true : false;
 }
