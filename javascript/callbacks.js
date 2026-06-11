@@ -23,7 +23,6 @@ function getCallbackInputValue(callback1, callback2) {
 
 function displayCallbackInputValue(value) {
     document.getElementById("callbackH2").textContent = value;
-    document.getElementById("callbackP").textContent = value;
 }
 
 function consoleLogCallback(callbackInputValue) {
