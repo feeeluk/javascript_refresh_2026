@@ -47,6 +47,9 @@ function forLoopWithBreak(){
     }    
 }
 
+// Advanced For Loops with arrays
+// see arrays.js
+
 // While Loops
 
 function whileLoop(){
