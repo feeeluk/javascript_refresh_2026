@@ -37,7 +37,7 @@ function displayToPage(result){
     document.getElementById("h2One").textContent = `Example 3: ${result}`;
 }
 
-// ////////////////////////////////////////////////////////////////////
+// Example 4
 
 document.getElementById("callbackButton").addEventListener("click", () => getCallbackInputValue(displayCallbackInputValue, consoleLogCallback)); // () => is an arrow function
 
@@ -53,5 +53,21 @@ function displayCallbackInputValue(value) {
 }
 
 function consoleLogCallback(callbackInputValue) {
-    console.log(callbackInputValue);
+    console.log(`Example 4: ${callbackInputValue}`);
+}
+
+// Example 5
+
+document.getElementById("callbackButton2").addEventListener("click", () => {
+    let input = document.getElementById("callbackInput2").value;
+    displayCallbackInputValue2(input);
+    consoleLogCallback2(input);
+})
+
+function displayCallbackInputValue2(value) {
+    document.getElementById("h2Three").textContent = value;
+}
+
+function consoleLogCallback2(callbackInputValue) {
+    console.log(`Example 5: ${callbackInputValue}`);
 }
