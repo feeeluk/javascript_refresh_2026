@@ -31,3 +31,13 @@ const numbers2 = [1,2,3,4,5,6];
 const squares2 = numbers2.map((element) => {return Math.pow(element,3)});
 
 console.log(`Example 4: ${squares2}`);
+
+// arrow functions can be simple or complicated. If simple they do not need to be enclosed in {} but, as soon as they are enclosed they will not RETURN anything unless explicitly requested!! E.G. using the previous example's code to demonstrate the point..
+
+// Example  - not using the 'return' keyword
+const numbers3 = [1,2,3,4,5,6];
+
+const squares3 = numbers3.map((element) => {Math.pow(element,3)});
+
+console.log(`Example 5: ${squares3}`);
+
