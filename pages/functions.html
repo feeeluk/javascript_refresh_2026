@@ -10,76 +10,107 @@
 
 <body>
 
-    <div id="Functions">
+    <div id="topic" class="topic">
 
-        <h1>Functions</h1>
+        <table>
 
-            <hr>
+            <tr>
+                <td id="title" class="title">
+                    <h1>Functions</h1>
+                </td>
+            </tr>
 
-                <p>
-                    A function is a section of reusable code.
-                    <br>
-                    Declare code once, use it whenever you want.
-                    <br>
-                    Call / invoke / execute it to run the code.
-                </p>
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        A function is a section of reusable code, i.e. declare some code once then use it whenever you want by 'calling' / 'invoking' / 'executing' it to run the code.
+                        <br>
 
-                <p>
-                    Functions can take arguments (also known as parameters in a different context)
-                    <br>e.g. 
-                </p>
-                <p>
-                    functionOne(argument1, argument2)
-                    <br>
-                    {
-                    <br><br>
-                    }
-                </p>
+                        Functions can take arguments (known as parameters when passed into the function).
+                        <br>
+                        <br>
 
-            <hr>
+                        Example - A simple function that accepts arguments:
+                    </p>
 
-                <h2 id="H2">Temporary Heading</h2>
+                    <p class="example">
+                        simpleFunction(argument1, argument2)
+                        <br>
+                        {
+                        <br>
+                            console.log(argument1);
+                        <br>
+                            console.log(argument2);
+                        <br>
+                        }
+                    </p>
 
-            <hr>
+                    <p>
+                        Example - Calling a function and passing it some parameters:
+                    </p>
+                    <p class="example">
+                        simpleFunction("one", "two");
+                    </p>
+                </td>
+            </tr>
 
-                <h4>EventListeners</h4>
-                <p>
-                    <button id="Button1">#1. Change heading</button>
-                </p>
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <h2 id="H2">Temporary Heading</h2>
+
+                    <hr>
+
+                        <h4>EventListeners</h4>
+                        <p>
+                            <button id="Button1">#1. Change heading</button>
+                        </p>
+                    
+                    <hr>
+                    
+                        <h4>Capturing User Input</h4>
+                        <p>
+                            <input type="text" id="Input" placeholder="Type something...">
+                            <button id="Button2">#2. Change heading</button>
+                        </p>
+                    
+                    <hr>
+
+                        <h4>'Click' events</h4>
+                        <p>
+                            <button id="Button3">#3. Change heading</button>
+                        </p>
+
+                    <hr>
+
+                        <!-- <button id="Button4">#4. Change heading using arguments</button> -->
+                    
+                    <p>
+                        See console output for more detail.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
             
-            <hr>
-            
-                <h4>Capturing User Input</h4>
-                <p>
-                    <input type="text" id="Input" placeholder="Type something...">
-                    <button id="Button2">#2. Change heading</button>
-                </p>
-            
-            <hr>
-
-                <h4>'Click' events</h4>
-                <p>
-                    <button id="Button3">#3. Change heading</button>
-                </p>
-
-            <hr>
-                <h4>Arguments</h4>
-                <p>
-                    Show console
-                </p>
-                <!-- <button id="Button4">#4. Change heading using arguments</button> -->
-
-            <hr>
-
-                <h4>Return</h4>
-                <p>
-                    Show console
-                </p>
+        </table>       
 
     </div>
-
-    <hr>
-    <a href="/index.html">Back</a>
 
 </body>
 </html>

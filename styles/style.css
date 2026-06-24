@@ -1,0 +1,19 @@
+h1,h3 {text-decoration: underline;}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border: solid;
+    border-bottom: none;
+}
+
+td {
+    border: none;
+    border-bottom: solid;
+    padding: 5px;
+}
+
+.example {
+    font-family: 'Courier New', Courier, monospace;
+    padding-left: 1rem;
+}
