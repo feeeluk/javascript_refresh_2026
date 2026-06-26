@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Variables</title>
+    <title>Constants</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <script src="/javascript/variables.js" defer></script>
+    <script src="/javascript/constants.js" defer></script>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 
             <tr>
                 <td id="title" class="title">
-                    <h1>Variables</h1>
+                    <h1>Constants</h1>
                 </td>
             </tr>
             
@@ -24,22 +24,33 @@
                     <h3>Description</h3>
                 
                     <p>
-                        A container that stores a value. Behaves as if it was the value that it contains. A variable's value can be changed after it is assigned (mutable).
+                        A container that stores a value. Behaves as if it was the value that it contains.
                         <br>
-                        <br>
+                        Constants cannot not change value once assigned (immutable).
+
+                        <p class="example">
+                            const constantOne = 1;
+                            <br>
+                            const constantTwo = "two";
+                            <br>
+                            const constantThree = [1,2,3];
+                        </p>
+                    
                         Declared:
                         <p class="example">
-                            let variableOne;
+                            const constantFour;
                         </p>
                         Assigned:
                         <p class="example">
-                            variableOne = 1;
+                            constantFour = 1;
                         </p>
 
                         Assigned and Declared at the same time:
                         <p class="example">
-                            let variableOne = 1;
+                            const constantFour = 1;
                         </p>
+
+                        *Note - even if an <a class="topic" href="\pages\arrays.html">array</a> or <a class="topic" href="\pages\objects.html">object</a> is assigned to a constant, the values inside that <a class="topic" href="\pages\arrays.html">array</a> or <a class="topic" href="\pages\objects.html">objects</a> can change, but NOT the assignment of the constant!
                     </p>
                 </td>
             </tr>
@@ -61,12 +72,12 @@
                     </p>
                 </td>
             </tr>
-
+            
             <tr>
                 <td>
                     <h3>Resources</h3>
                     <p>
-                        <a href="https://www.youtube.com/watch?v=nbX0MIV7-Ek&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=2">BroCode - Variables</a>
+                        <a href="">BroCode - </a>
                 </td>
             </tr>
 

@@ -1,4 +1,10 @@
-h1,h3 {text-decoration: underline;}
+h1,h3 {
+    text-decoration: underline;
+}
+
+h4 {
+    text-indent: 1rem;
+}
 
 table {
     width: 100%;
