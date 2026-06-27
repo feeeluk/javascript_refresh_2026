@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/map.js";
+
 // .map() = Creates a new array. Accepts a callback as a parameter and applies that function to each element of an array, then returns a new array
 
 // Example - Dates

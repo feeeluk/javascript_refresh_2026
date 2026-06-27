@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/function_expressions.js";
+
 // a way to define functions as values or variables
 
 

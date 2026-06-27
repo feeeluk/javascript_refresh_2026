@@ -1,6 +1,7 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/rest_parameters.js";
+
 // Rest parameters allow a funtion to work with a variable number of arguments by bundling them into an array
-
-
 
 const food1 = "pizza";
 const food2 = "hamburger";

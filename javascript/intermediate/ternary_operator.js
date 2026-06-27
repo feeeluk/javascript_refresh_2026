@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/ternary_operator.js";
+
 // a shortcut to if{} and else{} statements.
 // Helps to assign a variable based on a condition. E.G. condition ? codeIfTrue : codeIfFalse
 

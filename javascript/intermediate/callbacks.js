@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/callbacks.js";
+
 // Callback functions
 // a function that is passed as an argument to another function
 

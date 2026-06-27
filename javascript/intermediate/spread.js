@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/spread.js";
+
 
 // Show an array of numbers
 console.log("1:");

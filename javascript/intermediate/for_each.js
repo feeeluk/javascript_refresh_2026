@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/intermediate/for_each.js";
+
 // For Each
 
 // A method used to iterate over the elements of an array and apply a callback function to each element.
