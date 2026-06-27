@@ -34,14 +34,51 @@ console.log("Example 1");
         console.log(thirdElement);
         console.log(otherElements);
 
-// Example 5
-    console.log("Example 5");
+// Example 5 - Using destructuring with Objects
+    console.log("Example 5 - using destructuring with objects");
 
-// Example 6
-    console.log("Example 6");
+    const person1 = {
+        firstName: "Spongebob",
+        lastName: "Squarepants",
+        age: 30,
+        job: "Fry cook",
+    }
 
-// Example 7
-    console.log("Example 7");
+    const person2 = {
+    firstName: "Patrick",
+    lastName: "Star",
+    age: 34,
+    }
 
+    // const {firstName, lastName, age, job} = person2;
+
+    // console.log(firstName);
+    // console.log(lastName);
+    // console.log(age);
+    // console.log(job);
+
+// Example 6 - Setting default values
+    console.log("Example 6 - setting default values");
+
+    // const {firstName, lastName, age, job="TEST"} = person2;
+
+    // console.log(firstName);
+    // console.log(lastName);
+    // console.log(age);
+    // console.log(job);
+
+
+
+// Example 7 - Destructure in function parameters
+    console.log("Example 7 - using destructuring in function arguments");
+
+    function displayPerson({firstName, lastName, age, job="TEST"}){
+        console.log(`Name: ` + firstName + ` ` + lastName);
+        console.log(`Age: ` + age);
+        console.log(`Occupation: ` + job);
+    }
+
+    displayPerson(person1);
+    displayPerson(person2);
 
 
