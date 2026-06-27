@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/advanced/amber/nested_objects.js";
+
 const person = {
     name: "phil",
     age: 43,
