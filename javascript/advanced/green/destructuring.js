@@ -1,3 +1,7 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/advanced/green/destructuring.js";
+
+
 // Example 1 - using destructuring on variables (swapping them)
 console.log("Example 1");
 

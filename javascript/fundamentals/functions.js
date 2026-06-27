@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/fundamentals/functions.js";
+
 // Functions
 // /////////////
 

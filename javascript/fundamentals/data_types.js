@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/data_types.js";
+
 // Data Types in JavaScript
 
 let a = "pizza";

@@ -10,6 +10,8 @@ console.log(fruits[2]); // Output: banana
 
 
 // Event listeners - listen for button clicks from the page
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/fundamentals/arrays.js";
 document.getElementById("arrayPush").addEventListener("click", arrayPush);
 document.getElementById("arrayPop").addEventListener("click", arrayPop);
 document.getElementById("arrayUnshift").addEventListener("click", arrayUnshift);

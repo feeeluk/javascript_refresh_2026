@@ -1,3 +1,5 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/fundamentals/loops.js";
 document.getElementById(`forLoop`).addEventListener(`click`, forLoop);
 document.getElementById(`forLoopWithContinue`).addEventListener(`click`, forLoopWithContinue);
 document.getElementById(`forLoopWithBreak`).addEventListener(`click`, forLoopWithBreak);
