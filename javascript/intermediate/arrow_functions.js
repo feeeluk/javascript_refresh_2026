@@ -1,5 +1,5 @@
 document.getElementById("code").onclick = () =>
-  window.location = "/javascript/intermediate/arrow_function.js";
+  window.location = "/javascript/intermediate/arrow_functions.js";
 
 // a consise way to write function expressions. Good for simple functions that you use only once
 // (parameters) => some code

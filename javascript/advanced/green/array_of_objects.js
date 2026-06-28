@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/advanced/green/array_of_objects.js";
+
 const fruits = [{name: "apple", colour: "red", calories: 95},
                 {name: "orange", colour: "orange", calories: 45},
                 {name: "banana", colour: "yellow", calories: 105},

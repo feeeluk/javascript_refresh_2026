@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/advanced/green/async_await.js";
+
 // Example 1
 
     console.log("Example 1:")
