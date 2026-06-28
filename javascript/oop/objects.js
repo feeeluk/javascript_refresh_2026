@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/oop/object.js";
+
 // Example 1
 
 const person = {

@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/oop/static.js";
+
 class mathUtils{
     static PI = 3.14159;
 

@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/oop/this.js";
+
 const person1 = {
     name: "Phil",
     favFood: "Pizza",

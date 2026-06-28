@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/oop/getters_and_setters.js";
+
 // Example 1 - no getters and no setters, but an instance of a class with values that make no sense
 
 class Rectangle{

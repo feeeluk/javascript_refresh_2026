@@ -1,3 +1,6 @@
+document.getElementById("code").onclick = () =>
+  window.location = "/javascript/oop/classes.js";
+
 class Product{
     constructor(name, price){
         this.name = name;
