@@ -1,3 +1,6 @@
+// For Each
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/for_each.js";
 

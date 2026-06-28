@@ -1,3 +1,6 @@
+// Callbacks
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/callbacks.js";
 

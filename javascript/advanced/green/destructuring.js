@@ -1,3 +1,6 @@
+// Destructuring
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/advanced/green/destructuring.js";
 

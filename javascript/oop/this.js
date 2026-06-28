@@ -1,3 +1,6 @@
+// This
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/oop/this.js";
 

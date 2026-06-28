@@ -1,3 +1,6 @@
+// Arrays
+// ////////////////////////////////////////
+
 // Set up an array of fruits
 let fruits =["apple", "orange", "banana"];
 

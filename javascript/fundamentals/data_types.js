@@ -1,3 +1,6 @@
+// Data Types
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/data_types.js";
 

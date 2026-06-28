@@ -1,3 +1,6 @@
+// Ternary Operators
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/ternary_operator.js";
 

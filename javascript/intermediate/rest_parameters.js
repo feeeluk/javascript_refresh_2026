@@ -1,3 +1,6 @@
+// Rest Parameters
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/rest_parameters.js";
 

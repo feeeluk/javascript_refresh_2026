@@ -1,3 +1,6 @@
+// Array of Objects
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/advanced/green/array_of_objects.js";
 

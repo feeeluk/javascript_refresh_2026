@@ -1,3 +1,6 @@
+// Spread
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/spread.js";
 

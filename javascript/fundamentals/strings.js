@@ -1,3 +1,6 @@
+// Strings
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/fundamentals/strings.js";
 

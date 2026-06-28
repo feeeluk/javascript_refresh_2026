@@ -1,3 +1,6 @@
+// Arrow Functions
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/arrow_functions.js";
 

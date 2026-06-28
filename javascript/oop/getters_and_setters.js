@@ -1,3 +1,6 @@
+// Getters and Setters
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/oop/getters_and_setters.js";
 

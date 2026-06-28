@@ -1,8 +1,10 @@
+// Functions
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/fundamentals/functions.js";
 
-// Functions
-// /////////////
+
 
 document.getElementById("Button1").addEventListener("click", changeHeading);
 document.getElementById("Button2").addEventListener("click", changeHeadingUsingInputValue);

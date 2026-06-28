@@ -1,3 +1,6 @@
+// Super
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/oop/super.js";
 

@@ -1,3 +1,6 @@
+// Function Expressions
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/function_expressions.js";
 

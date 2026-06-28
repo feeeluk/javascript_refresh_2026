@@ -1,3 +1,6 @@
+// Map
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/intermediate/map.js";
 

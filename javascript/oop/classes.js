@@ -1,3 +1,6 @@
+// Classes
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/oop/classes.js";
 

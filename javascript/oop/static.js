@@ -1,3 +1,6 @@
+// Static
+// ////////////////////////////////////////
+
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/oop/static.js";
 
