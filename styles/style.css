@@ -25,6 +25,6 @@ td {
     background-color: lightpink
 }
 
-li {
+.description.li {
     margin-bottom: 1rem;
 }
