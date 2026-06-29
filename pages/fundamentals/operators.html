@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operators & Logical Operators</title>
+    <title>Operators</title>
     <link rel="stylesheet" href="/styles/style.css">
     <script src="/javascript/fundamentals/operators.js" defer></script>
 </head>
@@ -15,7 +15,7 @@
 
             <tr>
                 <td id="title" class="title">
-                    <h1>Operators & Logical Operators</h1>
+                    <h1>Operators</h1>
                 </td>
             </tr>
 
@@ -30,7 +30,64 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        <h4>Arithmetic Operators</h4>
+                        <ul>
+                            <li>+ (addition)</li>
+                            <li>- (subtraction)</li>
+                            <li>* (muliplication)</li>
+                            <li>/ (division)</li>
+                            <li>% (modulus)</li>
+                            <li>** (exponent / power)</li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        <h4>Comparison Operators</h4>
+                        <ul>
+                            <li>== (equal)</li>
+                            <li>!= (not equal)</li>
+                            <li>=== (strict equal)</li>
+                            <li>!== (strict not equal)</li>
+                            <li>> (greater than)</li>
+                            <li>< (less than)</li>
+                            <li>>= (greater than or equal)</li>
+                            <li><= (less than or equal)</li>
+                        </ul>
+                    </p>
+                    
+                    <p>
+                        <h4>Logical Operators</h4>
+                        <ul>
+                            <li>&& (AND - both must be true)</li>
+                            <li>|| (OR - either can be true)</li>
+                            <li>! (NOT - negates a value - flips a positive to a negative, vice-versa)</li>
+                        </ul>
+                    </p>
+                    <p>
+                        <h4>Assignment Operators</h4>
+                        <ul>
+                            <li>= (assign a value)</li>
+                            <li>+= (add and assign)</li>
+                            <li>-= (subract and assign)</li>
+                            <li>*= (multipy and assign)</li>
+                            <li>/+ (divide and assign)</li>
+                            <li>%= (modulus and assign)</li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        <h4>String Operators</h4>
+                        <ul>
+                            <li>+ (concatenate)</li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        <h4>Unary Operators</h4>
+                        <ul>
+                            <li>++ (increment)</li>
+                            <li>-- (decrement)</li>
+                        </ul>
                     </p>
                 </td>
             </tr>
@@ -39,16 +96,88 @@
                 <td id="why" class="why">
                     <h3>How is it used / why is it important?</h3>
                 
-                    <p>
+                    <ul>
+                        <li>
+                            <b>Arithmetic Operators</b>
+                            <br>
+                            Used for working with numbers.
+                        </li>
+
+                        <li>
+                            <b>Comparison Operators</b>
+                            <br>
+                            Used for comparing values (regardless of type). Some of these operators can only work with numbers e.g. 'greater than'. They are great for use with <a class="topic" href="\pages\fundamentals\if_statements.html">if statements</a>.
+                            <br>
+                            <br>
+                            See the <a class="topic" href="\pages\fundamentals\strict_equality.html">strict equality</a> section for more details on this operator.
+                        </li>
+
+                        <li>
+                            <b>Logical Operators</b>
+                            <br>
+                            Used for working with boolean values, e.g. create an if statement with TWO or more conditions (that can be mutually exlusive or NOT mutally exclusive).                                
+                            
+                            <p class="example">
+                                <b>Example 1 - if both values match then do 'xyz'</b>
+                                <br>
+                                if(value = something && anotherValue = somethingElse){
+                                <br>
+                                }
+                            </p>
+
+                            <p class="example">
+                                <b>Example 2 - if one or the other values match then do 'abc'</b>
+                                <br>
+                                if(value = something || anotherValue = somethingElse){
+                                <br>
+                                }
+                            </p>
+                        </li>
                         
-                    </p>
+                        <li>
+                            <b>Assignment Operators</b>
+                            <br>
+                            Used for asigning a value to a <a class="topic" href="\pages\fundamentals\variables.html">variable</a> or a <a class="top" href="\pages\fundamentals\constants.html">constant</a>.
+                            
+                            <p class="example">
+                                <b>Example 1 - simple assignment</b>
+                                <br>
+                                let total = 5;
+                            </p>
+                            
+                            <p class="example">
+                                <b>Example 2 - take the current value and add something to it</b>
+                                <br>
+                                total += 3; // adds 3 to 'total', so that it is now 8
+                            </p>
+
+                        </li>
+
+                        <li>
+                            <b>String Operators</b>
+                            <br>
+                            Used for string concatenation (adding different strings together).
+                            
+                            <p class="example">
+                                <b>Example 1 - using string concatenation</b>
+                                <br>
+                                "this" + " " + "is" + " " + "concatenation"
+                            </p>
+                        </li>
+
+                        <li>
+                            <b>Unary Operators</b>
+                            <br>
+                            Really simple incremental / decremental tools ideal for use as a counter (e.g. <a class="topic" href="\pages\fundamentals\loops.html">loops</a>).
+                        </li>
+                    </ul>
                 </td>
             </tr>
 
             <tr>
                 <td id="main" class="main">
                     <p>
-                        See console output for more detail.
+                        <!-- See console output for more detail. -->
                     </p>
                 </td>
             </tr>
@@ -57,7 +186,12 @@
                 <td>
                     <h3>Resources</h3>
                     <p>
-                        <a href="">BroCode - </a>
+                        <a href="https://www.youtube.com/watch?v=FyGIKD2fxIo&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=3">BroCode - Arithmetic Operators</a>
+                        <br>
+                        <a href="https://www.youtube.com/watch?v=ovWYhDVQiR8&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=18">BroCode - Logical Operators</a>
+                        <br>
+                        <a href="https://www.youtube.com/watch?v=O7aUm0AuUy4&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=18">BroCode - Strict Equality</a>
+                    </p>
                 </td>
             </tr>
 
