@@ -30,7 +30,7 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        Strict Equality / Scrict Inequality (3 = signs) is different to equality / inequality (2 = signs) in that it checks both the VALUE and the DATA TYPE!
                     </p>
                 </td>
             </tr>
@@ -40,7 +40,15 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        
+                        General equality (==) is not very specific as JavaScript doesn't enforce <a class="topic" href="\pages\fundamentals\variables.html">variable</a> <a class="topic" href="\pages\fundamentals\data_types.html">data types</a>. Therefore using a standard equality check could easily evaluate a string as the same value as a number, etc.. So using the strict equality operator can be help mitigate these sort of errors, e.g. user input is often capured as a <a class="topic" href="\pages\fundamentals\strings.html">string</a>, so this operator could be used to avoid coding errors.
+                    </p>
+                    <p class="example">
+                        <b>Example 1 - a variable containing a string</b>
+                        <br>
+                        const PI = 3.14; // constant contains a number
+                        <br>
+                        if(PI = "3.14"){} // evaluates as TRUE even though the value was a string!
+
                     </p>
                 </td>
             </tr>
@@ -57,7 +65,7 @@
                 <td>
                     <h3>Resources</h3>
                     <p>
-                        <a href="">BroCode - </a>
+                        <a href="https://www.youtube.com/watch?v=O7aUm0AuUy4&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=21">BroCode - Strict Operators</a>
                 </td>
             </tr>
 
