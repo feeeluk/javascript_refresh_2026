@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DOM</title>
+    <title>Element Selectors</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <script src="/javascript/advanced/green/dom.js" defer></script>
+    <script src="/javascript/intermediate/element_selectors.js" defer></script>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 
             <tr>
                 <td id="title" class="title">
-                    <h1>DOM / Document Object Model</h1>
+                    <h1>Element Selectors</h1>
                 </td>
             </tr>
 
@@ -29,9 +29,18 @@
                 <td id="description" class="description">
                     <h3>Description</h3>
                 
-                <p>
-                    DOM (Document Object Model) represents the actual web page structure.
-                </p>
+                    <p>
+                        Methods used to target and manipulate HTML elements. They allow you to select one of multiple HTML elements from the DOM.
+
+                            <ul  class="example">
+                                <li>document.getElementById() // Element or Null</li>
+                                <li>document.getElementsClassName() // HTML Collection</li>
+                                <li>document.getElementByTagName() // HTML Collection</li>
+                                <li>document.querySelector() // Element of Null</li>
+                                <li>document.querySelectorAll() // Nodelist</li>
+                            </ul>
+                        
+                    </p>
                 </td>
             </tr>
 
@@ -40,7 +49,9 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        By manipulating the DOM developers are able to read and modify elements, text, attributes, and layout using JavaScript code (no HTML!).
+                        Element Selectors allow a developer to grab specific elements from the page (e.g., buttons, inputs, sections) so they can update content, attach events, or manipulate the UI.
+                        <br>
+                        This is a CORE part of JavaScript as it is one of the ways that JavaScript interacts with HTML.
                     </p>
                 </td>
             </tr>
@@ -57,7 +68,7 @@
                 <td>
                     <h3>Resources</h3>
                     <p>
-                        <a href="https://www.youtube.com/watch?v=RKXIMnSwUcg&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=65">BroCode - DOM</a>
+                        <a href="https://www.youtube.com/watch?v=FQtjI1PC5Z0&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=64">BroCode - Element Selectors</a>
                 </td>
             </tr>
 

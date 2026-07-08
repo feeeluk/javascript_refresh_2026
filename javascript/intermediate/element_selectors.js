@@ -1,5 +1,5 @@
-// DOM
+// Element Selectors
 // ////////////////////////////////////////
 
 document.getElementById("code").onclick = () =>
-  window.location = "/javascript/advanced/green/dom.js";
+  window.location = "/javascript/intermediate/element_selectors.js";
