@@ -32,7 +32,7 @@ document.getElementById("code").onclick = () =>
   
   console.log(max);
 
-  // Example 2
+  // Example 3
 
     console.log("Example 3 - return the smallest value from an array");
 
