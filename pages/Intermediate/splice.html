@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shuffle</title>
+    <title>Splice()</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <script src="/javascript/intermediate/shuffle.js" defer></script>
+    <script src="/javascript/intermediate/splice.js" defer></script>
 </head>
 <body>
 
@@ -15,7 +15,7 @@
 
             <tr>
                 <td id="title" class="title">
-                    <h1>Shuffle</h1>
+                    <h1>Splice()</h1>
                 </td>
             </tr>
 
@@ -30,8 +30,21 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        Splice lets you remove, replace, or insert items in an <a class="topic" href="\javascript\fundamentals\arrays.js">array</a>.
                     </p>
+                    <p>
+                        Mutates the original array. Adds, removes, or replaces items.
+                    </p>
+                    <p>
+                        array.splice(index, howManyItemsToDelete, addItem1AtIndex, addItem2AtIndex, etc...)
+                    </p>
+
+                    <ul>
+                        <li>Remove items</li>
+                        <li>Insert items</li>
+                        <li>Replace items</li>
+                        <li>Remove everything from a point onward</li>
+                    </ul>
                 </td>
             </tr>
 
@@ -40,7 +53,7 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        
+                        Splice() is used to change an array in place — by removing, inserting, or replacing items. It’s important because it’s the only built‑in array method that can surgically modify the original array at any position.
                     </p>
                 </td>
             </tr>
