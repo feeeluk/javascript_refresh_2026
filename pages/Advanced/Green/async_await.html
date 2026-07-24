@@ -33,7 +33,21 @@
                         Synchronous = Executed line by line consecutively in a sequential manner. Code that waits for an operation to complete.
                         <br>
                         Asynchronous = Allows multiple operations to be performed concurrently without waiting. Doesn't block the execution flow and allows the program to continue.
-                        
+                    </p>
+                    <p>
+                        Different ways of working can be achieved by mixing these concepts.. For example, you could set one function to run asynchronously, but then be followed by synchronous code that will not execute until the asynchronous function has finished.
+                    </p>
+
+                    <p>
+                        Async / Await
+                        <br>
+                        Async = makes a function return a promise
+                        <br>
+                        Await = make an async function wait for a promise to complete
+                    </p>
+
+                    <p>
+                        Allows you to write asynhronous code in a synchronous manner. Async doesn't have resolve or reject parameters. Everything after Await is placed in an event queue.
                     </p>
                 </td>
             </tr>

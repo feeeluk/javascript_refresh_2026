@@ -17,7 +17,7 @@ function walkDog(){
         reject("You did not walk the dog");
       }
 
-    }, 2000);
+    }, 1000);
 
   });
 }
@@ -34,7 +34,7 @@ function cleanKitchen(){
       else {
         reject("You did not clean the kitchen")
       }
-    }, 4000)
+    }, 2000)
   })
 }
 
@@ -42,7 +42,7 @@ function takeOutTrash(){
   return new Promise((resolve, reject) => {
     setTimeout(() =>{
 
-      const trashTakenOut = false;
+      const trashTakenOut = true;
 
       if(trashTakenOut){
         resolve("You took out the trash")
@@ -50,28 +50,87 @@ function takeOutTrash(){
       else {
         reject("You did not take out the trash")
       }
-    }, 6000)
+    }, 3000)
   })
 }
 
-// chained / sequential
+function emptyDishWasher(){
+  return new Promise((resolve, reject) => {
+    setTimeout(() =>{
 
-  walkDog().then(value => {console.log(value); return cleanKitchen()})
-           .then(value => {console.log(value); return takeOutTrash()})
-           .then(value => {console.log(value); console.log("You finished all the chores")}).catch(error => console.error(error));
+      const dishWasherEmptied = false;
+
+      if(dishWasherEmptied){
+        resolve("You emptied the dishwasher")
+      }
+      else {
+        reject("You did not empty the dishwasher")
+      }
+    }, 1000)
+  })
+}
+
+
+// parallel / independent (should take 3 seconds for all to execute as 3 seconds is the longest function)
+
+  document.getElementById("independent").addEventListener("click", () => {
+    walkDog()
+      .then(console.log)
+      .catch(console.error);
+
+    cleanKitchen()
+      .then(console.log)
+      .catch(console.error);
+
+    takeOutTrash()
+      .then(console.log)
+      .catch(console.error);
+  })
 
 
 
-// parallel / independent
+// chained / sequential (should take 6 seconds as that is the total of all 3 combined)
 
-walkDog()
-  .then(value => console.log("2 - ",value))
-  .catch(err => console.error("2 - ", err));
+  document.getElementById("sequential").addEventListener("click", () => {
 
-cleanKitchen()
-  .then(value => console.log("2 - ",value))
-  .catch(err => console.error("2 - ", err));
+    walkDog()
+      .then(value => {console.log(value); return cleanKitchen()})
+      .then(value => {console.log(value); return takeOutTrash()})
+      .then(value => {console.log(value); console.log("You finished all the chores")})
+      .catch(error => console.error(error));
+    });
 
-takeOutTrash()
-  .then(value => console.log("2 - ",value))
-  .catch(err => console.error("2 - ", err));
+
+
+// chained / sequential (should take 7 seconds as that is the total of all 4 combined BUT as the dishwasher was not done the chain will fail!)
+
+  document.getElementById("sequential2").addEventListener("click", () => {
+
+    emptyDishWasher()
+      .then(value => {console.log(value); return walkDog()})
+      .then(value => {console.log(value); return cleanKitchen()})
+      .then(value => {console.log(value); return takeOutTrash()})
+      .then(value => {console.log(value); console.log("You finished all the chores")})
+      .catch(error => console.error(error));
+    });
+
+
+
+// parallel / independent (should take 3 seconds for all to execute as 3 seconds is the longest function)
+
+  document.getElementById("independent2").addEventListener("click", () => {
+    emptyDishWasher()
+      .then(console.log)
+      .catch(console.error);
+    walkDog()
+      .then(console.log)
+      .catch(console.error);
+
+    cleanKitchen()
+      .then(console.log)
+      .catch(console.error);
+
+    takeOutTrash()
+      .then(console.log)
+      .catch(console.error);
+  })

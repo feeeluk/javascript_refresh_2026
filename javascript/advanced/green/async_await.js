@@ -7,32 +7,34 @@ document.getElementById("code").onclick = () =>
 
 // Example 1
 
-    console.log("Example 1:")
-    console.log("Task 1")
-    console.log("Task 2")
-    console.log("Task 3")
+    console.log("Example 1 - Demonstration of synchronous code")
+
+    console.log("Task 1 - synchronous")
+    console.log("Task 2 - synchronous")
+    console.log("Task 3 - synchronous")
 
     
-// Example 2 - Demonstration of async ('setTimeout()' is natively async)
+// Example 2
     
-    console.log("Example 2:")
-    setTimeout(() => console.log("Task 1"), 1000);
-    console.log("Task 2")
-    console.log("Task 3")
+    console.log("Example 2 - Demonstration of asynchronous behaviour ('setTimeout()' is natively async)")
 
-// Example 3 - using Callbacks
+    setTimeout(() => console.log("Task 1 - asynchronous"), 1000);
+    console.log("Task 2 - synchronous")
+    console.log("Task 3 - synchronous")
 
+// Example 3
+
+    setTimeout(() => console.log("Example 3 - demonstration of asynchronous code used alongside synchronous code (via callbacks)"), 1001);
+    
     function func1(callback){
-        setTimeout(() => {  console.log("Task 1")
+        setTimeout(() => {  console.log("Task 1 - asynchronous")
                             callback()},
-                            1000);
+                            4000);
     }
-
 
     function func2(){
-        console.log("Task 2");
-        console.log("Task 3");
+        console.log("Task 2 - synchronous");
+        console.log("Task 3 - synchronous");
     }
-
-    setTimeout(() => console.log("Example 3:"),2000);
-    setTimeout(() => func1(func2), 2001);
+    
+    func1(func2);

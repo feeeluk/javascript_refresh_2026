@@ -50,6 +50,20 @@
                     <p>
                         See console output.
                     </p>
+
+                    <button id="independent">Independent / Parallel</button>
+                    <button id="sequential">Sequential / Chained</button>
+
+                    <p>
+                        If one of the chained promises rejects, then the chain stops. None of the following chained functions will run.
+                    </p>
+                    
+                    <p>
+                        Whereas if one of the independent promises rejects, then it makes no difference. It might appear at first that this is 'better' but it's simply a case of 'horses for courses'.
+                    </p>
+                    
+                    <button id="sequential2">Sequential / Chained with a promise that fails early in the chain</button>
+                    <button id="independent2">Independent / Parallel with a promise that fails</button>
                 </td>
             </tr>
             
