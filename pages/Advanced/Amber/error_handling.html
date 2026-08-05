@@ -30,7 +30,21 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        Error Handling ensures the program can gracefully respond when something fails (like a network error or invalid <a class="topic" href="\pages\advanced\green\json.html">JSON</a>) instead of crashing.
+                        <br>
+                        There are several different types of error, but unless they are handled correctly they will interrupt the flow of the program, and the program may not even complete.
+                    </p>
+
+                    <p>
+                        When we say 'handle' we mean use 'try()', 'catch()', and 'finally()' blocks.
+                    </p>
+
+                    <p>
+                        <ul>
+                            <li>try() = encloses code that might potentially cause an error</li>
+                            <li>catch() = Catch and handle any thrown errors from try()</li>
+                            <li>finally() = optional, but always executes. Used mostly for clean up, e.g. closes files, close connections, release resources.</li>
+                        </ul>
                     </p>
                 </td>
             </tr>
@@ -40,7 +54,9 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        Error Handling ensures the program can gracefully respond when something fails (like a network error or invalid <a class="topic" href="\pages\advanced\green\json.html">JSON</a>) instead of crashing.
+                        An error is an object that is created to represent a problem that occurs.
+                        <br>
+                        They often occur with user input or establishing a connection.
                     </p>
                 </td>
             </tr>
