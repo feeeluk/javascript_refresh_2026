@@ -41,10 +41,14 @@
 
                     <p>
                         <ul>
-                            <li>try() = encloses code that might potentially cause an error</li>
-                            <li>catch() = Catch and handle any thrown errors from try()</li>
-                            <li>finally() = optional, but always executes. Used mostly for clean up, e.g. closes files, close connections, release resources.</li>
+                            <li>try{ } = encloses code that might potentially cause an error</li>
+                            <li>catch{ } = Catch and handle any thrown errors from try()</li>
+                            <li>finally{ } = optional, but always executes. Used mostly for clean up, e.g. closes files, close connections, release resources.</li>
                         </ul>
+                    </p>
+
+                    <p>
+                        'Throwing' errors is different than generically catching all errors. We can 'throw' errors for specific situations. These errors have to be thrown in the 'try' block. 
                     </p>
                 </td>
             </tr>
@@ -68,15 +72,15 @@
                     </p>
 
                     <p>
-                        <button id="exampleOne">Example 1 - No try()/catch()</button>
+                        <button id="exampleOne">Example 1 - No try/catch without error</button>
                         <br>
-                        <button id="">2</button>
+                        <button id="exampleTwo">Example 2 - No try/catch with error</button>
                         <br>
-                        <button id="">3</button>
+                        <button id="exampleThree">Example 3 - caught error</button>
                         <br>
-                        <button id="">4</button>
+                        <button id="exampleFour">Example 4 - Throwing errors</button>
                         <br>
-                        <button id="">5</button>
+                        <button id="exampleFive">5</button>
                     </p>
                 </td>
             </tr>
