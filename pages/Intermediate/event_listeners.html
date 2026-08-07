@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listeners</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/intermediate/event_listeners.js" defer></script>
+    <style>
+        #boxOne{
+            background: lightgreen;
+            width: 400px;
+            height: 400px;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #boxTwo{
+            position: static;
+        }
+
+        #boxThree{
+            position: relative;
+            background-color: lightblue;
+            width: 200px;
+            height: 200px;
+            font-size: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Event Listeners</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Listen for specific events to create interactive web pages
+                        <br>
+                        events: click, mouseover, mouseout, etc.
+                        <br>
+                        .addEventListener(event, callback (or an anonymous function, or an arrow function));
+                    </p>
+
+                    <h4>Mouse events</h4>
+                    
+                    <p class="indent">
+                        Interact with the box below with the mouse. Move over it, move out of it and click on it.
+                    </p>
+
+                    <div id="boxOne">
+                        Click me 😊
+                    </div>
+
+                    <h4>Keyboard events</h4>
+                    
+                    <p class="indent">
+                        Press the arrow keys to move the box below.
+                    </p>
+
+                    <div id="boxTwo">
+                        <div id="boxThree">
+                            😊
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        Click me 
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output for more detail.
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="http://youtube.com/watch?v=g_vXSKbfUiQ&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=68">BroCode - Mouse events</a>
+                        <br>
+                        <a href="https://www.youtube.com/watch?v=q32skvBgxo4&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=68">BroCode - Keyboard events</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

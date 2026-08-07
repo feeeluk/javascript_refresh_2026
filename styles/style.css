@@ -28,3 +28,7 @@ td {
 .description.li {
     margin-bottom: 1rem;
 }
+
+.indent {
+    text-indent: 1rem;
+}
