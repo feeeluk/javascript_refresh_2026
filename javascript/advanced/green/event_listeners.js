@@ -2,7 +2,7 @@
 // ////////////////////////////////////////
 
 document.getElementById("code").onclick = () =>
-  window.location = "/javascript/intermediate/event_listeners.js";
+  window.location = "/javascript/advanced/green/event_listeners.js";
 
 
 // Mouse events

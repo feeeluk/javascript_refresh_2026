@@ -1,9 +1,9 @@
-// Async / Await
+// Asynchrnous code
 // ////////////////////////////////////////
 
 
 document.getElementById("code").onclick = () =>
-  window.location = "/javascript/advanced/green/async_await.js";
+  window.location = "/javascript/intermediate/asynchronous_code.js";
 
 document.getElementById("exampleOne").addEventListener("click", () => exampleOne());
 document.getElementById("exampleTwo").addEventListener("click", () => exampleTwo());

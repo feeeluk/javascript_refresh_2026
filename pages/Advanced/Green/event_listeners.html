@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Listeners</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <script src="/javascript/intermediate/event_listeners.js" defer></script>
+    <script src="/javascript/advanced/green/event_listeners.js" defer></script>
     <style>
         #boxOne{
             background: lightgreen;
@@ -61,7 +61,9 @@
                         Listen for specific events to create interactive web pages
                         <br>
                         events: click, mouseover, mouseout, etc.
-                        <br>
+                    </p>
+
+                    <p class="example">
                         .addEventListener(event, callback (or an anonymous function, or an arrow function));
                     </p>
 
@@ -95,7 +97,37 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        Click me 
+                        Event listeners allow JavaScript to react to user actions in real time, which is what makes web pages feel interactive and alive. They also keep code modular by letting you attach multiple independent behaviours to the same element without overwriting anything, unlike a single onclick handler.
+                    </p>
+
+                    <p>
+                        There are two approaches to handling 'events'. The first is direct, the second is using an 'event listener'.
+                        <br>
+                        The 'direct approach' (see example below) is old hat, and can only hold one function — assigning another one replaces it. However, 'event listeners' let you attach multiple independent handlers.
+                    </p>
+
+                    <h4>Direct</h4>
+                    <p class="example">
+                        const box = document.getElementById("myBox");
+                        <br>
+
+                        box.onclick = () => {
+                        <br>
+                        console.log("Box was clicked");
+                        <br>
+                        };
+                    </p>
+
+                    <h4>Event Listener</h4>
+                    <p class="example">
+                        const box = document.getElementById("myBox");
+                        <br>
+
+                        box.addEventListener("click", () => {
+                        <br>
+                        console.log("Box was clicked");
+                        <br>
+                        });
                     </p>
                 </td>
             </tr>
