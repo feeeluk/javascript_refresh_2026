@@ -30,7 +30,21 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        Closures allow <a class="topic" href="\pages\fundamentals\functions.html">functions</a> to “remember” <a class="topic" href="\pages\fundamentals\variables.html">variables</a> from their creation context, enabling patterns like private state, event handler factories, and custom utility functions.
+                    </p>
+                    
+                    <p>
+                        At first the concept of <b>Closures</b> seems very abstract and complicated.
+                        <br>
+                        <b>Closures ARE NOT COMPLICATED AT ALL!</b>
+                    </p>
+
+                    <p>
+                        A <b>Closure</b> is simply a function that retains access to the specific scope in which it was created, even after that scope has finished executing.
+                    </p>
+
+                    <p>
+                        That seems very wordy, but it is essentially very simple. Imagine nested functions. All child functions have access to the resurces created in the parent function. Those resources expire when the function expires, but if you <b>return</b> the child function as a result of running the parent function and store it in memory, then the parent's resources are still alive. 
                     </p>
                 </td>
             </tr>
@@ -40,7 +54,7 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        Closures allow <a class="topic" href="\pages\fundamentals\functions.html">functions</a> to “remember” <a class="topic" href="\pages\fundamentals\variables.html">variables</a> from their creation context, enabling patterns like private state, event handler factories, and custom utility functions.
+
                     </p>
                 </td>
             </tr>
@@ -50,6 +64,20 @@
                     <p>
                         See console output.
                     </p>
+
+                    <p>
+                        Points: <span id="points"></span>
+                    </p>
+
+                        <button id="showScore">Show Score</button>
+                        <br>
+                        <button id="increaseScore">Increase Score</button>
+                        <br>
+                        <button id="decreaseScore">Decrease Score</button>
+                        <br>
+                        <button id="resetScore">Reset Score</button>
+                    </p>
+
                 </td>
             </tr>
             

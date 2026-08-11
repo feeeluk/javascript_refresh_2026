@@ -32,3 +32,14 @@ td {
 .indent {
     text-indent: 1rem;
 }
+
+a,
+a:active,
+a:visited {
+    color: blue;
+    text-decoration: underline;
+}
+
+.toComplete {
+    color: red;
+}
