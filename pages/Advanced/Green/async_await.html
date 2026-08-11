@@ -30,40 +30,39 @@
                     <h3>Description</h3>
                 
                     <p>
-                        Synchronous = Executed line by line consecutively in a sequential manner. Code that waits for an operation to complete.
+                        Async = makes a function return a promise.
                         <br>
-                        Asynchronous = Allows multiple operations to be performed concurrently without waiting. Doesn't block the execution flow and allows the program to continue.
-                    </p>
-                    <p>
-                        Different ways of working can be achieved by mixing these concepts.. For example, you could set one function to run asynchronously, but then be followed by synchronous code that will not execute until the asynchronous function has finished.
+                        Await = make an async function WAIT for a promise to complete.
                     </p>
 
                     <p>
-                        Async / Await
+                        <u>Using Async without await is common practice!!!!!!!!!!!</u>
                         <br>
-                        Async = makes a function return a promise
+                        <b>You DO NOT HAVE TO USE AWAIT!</b>
                         <br>
-                        Await = make an async function wait for a promise to complete
+                        Using AWAIT allows you to write asynhronous code in an synchronous manner.
+                        <br>Everything after Await is placed in an event queue.
+                        <br>
+                        AWAIT literally pauses the flow of the program until the promise has returned (literal meaning. It 'awaits' the return of the promise before continuing).
+                        <br>
+                        <br>
+                        Async promises don't have resolve or reject parameters.
                     </p>
 
-                    <p>
-                        Allows you to write asynhronous code in a synchronous manner. Async doesn't have resolve or reject parameters. Everything after Await is placed in an event queue.
-                    </p>
-
-                    <p>
-                        In the examples used, we create an async function that calls functions that already return a promise. 
-                    </p>
-
-                    <button id="exampleOne">Example 1 - Demonstration of synchronous code</button>
+                    <button id="exampleOne">Example 1 - Single call to an async function</button>
                     <br>
-                    <button id="exampleTwo">Example 2 - Demonstration of asynchronous code</button>
+                    <button id="exampleTwo">Example 2 - Two calls to async functions</button>
                     <br>
-                    <button id="exampleThree">Example 3 - Demonstration of asynchronous code used alongside synchronous code (via callbacks)</button>
+                    <button id="exampleThree">Example 3 - Three calls to async functions</button>
                     <br>
-                    <button id="exampleFour">Example 4 - Demonstration of multiple async functions running at the same time</button>
+                    <button id="exampleFour">Example 4 - Four calls to async functions</button>
                     <br>
-                    <!-- <button id="exampleFive">Example 5</button>
-                    <br> -->
+                    <button id="exampleFive">Example 5 - Four calls to async functions inside try/catch blocks</button>
+                    <br>
+                    <button id="exampleSix">Example 6 - Four calls to async functions inside individual try/catch blocks</button>
+                    <br>
+                    <button id="exampleSeven">Example 7 - Four calls to async functions in parallel</button>
+                    <br>
                 </td>
             </tr>
 
@@ -92,9 +91,8 @@
                 <td>
                     <h3>Resources</h3>
                     <p>
-                        <a href="https://www.youtube.com/watch?v=Coyy79wRz_s&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=60">BroCode - Asynchronous code</a>
-                        <br>
                         <a href="https://www.youtube.com/watch?v=9j1dZwFEJ-c&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=76">BroCode - Async / Await</a>
+                    </p>
                 </td>
             </tr>
 

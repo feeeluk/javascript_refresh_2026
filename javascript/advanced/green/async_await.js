@@ -5,75 +5,238 @@
 document.getElementById("code").onclick = () =>
   window.location = "/javascript/advanced/green/async_await.js";
 
-document.getElementById("exampleOne").addEventListener("click", () => exampleOne());
-document.getElementById("exampleTwo").addEventListener("click", () => exampleTwo());
-document.getElementById("exampleThree").addEventListener("click", () => exampleThree());
-document.getElementById("exampleFour").addEventListener("click", () => exampleFour());
+document.getElementById("exampleOne").addEventListener("click", () => doChoresOne());
+document.getElementById("exampleTwo").addEventListener("click", () => doChoresTwo());
+document.getElementById("exampleThree").addEventListener("click", () => doChoresThree());
+document.getElementById("exampleFour").addEventListener("click", () => doChoresFour());
+document.getElementById("exampleFive").addEventListener("click", () => doChoresFive());
+document.getElementById("exampleSix").addEventListener("click", () => doChoresSix());
+document.getElementById("exampleSeven").addEventListener("click", () => doChoresSeven());
 
+   
 
-// Example 1 - Demonstration of synchronous code
+    function walkDog(){
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
 
-    function exampleOne(){
-        console.log("Example 1 - Demonstration of synchronous code")
+            const dogWalked = true;
 
-        // synchronous
-        console.log("Task 1 - synchronous")
-        console.log("Task 2 - synchronous")
-        console.log("Task 3 - synchronous")
+            if (dogWalked){
+                resolve("You walked the dog");
+            }
+            else {
+                reject("You did not walk the dog");
+            }
+
+            }, 1000);
+
+        });
+        }
+
+    function cleanKitchen(){
+        return new Promise((resolve, reject) => {
+        setTimeout(() =>{
+
+        const kitchenCleaned = false;
+        
+        if(kitchenCleaned){
+            resolve("You cleaned the kitchen");
+        }
+        else {
+            reject("You did not clean the kitchen")
+        }
+        }, 2000)
+    })
     }
 
+    function takeOutTrash(){
+        return new Promise((resolve, reject) => {
+        setTimeout(() =>{
+
+        const trashTakenOut = true;
+
+        if(trashTakenOut){
+            resolve("You took out the trash")
+        }
+        else {
+            reject("You did not take out the trash")
+        }
+        }, 3000)
+    })
+    }
+
+    function emptyDishWasher(){
+        return new Promise((resolve, reject) => {
+        setTimeout(() =>{
+
+        const dishWasherEmptied = true;
+
+        if(dishWasherEmptied){
+            resolve("You emptied the dishwasher")
+        }
+        else {
+            reject("You did not empty the dishwasher")
+        }
+        }, 1000)
+    })
+    }
+
+// Example 1 - Single call to an async function
+
+    async function doChoresOne() {
+        console.log("Example 1 - Single call to an async function")
+        
+        const walkDogResult = await walkDog();
+        console.log(walkDogResult);
+    }
+
+// Example 2 - Two calls to async functions
+
+    async function doChoresTwo() {
+        console.log("Example 2 - Two calls to async functions");
+        
+        const walkDogResult = await walkDog();
+        console.log(walkDogResult);
+        
+        const cleanKitchenResult = await cleanKitchen();
+        console.log(cleanKitchenResult);
+        
+    }
+
+// Example 3 - Three calls to async functions
+
+    async function doChoresThree() {
+        console.log("Example 3 - Three calls to async functions")
+        
+        const walkDogResult = await walkDog();
+        console.log(walkDogResult);
+        
+        const cleanKitchenResult = await cleanKitchen();
+        console.log(cleanKitchenResult);
+        
+        const takeOutTrashResult = await takeOutTrash();
+        console.log(takeOutTrashResult);
+        
+    }
+
+
+// Example 4 - Four calls to async functions
+
+    async function doChoresFour() {
+        console.log("Example 4 - Four calls to async functions")
+        
+        const walkDogResult = await walkDog();
+        console.log(walkDogResult);
+        
+        const cleanKitchenResult = await cleanKitchen();
+        console.log(cleanKitchenResult);
+        
+        const takeOutTrashResult = await takeOutTrash();
+        console.log(takeOutTrashResult);
+
+        const emptyDishWasherResult = await emptyDishWasher();
+        console.log(emptyDishWasherResult);
+        
+    }
+
+// Example 5 - Four calls to async functions inside try/catch blocks
+
+    async function doChoresFive() {
+        console.log("Example 5 - Four calls to async functions inside try/catch blocks")
+        
+        try{
+            const walkDogResult = await walkDog();
+            console.log(walkDogResult);
+            
+            const cleanKitchenResult = await cleanKitchen();
+            console.log(cleanKitchenResult);
+            
+            const takeOutTrashResult = await takeOutTrash();
+            console.log(takeOutTrashResult);
+
+            const emptyDishWasherResult = await emptyDishWasher();
+            console.log(emptyDishWasherResult);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+        
+    }
+
+
+
+    // Example 6 - Four calls to async functions inside individual try/catch blocks
+
+    async function doChoresSix() {
+        console.log("Example 6 - Four calls to async functions inside individual try/catch blocks");
+        
+        try{
+            const walkDogResult = await walkDog();
+            console.log(walkDogResult);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+        
+        //////////////////
+
+        try{
+            const cleanKitchenResult = await cleanKitchen();
+            console.log(cleanKitchenResult);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+        
+        //////////////////
+
+        try{
+            const takeOutTrashResult = await takeOutTrash();
+            console.log(takeOutTrashResult);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+        
+        //////////////////
+        
+        try{
+            const emptyDishWasherResult = await emptyDishWasher();
+            console.log(emptyDishWasherResult);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+    }
+
+// Example 7 - playing around with something from 'promises'... parallel 
+
+    async function doChoresSeven(){
+
+        console.log("Example 7 - Four calls to async functions in parallel");
+
+            walkDog()
+                .then(console.log)
+                .catch(console.error);
+
+            cleanKitchen()
+                .then(console.log)
+                .catch(console.error);
+
+            takeOutTrash()
+                .then(console.log)
+                .catch(console.error);
+
+            emptyDishWasher()
+                .then(console.log)
+                .catch(console.error);
     
-// Example 2 - Demonstration of asynchronous code
-
-    //  *note ('setTimeout()' is natively async)
-    
-    function exampleTwo(){
-        console.log("Example 2 - Demonstration of asynchronous code")
-
-        // asynchronous
-        setTimeout(() => console.log("Task 1 - asynchronous"), 1000);
-
-        // synchronous
-        console.log("Task 2 - synchronous")
-        console.log("Task 3 - synchronous")
+            // because they run in parallel, the emptyDishWasher function takes less time to complete than cleanKitchen or takeOutTrash, and so it appears 2nd in the console, not last. BUT we are not using AWAIT!
     }
 
-// Example 3 - Demonstration of asynchronous code used alongside synchronous code (via callbacks)
 
-function exampleThree(){
-    
-    function func1(callback){
-        // asynchronous
-        setTimeout(() => {  console.log("Task 1 - asynchronous")
-                            callback()},
-                            2000);
-    }
-
-    function func2(){
-        // synchronous
-        console.log("Task 2 - synchronous");
-        console.log("Task 3 - synchronous");
-    }
-    
-    console.log("Example 3 - demonstration of asynchronous code used alongside synchronous code (via callbacks)");
-
-    func1(func2);
-
-}
-
-
-// Example 4 - Demonstration of multiple async functions running at the same time
-
-    // Multiple asynch functions can run at the same time. In this example it is simply a race to the finish... whichever function finishes first appears first. Otherwise known as a 'race condition'. This doesn't have to be the case, and we can use controls to overcome this.
-
-
-    function exampleFour(){
-
-        console.log("Example 4 - Demonstration of multiple async functions running at the same time");
-
-        // asynchronous
-        setTimeout(() => console.log("Task 1"), 1000);
-        setTimeout(() => console.log("Task 2"), 500);
-        setTimeout(() => console.log("Task 3"), 100);
-
-    }
