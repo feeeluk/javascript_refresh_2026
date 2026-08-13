@@ -3,9 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nodelist</title>
+    <title>NodeList</title>
     <link rel="stylesheet" href="/styles/style.css">
     <script src="/javascript/advanced/amber/nodelist.js" defer></script>
+    <style>
+        .nodeListButton{
+            font-size: 3rem;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            background-color: hsl(205, 100%, 60%);
+            color: white;
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
 
@@ -15,7 +27,7 @@
 
             <tr>
                 <td id="title" class="title">
-                    <h1>Nodelist</h1>
+                    <h1>NodeList</h1>
                 </td>
             </tr>
 
@@ -30,7 +42,17 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        A NodeList is a static collection of HTML elements (by "ID", "class", "element").
+                        <br>
+                        It can be vreated by using queryySelectorAll().
+                        <br>
+                        It is similar to an array, but with no map() or filter() or reduce().
+                        <br>
+                        NodeList is not dynamic, so it won't update to automatically relect any changes made.
+                    </p>
+
+                    <p>
+                        querySelectorAll (which creates the NodeList) is different to queryySelector because it returns ALL matching elements, not just the first one.
                     </p>
                 </td>
             </tr>
@@ -49,6 +71,16 @@
                 <td id="main" class="main">
                     <p>
                         See console output for more detail.
+                    </p>
+
+                    <p>
+                        <button class="nodeListButton">One</button>
+                        <br>
+                        <button class="nodeListButton">Two</button>
+                        <br>
+                        <button class="nodeListButton">Three</button>
+                        <br>
+                        <button class="nodeListButton">Four</button>
                     </p>
                 </td>
             </tr>
