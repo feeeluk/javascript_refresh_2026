@@ -6,6 +6,34 @@
     <title>Classlist</title>
     <link rel="stylesheet" href="/styles/style.css">
     <script src="/javascript/advanced/amber/classlist.js" defer></script>
+    <style>
+        #button1, #button2, #button3, #button4, #button5,
+        #buttonA, #buttonB, #buttonC, #buttonD, #buttonE  {
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: 250px;
+            height: 50px;
+        }
+
+        .enabled {
+            background-color: green;
+            color: white;
+        }
+
+        .hover {
+            background-color: orange;
+            color: white;
+        }
+
+        .disabled {
+            background-color: darkgrey;
+            color: grey;
+            border: none;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -30,7 +58,19 @@
                     <h3>Description</h3>
                 
                     <p>
-                        
+                        Classlist is an element property in Javascript (meaning in applies to every element). It is used to interact with an element's list of classes.
+                        <br>
+                        Thus allowing reusable classes for many elements across a webpage.
+                    </p>
+
+                    <p>
+                        <ul>
+                            <li>add()</li>
+                            <li>remove()</li>
+                            <li>toggle()</li>
+                            <li>replace()</li>
+                            <li>contains()</li>
+                        </ul>
                     </p>
                 </td>
             </tr>
@@ -53,6 +93,36 @@
                     <p>
                         See console output.
                     </p>
+
+                    <p>
+                        <button id="button1" class="">Button 1 - Add()</button>
+                        <br>
+                        <button id="button2" class="">Button 2 - Remove()</button>
+                        <br>
+                        <button id="button3" class="">Button 3 - Toggle()</button>
+                        <br>
+                        <button id="button4" class="">Button 4 - Replace()</button>
+                        <br>
+                        <button id="button5" class="none">Button 5 - Contains()</button>
+                        <br>
+                    </p>
+
+                    <h4>Using nodeList and classList together</h4>
+
+                    <p>
+                        <button id="buttonA" class="disabled">Button A - </button>
+                        <br>
+                        <button id="buttonB" class="disabled">Button B - </button>
+                        <br>
+                        <button id="buttonC" class="disabled">Button C - </button>
+                        <br>
+                        <button id="buttonD" class="disabled">Button D - </button>
+                        <br>
+                        <button id="buttonE" class="disabled">Button E - </button>
+                        <br>
+                    </p>
+
+
                 </td>
             </tr>
             
