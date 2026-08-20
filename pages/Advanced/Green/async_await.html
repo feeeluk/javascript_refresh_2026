@@ -49,20 +49,16 @@
                         Async promises don't have resolve or reject parameters.
                     </p>
 
-                    <button id="exampleOne">Example 1 - Single call to an async function</button>
-                    <br>
-                    <button id="exampleTwo">Example 2 - Two calls to async functions</button>
-                    <br>
-                    <button id="exampleThree">Example 3 - Three calls to async functions</button>
-                    <br>
-                    <button id="exampleFour">Example 4 - Four calls to async functions</button>
-                    <br>
-                    <button id="exampleFive">Example 5 - Four calls to async functions inside try/catch blocks</button>
-                    <br>
-                    <button id="exampleSix">Example 6 - Four calls to async functions inside individual try/catch blocks</button>
-                    <br>
-                    <button id="exampleSeven">Example 7 - Four calls to async functions in parallel</button>
-                    <br>
+                    <p>
+                        Async functions always return a promise (Promise&lt;Response&gt;) e.g. <span class="example">Promise { 42 }</span>
+                        <br>
+                        To get access to the value contained within the promise (i.e. to 'unwrap it') there are two methods.
+                        <ul>
+                            <li>.then (for use inside a non 'async' function)</li>
+                            <li>await (for clean, readable, step‑by‑step code inside an 'async' function)</li>
+                        </ul>
+                    </p>
+
                 </td>
             </tr>
 
@@ -83,6 +79,23 @@
                 <td id="main" class="main">
                     <p>
                         See console output.
+                    </p>
+
+                    <p>
+                        <button id="exampleOne">Example 1 - Single call to an async function</button>
+                        <br>
+                        <button id="exampleTwo">Example 2 - Two calls to async functions</button>
+                        <br>
+                        <button id="exampleThree">Example 3 - Three calls to async functions</button>
+                        <br>
+                        <button id="exampleFour">Example 4 - Four calls to async functions</button>
+                        <br>
+                        <button id="exampleFive">Example 5 - Four calls to async functions inside try/catch blocks</button>
+                        <br>
+                        <button id="exampleSix">Example 6 - Four calls to async functions inside individual try/catch blocks</button>
+                        <br>
+                        <button id="exampleSeven">Example 7 - Four calls to async functions in parallel</button>
+                        <br>
                     </p>
                 </td>
             </tr>
