@@ -6,6 +6,24 @@
     <title>JSON</title>
     <link rel="stylesheet" href="/styles/style.css">
     <script src="/javascript/advanced/green/json.js" defer></script>
+    <style>
+        .enabled {
+            font-size: 1rem;
+            margin: 10px;
+            border-radius: 5px;
+            padding: 10px 15px;
+            width: 250px;
+            height: 50px;
+            background-color: green;
+            color: white;
+        }
+
+        .hover {
+            background-color: orange;
+            color: white;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -31,6 +49,18 @@
                 
                     <p>
                         JSON (JavaScript Object Notation)
+                        <br>
+                        Data-interchange format.
+                        <br>
+                        Used for exchanging data between a server and a web application.
+                        <br>
+                        JSON files are made up of objects, arrays, or objects that contain arrays, or arrays that contain objects. 
+                    </p>
+
+                    <p class="example">
+                        JSON.stringify() = converts a JS object into a JSON string.
+                        <br>
+                        JSON.parse() = converts a JSON string into a JS object.
                     </p>
                 </td>
             </tr>
@@ -49,6 +79,27 @@
                 <td id="main" class="main">
                     <p>
                         See console output.
+                    </p>
+
+                    <p>
+                        <button id="1">Names</button>
+                        <br>
+                        <button id="2">People</button>
+                        <br>
+                        <button id="3">Person</button>
+                        <br>
+                        <button id="4">Stringify() Names</button>
+                        <br>
+                        <button id="5">Stringify() People</button>
+                        <br>
+                        <button id="6">Stringify() Person</button>
+                        <br>
+                        <button id="7">Fetch Names</button>
+                        <br>
+                        <button id="8">Fetch People</button>
+                        <br>
+                        <button id="9">Fetch Person</button>
+                        <br>
                     </p>
                 </td>
             </tr>
