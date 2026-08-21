@@ -28,13 +28,31 @@
             <tr>
                 <td id="description" class="description">
                     <h3>Description</h3>
+                    <p>
+                        Function Expressions are a way to define a function as a value or a variable.
+                        <br>
+                        They are not declared and then called (as with a 'normal' function), they are literally written in situ
+                    </p>
                 
                     <p>
                         Function Declaration (a normal <a class="topic" href="\pages\fundamentals\functions.html">function</a>) = Defines a reusable block of code that performs a specific task.
                     </p>
+
                     <p>
-                        Function Expressions = A way to define functions as values or variables.
+                        Their very existence is quite unique to JavaScript, actually. Traditional programming languages typically use function declarations exclusively.
+                        <br>
+                        The key difference between the two is that a <b>function declaration</b> is like saying:
+                        <br>
+                        <br>
+                        “Here is a tool. I might use it multiple times.”
+                        <br>
+                        <br>
+                        Whereas a <b>function expression</b> is like saying:
+                        <br>
+                        <br>
+                        “I need a tool right now, in this exact position, because I’m handing it to something.”
                     </p>
+
                 </td>
             </tr>
 
@@ -43,7 +61,40 @@
                     <h3>How is it used / why is it important?</h3>
                 
                     <p>
-                        
+                        Why might you need "a tool right now, in this exact position"?
+                        <br>
+                        Here is a great example using Promises. While Promises are an advanced topic, the point applies accross the board.
+                    </p>
+
+                    <h4>Function declaration</h4>
+                    <p class="example">
+                        function executor(resolve, reject) {
+                        <br>
+                        resolve("done");
+                        <br>
+                        }
+                        <br>
+                        <br>
+                        new Promise(executor);
+                    </p>
+
+                    <h4>Function expression</h4>
+                    <p class="example">
+                        new Promise(function(resolve, reject) {
+                            <br>
+                            resolve("done");
+                            <br>
+                            });
+                    </p>
+
+                    <h4>Arrow function</h4>
+                    <p class="example">
+                        new Promise((resolve, reject) => {
+                        <br>
+                        resolve("done");
+                        <br>
+                        });
+
                     </p>
                 </td>
             </tr>

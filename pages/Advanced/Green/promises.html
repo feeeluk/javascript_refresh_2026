@@ -36,6 +36,34 @@
                     <p>
                         A promise does not have to live inside an async function, however if you want that promise to resolve before doing something else, then it needs an 'await' when it is called.
                     </p>
+
+                    <p>
+                        A 'promise' is an object. A new instance of that object can be instantiated using the 'Promise' constructor.
+                        <br>
+                        Promises contain state (pending, fulfilled, rejected), and a result (the value or error).
+
+                    </p>
+
+                    <p class="example">
+                        new Promise((resolve, reject) => {})
+                    </p>
+
+                    <p>
+                        This hands an arrow function expression to the Promise constructor.
+                        <br>
+                        Then JavaScript does this:
+                        <ol>
+                            <li>It creates a new Promise object.</li>
+                            <li>It immediately calls your function.</li>
+                            <li>It passes two arguments into your function:
+                                <br>
+                                <ul>
+                                    <li>a function called resolve (parameter)</li>
+                                    <li>a function called reject (parameter)</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
                 </td>
             </tr>
 
