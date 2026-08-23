@@ -23,7 +23,10 @@ document.getElementById("code").addEventListener("click", event => {
 
 // when button is clicked
 document.getElementById("convert").addEventListener("click", event => {
+<<<<<<< HEAD
   
+=======
+>>>>>>> 3cc2182a5011171e9b554f136bec409b75e61661
   tempInput = document.getElementById("tempInput").value;
   tempInputNumber = Number(tempInput);
 
