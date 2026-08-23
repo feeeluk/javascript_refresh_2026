@@ -17,7 +17,7 @@ document.getElementById("convert").addEventListener("click", event => {
   const toCelsius = document.getElementById("toCelsius");
 
   // display result
-  let displayResult = document.getElementById("result");
+  const displayResult = document.getElementById("result");
 
   // calculate value
   let calculatedValue;
@@ -28,11 +28,15 @@ document.getElementById("convert").addEventListener("click", event => {
   else if(toFarenheit.checked){
     console.log(toFarenheit.value);
     calculatedValue = (temptInputNumber * 1.8) + 32;
+
+    displayResult.style.display = "block";
     displayResult.textContent = `${calculatedValue.toFixed(1)} °F`;
   }
   else {
     console.log(toCelsius.value);
     calculatedValue = (temptInputNumber - 32) / 1.8;
+    
+    displayResult.style.display = "block";
     displayResult.textContent = `${calculatedValue.toFixed(1)} °C`;
   }
 })
