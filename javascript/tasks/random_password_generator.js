@@ -14,9 +14,12 @@ let includeLowercase;
 let includeUppercase;
 let includeNumbers;
 let includeSymbols;
+let options = true;
 
 let allowedChars;
 let password;
+
+let show;
 
 const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
 const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -24,9 +27,12 @@ const numberChars = "0123456789";
 const symbolChars = "!£$%&*@+-";
 
 function reset(){
-
+    
     allowedChars = "";
     password = "";
+    show = document.getElementById("showPassword").style.display = "none";
+    options = true;
+        
 }
 
 function getOptions(){
@@ -34,7 +40,12 @@ function getOptions(){
     console.log("Options:");
     
     passwordLength = document.getElementById("passwordLength").value;
-        console.log(`Pawword length (chars): ${passwordLength}`);
+        console.log(`Password length (chars): ${passwordLength.value}`);
+
+        if(passwordLength === "" || passwordLength < 8){
+            window.alert("A password must contain 8 or more characters!");
+            options = false;
+        }
 
     includeLowercase = document.getElementById("includeLowercase").checked;
         if(includeLowercase == true){
@@ -72,6 +83,11 @@ function getOptions(){
             console.log("Symbol = No");
         }
 
+    if(!includeLowercase && !includeUppercase && !includeNumbers && !includeSymbols){
+        window.alert("You must choose 1 or more options!");
+        options = false;
+    }
+
 }
 
 function generatePassword(){
@@ -85,16 +101,13 @@ function generatePassword(){
     let length = allowedChars.length;
 
     for(let i = 0; i < passwordLength; i++){
-        // console.log(i);
         let random = Math.floor(Math.random() * length);
         password += allowedChars[random];
-        
-
     }
 }
 
 function showPassword(){
-    let show = document.getElementById("showPassword");
+    show = document.getElementById("showPassword");
     show.style.display = "block";
     show.innerHTML = `Password = ${password}`;
     console.log(`Generated Password = ${password}`);
@@ -103,7 +116,15 @@ function showPassword(){
 document.getElementById("generatePassword").addEventListener("click", event => {
     console.clear();
     reset();
-    getOptions();
-    generatePassword();
-    showPassword();
+    setTimeout(() => {
+        getOptions();
+
+        if(options){
+            generatePassword();
+            showPassword(); 
+        }
+        else{
+            return;
+        }
+    }, 0);
 })
