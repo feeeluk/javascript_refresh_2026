@@ -25,7 +25,11 @@ function getTime(){
 
 function displayTime(){
   console.log(time);
+  console.log(time.getHours().toString().padStart(2,0));
+  console.log(time.getMinutes().toString().padStart(2,0));
+  console.log(time.getSeconds().toString().padStart(2,0));
   clock.innerHTML = time;
+  clock.innerHTML = time + `<br>${time.getHours().toString().padStart(2,0)}:${time.getMinutes().toString().padStart(2,0)}:${time.getSeconds().toString().padStart(2,0)}`;
 }
 
 function updateClock(){
