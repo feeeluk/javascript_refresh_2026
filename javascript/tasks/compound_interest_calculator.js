@@ -87,9 +87,13 @@ document.getElementById("calculate").addEventListener("click", event => {
   reset();
   getInput();
   displayInputs();
+
+  // hack to redraw the page when using window.prompt/window.alert
   setTimeout(() => {
+    
     calculate();
     displayResults();
+    
   }, 0);
 
 })
