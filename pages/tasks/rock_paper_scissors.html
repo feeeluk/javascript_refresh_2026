@@ -6,7 +6,13 @@
     <title>Rock, Paper, Scissors</title>
     <link rel="stylesheet" href="/styles/style.css">
     <style>
+        .userChoice{
+            display: none;
+        }
 
+        .playAgain{
+            display: none;
+        }
     </style>
     <script src="/javascript/tasks/rock_paper_scissors.js" defer></script>
 </head>
@@ -38,9 +44,16 @@
 
                     <div id="playingArea">
                         <button id="startNewGame">Start New Game</button>
+                        <button id="rock" class="userChoice">Rock</button>
+                        <button id="paper" class="userChoice">Paper</button>
+                        <button id="scissors" class="userChoice">Scissors</button>
                     </div>
 
                     <div id="resultArea"></div>
+
+                    <div id="playAgainArea">
+                        <button id="playAgainButton" class="playAgain">Play Again?</button>
+                    </div>
                 </td>
             </tr>
             

@@ -10,74 +10,122 @@ document.getElementById("code").addEventListener("click", event => {
 
   const playingArea = document.getElementById("playingArea");
   const resultArea = document.getElementById("resultArea");
+  const playAgainButton = document.getElementById("playAgainButton");
 
-  let userChoice;
+  let usersChoiceString;
+  let computersChoiceString;
+  let result;
 
 // Functions 
-// ////////////////////////////////////////
+// ////////////////////////////////////////block
 
-  function gameStarted(){
-    console.log("Game started");
+  function usersChoice(){
+    document.getElementById("startNewGame").style.display = "none";
+    playingArea.querySelectorAll(".userChoice").forEach(button => button.style.display = "inline")
   }
 
-  function giveUserChoice(){
-    playingArea.innerHTML = `
-                            <button id='rock'>Rock</button>
-                            <button id='paper'>Paper</button>
-                            <button id='scissors'>Scissors</button>
-                            `;
+  function runGame(){
+
+    computersChoice();
+    compareChoices();
+
   }
 
-  function listenForChoice(){
-    document.getElementById("rock").addEventListener("click", event => {
-      userChoice = "Rock";
-      console.log(`User chose "${userChoice}"`);  
-      display(`You chose "${userChoice}"`);
-    })
-
-    document.getElementById("paper").addEventListener("click", event => {
-      userChoice = "Paper";
-      console.log(`User chose "${userChoice}"`);
-      display(`You chose "${userChoice}"`);
-    })
-
-    document.getElementById("scissors").addEventListener("click", event => {
-      userChoice = "Scissors";
-      console.log(`User chose "${userChoice}"`);
-      display(`You chose "${userChoice}"`);
-    })
-    return;
-  }
-
-  function computerChoice(){
+  function computersChoice(){
     const random = Math.floor(Math.random() * 3);
-    const choice = ["Rock", "Paper", "Siccors"]
+    const choice = ["Rock", "Paper", "Scissors"]
+    computersChoiceString = choice[random];
     
-    console.log(`Computer: ${choice[random]}`);
+    console.log(`Computer chose: "${computersChoiceString}"`);
   }
 
-  function display(string){
-    playingArea.innerHTML = string;
+  function compareChoices(){
+
+    // both players match then it is a draw
+    if(usersChoiceString === computersChoiceString){
+      result = "DRAW!";
+      console.log(result);
+      hidePlayingArea();
+      showResult(result);
+      showPlayAgainButton();
+    }
+
+    // rock: beats scissors, loses to paper
+    else if(
+      usersChoiceString === "Rock" &&
+      computersChoiceString === "Scissors"
+    ){
+      result = "You WIN!";
+      console.log(result);
+      hidePlayingArea();
+      showResult(result);
+      showPlayAgainButton();
+    }
+
+    // paper: beats rock, loses to scissors
+    else if(
+      usersChoiceString === "Paper" &&
+      computersChoiceString === "Rock"
+    ){
+      result = "You WIN!";
+      console.log(result);
+      hidePlayingArea();
+      showResult(result);
+      showPlayAgainButton();
+    }
+
+    // scissors: beats paper, loses to rock
+    else if(
+        usersChoiceString === "Scissors" &&
+        computersChoiceString === "Paper"
+    ){
+      result = "You WIN!";
+      console.log(result);
+      hidePlayingArea();
+      showResult(result);
+      showPlayAgainButton();
+    }
+
+    else {
+      result = "You LOSE!";
+      console.log(result);
+      hidePlayingArea();
+      showResult(result);
+      showPlayAgainButton();
+    }
+
   }
 
-  function gameOver(){
-    console.log("Game ended");
-  }
+  function hidePlayingArea(){
 
-  // game needs to randomly select an option for 'the computer'
-
-  // game needs to compare the two choices and decide if the player has won, lost, or drawn.
-
-  function startNewGame(){
-    
-    gameStarted();
-    giveUserChoice();
-    listenForChoice(); // asynchronous
-    computerChoice();
-    gameOver();
+    playingArea.querySelectorAll(".userChoice").forEach(button => button.style.display = "none");
 
   }
 
+  function showResult(string){
+
+    resultArea.style.display = "block";
+    resultArea.innerHTML = string;
+
+  }
+
+  function hideResult(){
+
+    resultArea.style.display = "none";
+
+  }
+
+  function showPlayAgainButton(){
+
+    playAgainButton.style.display = "block";
+
+  }
+
+  function hidePlayAgainButton(){
+
+    playAgainButton.style.display = "none";
+
+  }
 
 // Execution
 // ////////////////////////////////////////
@@ -87,7 +135,49 @@ document.getElementById("code").addEventListener("click", event => {
 // ////////////////////////////////////////
 
   document.getElementById("startNewGame").addEventListener("click", event => {
-    startNewGame();
+    
+    console.log("Game started");
+    usersChoice();
+
   })
+
+  document.getElementById("rock").addEventListener("click", event => {
+
+    usersChoiceString = "Rock";
+    console.log(`User chose: "${usersChoiceString}"`);  
+    runGame();
+
+  })
+
+  document.getElementById("paper").addEventListener("click", event => {
+
+    usersChoiceString = "Paper";
+    console.log(`User chose: "${usersChoiceString}"`);
+    runGame();
+
+  })
+
+  document.getElementById("scissors").addEventListener("click", event => {
+
+    usersChoiceString = "Scissors";
+    console.log(`User chose: "${usersChoiceString}"`);
+    runGame();
+    
+  })
+
+  document.getElementById("playAgainButton").addEventListener("click", event => {
+
+      console.clear();
+      console.log("new game");
+      usersChoiceString = "";
+      computersChoiceString = "";
+      result = "";
+      usersChoice();
+      hideResult();
+      hidePlayAgainButton();
+
+    })
+
+ 
 
   
