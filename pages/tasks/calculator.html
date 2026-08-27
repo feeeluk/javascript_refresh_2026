@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="/styles/style.css">
     <style>
 
+        .calculatorButton{
+            width: 50px;
+        }
+
+        #buttons{
+            width: 250px;
+            display: flexbox;
+            flex-wrap: wrap;
+        }
     </style>
     <script src="/javascript/tasks/calculator.js" defer></script>
 </head>
@@ -33,6 +42,27 @@
                     <p>
                         See console output for more detail.
                     </p>
+                    <div id="display"></div>
+                    <div id="buttons">
+                        <button id="add" class="calculatorButton">+</button>
+                        <button id="7" class="calculatorButton">7</button>
+                        <button id="8" class="calculatorButton">8</button>
+                        <button id="9" class="calculatorButton">9</button>
+                        <button id="minus" class="calculatorButton">-</button>
+                        <button id="4" class="calculatorButton">4</button>
+                        <button id="5" class="calculatorButton">5</button>
+                        <button id="6" class="calculatorButton">6</button>
+                        <button id="multiply" class="calculatorButton">*</button>
+                        <button id="1" class="calculatorButton">1</button>
+                        <button id="2" class="calculatorButton">2</button>
+                        <button id="3" class="calculatorButton">3</button>
+                        <button id="divide" class="calculatorButton">/</button>
+                        <button id="0" class="calculatorButton">0</button>
+                        <button id="period" class="calculatorButton">.</button>
+                        <button id="equals" class="calculatorButton">=</button>
+                        <button id="clear" class="calculatorButton">C</button>
+                        <button id="delete" class="calculatorButton"><</button>
+                    </div>
                 </td>
             </tr>
             
