@@ -9,35 +9,159 @@
 // Variables
 // ////////////////////////////////////////
 
-// const cardSuits = ["hearts", "spades", "diamonds", "clubs"];
-let deck = ["Ace", "King", "Queen", "Jack", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+const actions = document.getElementById("actions");
+const startGameButton = document.getElementById("startGame");
+const stickButton = document.getElementById("stick");
+const twistButton = document.getElementById("twist");
 
+const details = document.getElementById("details");
+const showPlayerScore = document.getElementById("showPlayerScore");
+const showPlayerNumberOfCards = document.getElementById("showPlayerNumberOfCards");
+const showPlayerCards = document.getElementById("showPlayerCards");
+const showComputerScore = document.getElementById("showComputerScore");
+const showComputerNumberOfCards = document.getElementById("showComputerNumberOfCards");
+const showComputerCards = document.getElementById("showComputerCards");
 
-let playerCards = [];
+const results = document.getElementById("results");
+const showResults = document.getElementById("showResults");
+
+let deck = [
+              "AH", "KH", "QH", "JH", "10H", "9H", "8H", "7H", "6H", "5H", "4H", "3H", "2H",
+              "AD", "KD", "QD", "JD", "10D", "9D", "8D", "7D", "6D", "5D", "4D", "3D", "2D",
+              "AC", "KC", "QC", "JC", "10C", "9C", "8C", "7C", "6C", "5C", "4C", "3C", "2C",
+              "AS", "KS", "QS", "JS", "10S", "9S", "8S", "7S", "6S", "5S", "4S", "3S", "2S"
+            ];
+
+// let deck = [
+//                 "Hearts-Ace", "Hearts-King", "Hearts-Queen"];
+
 let playerScore = 0;
+let playerNumberOfCards = 0;
+let playerCards = [];
 
+let computerScore = 0;
+let computerNumberOfCards = 0;
 let computerCards = [];
 
 // Functions
 // ////////////////////////////////////////
 
-  function drawCards(numberOfCards, score, cards, showScore, showCards){
 
-    for(let i = 0; i < numberOfCards; i++){
-      const getCard = randomNumber(deck.length);
-      const chosenCard = deck[getCard];
+  async function startGame(){
 
-      let value = calculateCardValue(chosenCard);
-      // console.log(`${i} ${value}`);
-      score += value;
+    // Hide the 'Start Game' button
+    startGameButton.classList.replace("visible", "hidden");
 
-      deck.splice(getCard, 1);
-      cards.push(chosenCard);
+    // Show the 'details' area
+    details.classList.replace("hidden", "visible");
 
-      document.getElementById(showScore).textContent = score;
-      document.getElementById(showCards).textContent += `${chosenCard}, `;
+    // Draw 2 cards for the player
+    await drawCards(2, "player", 1000);
+
+    // Draw 2 cards for the computer
+    await drawCards(2, "computer", 1000);
+
+    // Give player options
+    playerOptions();
+  }
+
+  function playerOptions(){
+    
+    if(
+        playerNumberOfCards === 2 &&
+        playerCards.some(card => card.includes("A")) &&
+        (
+          playerCards.some(card => card.includes("K")) ||
+          playerCards.some(card => card.includes("Q")) ||
+          playerCards.some(card => card.includes("J"))
+        )
+    ){
+      // showResults = "You have Pontoon!"
+      results.classList.replace("hidden", "visible");
+      showResults.textContent = "You have PONTOON..";
+    }
+    
+    else if(playerScore < 15){
+      // Show the 'actions' area
+      actions.classList.replace("hidden", "visible");
+
+      // Show the 'twist' button
+      twistButton.classList.replace("hidden", "visible"); 
+    }
+    
+    else if(playerScore >= 15 && playerScore < 21){
+      // Show the 'actions' area
+      actions.classList.replace("hidden", "visible");
+
+      // Show the 'twist' button
+      twistButton.classList.replace("hidden", "visible");
+
+      // Show the 'stick' button
+      stickButton.classList.replace("hidden", "visible"); 
     }
 
+    else if(playerScore > 21){
+      // Result = "Bust"
+      results.classList.replace("hidden", "visible");
+      showResults.textContent = "Bust";
+
+      // Hide the 'actions' area
+      actions.classList.replace("visible", "hidden");
+    }  
+      
+  }
+ 
+  async function drawCards(numberOfCards, who, time){
+
+    function sleep(time){
+      return new Promise(resolve => setTimeout(resolve, time));
+    }
+        
+    for(let i = 0; i < numberOfCards; i++){
+      
+      const getCard = randomNumber(deck.length); // use the randomNumber function to produce a random number within the size of the deck
+      const chosenCard = deck[getCard]; // use that randon number to get a card out of the deck
+      let value = calculateCardValue(chosenCard); // calculate that card's value (e.g "King" becomes 10)
+        
+      deck.splice(getCard, 1); // remove the chosen card from the deck
+
+      switch(who){
+
+        case "player":
+          playerScore += value; // assign the value of the chosen card to the playerScore variable
+          playerNumberOfCards++; // increase the player's number of cards variable
+          playerCards.push(chosenCard); // assign the chosen card to the playerCards array
+          showPlayerScore.textContent = playerScore;
+          showPlayerNumberOfCards.textContent = playerNumberOfCards;
+          const newPlayerCard = document.createElement("img");
+          newPlayerCard.style.width = "100px";
+          newPlayerCard.src = `/resources/images/cards/front/${chosenCard}.png`;
+          showPlayerCards.append(newPlayerCard);
+          break;
+
+        case "computer":
+          computerScore += value; // assign the value of the chosen card to the computerScore variable
+          computerNumberOfCards++; // increase the computer's number of cards variable
+          computerCards.push(chosenCard); // assign the chosen card to the computerCards array
+          showComputerScore.textContent = computerScore;
+          showComputerNumberOfCards.textContent = computerNumberOfCards;
+          const newComputerCard = document.createElement("img");
+          newComputerCard.style.width = "100px";
+          newComputerCard.src = `/resources/images/cards/front/${chosenCard}.png`;
+          showComputerCards.append(newComputerCard);
+          break;
+
+      }
+
+      // show details
+
+
+      // only add a delay if there are more cards to come
+      if (numberOfCards - i !== 1) {
+        await sleep(2000);
+      }
+
+    }
   }
 
   function randomNumber(sizeOfNumber){
@@ -47,25 +171,28 @@ let computerCards = [];
   }
 
   function calculateCardValue(card){
+    
+    const result = card[0];
+
     let value;
-    switch(card){
-      case "Ace":
-      value = 1;
+    switch(result){
+      case "A":
+      value = 11;
       break;
 
-      case "King":
+      case "K":
       value = 10;
       break;
 
-      case "Queen":
+      case "Q":
       value = 10;
       break;
 
-      case "Jack":
+      case "J":
       value = 10;
       break;
 
-      case "10":
+      case "1":
       value = 10;
       break;
 
@@ -114,9 +241,18 @@ let computerCards = [];
 
   document.getElementById("startGame").addEventListener("click", event => {
 
-    // Deal two cards to the player
-    drawCards(2, playerScore, playerCards, "showPlayerScore", "showPlayerCards");
-    console.log(playerCards);
-    console.log(deck);
+    startGame();
+    
+  })
 
+  document.getElementById("stick").addEventListener("click", event => {
+      
+    // Hide player actions
+    // Show computer cards
+
+  })
+
+  document.getElementById("twist").addEventListener("click", event => {
+    drawCards(1, "player", 0);
+    playerOptions();
   })

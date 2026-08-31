@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontoon V1</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/tasks/pontoon_1.css">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_1.css?v003">
     <script src="/javascript/tasks/pontoon_1.js" defer></script>
 </head>
 <body>
@@ -28,18 +28,41 @@
 
             <tr>
                 <td id="main" class="main">
-                    <p>
-                        See console output for more detail.
-                    </p>
-                
+                    
+                    <div id="actions" class="visible">
 
-                    <div id="playerChoices">
-                        <button id="startGame">Start Game</button>
+                        <button id="startGame" class="visible">Start Game</button>
+                        <br>
+                        
+                        <button id="twist" class="hidden">Twist</button>
+                        <button id="stick" class="hidden">Stick</button>
+                        <br>
+
                     </div>
-                    <div>Player's score: <span id="showPlayerScore"></span></div>
-                    <div>Images of Player's cards: <span id="showPlayerCards"></span></div>
-                    <div id=""></div>
-                    <div id=""></div>
+                    
+                    <div id="details" class="hidden">
+
+                        Player's score: <span id="showPlayerScore"></span>
+                        <br>
+                        Player's number of cards: <span id="showPlayerNumberOfCards"></span>
+                        <br>
+                        Images of Player's cards: <span id="showPlayerCards"></span>
+
+                        <br>
+
+                        Computer's score: <span id="showComputerScore"></span>
+                        <br>
+                        Computer's number of cards: <span id="showComputerNumberOfCards"></span>
+                        <br>
+                        Images of Computer's cards: <span id="showComputerCards"></span>
+
+                    </div>
+
+                    <br>
+
+                    <div id="results" class="hidden">
+                        Results: <span id="showResults"></span>
+                    </div>
 
                 </td>
             </tr>
