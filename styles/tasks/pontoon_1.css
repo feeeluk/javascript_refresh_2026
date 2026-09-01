@@ -1,7 +1,49 @@
+#main{
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+#playerActions{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    background-color: lightblue;
+}
+
+.break{
+    flex-basis: 100%;
+}
+
+#playerArea{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    min-height: 80%;
+    background-color: red;
+}
+
+#computerArea{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    min-height: 80%;
+    background-color: blue;
+}
+
+#resultArea{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 50px;
+    background-color: green;
+}
+
 .visible{
-    display: inline;
+    visibility: visible;
 }
 
 .hidden{
-    display: none;
+    visibility: hidden;
 }

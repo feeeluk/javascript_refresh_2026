@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontoon V1</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/tasks/pontoon_1.css?v003">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_1.css?v009">
     <script src="/javascript/tasks/pontoon_1.js" defer></script>
 </head>
 <body>
@@ -28,40 +28,61 @@
 
             <tr>
                 <td id="main" class="main">
-                    
-                    <div id="actions" class="visible">
-
-                        <button id="startGame" class="visible">Start Game</button>
-                        <br>
                         
-                        <button id="twist" class="hidden">Twist</button>
-                        <button id="stick" class="hidden">Stick</button>
-                        <br>
+                    <div id="playerActions" class="visible">
 
-                    </div>
+                        <button id="startGame" class="visible" enabled>Start Game</button>
+                        <div class="break"></div>
+
+                        <button id="twist" class="visible" disabled>Twist</button>
+                        <button id="stick" class="visible" disabled>Stick</button>
                     
-                    <div id="details" class="hidden">
+                    </div>
 
-                        Player's score: <span id="showPlayerScore"></span>
-                        <br>
-                        Player's number of cards: <span id="showPlayerNumberOfCards"></span>
-                        <br>
-                        Images of Player's cards: <span id="showPlayerCards"></span>
+                    <div id="playerArea" class="visible">
+                        
+                        <h3>Player Area</h3>
+                        <div class="break"></div>
 
-                        <br>
+                        <span id="showPlayerCards" class="visible"></span>
+                        <div class="break"></div>
+                        
+                        Score: <span id="showPlayerScore" class="visible"></span>
+                        <div class="break"></div>
 
-                        Computer's score: <span id="showComputerScore"></span>
-                        <br>
-                        Computer's number of cards: <span id="showComputerNumberOfCards"></span>
-                        <br>
-                        Images of Computer's cards: <span id="showComputerCards"></span>
+                        Number of cards: <span id="showPlayerNumberOfCards" class="visible"></span>
+                        <div class="break"></div>                      
+
+                        History:
+                        <div class="break"></div>
+                        <ul id="showPlayerHandHistory" class="visible"></ul>
 
                     </div>
 
-                    <br>
+                    <div id="computerArea" class="visible">
 
-                    <div id="results" class="hidden">
-                        Results: <span id="showResults"></span>
+                        <h3>Computer Area</h3>
+                        <div class="break"></div>
+
+                        <span id="showComputerCards" class="visible"></span>
+                        <div class="break"></div>
+                        
+                        Score: <span id="showComputerScore"></span>
+                        <div class="break"></div>
+
+                        Number of cards: <span id="showComputerNumberOfCards"></span>
+                        <div class="break"></div>
+
+                        History:
+                        <div class="break"></div>
+                        <ul id="showComputerHandHistory"></ul>
+
+                    </div>   
+
+                    <div id="resultArea" class="visible">
+
+                        Result: <span id="showResults"></span>
+
                     </div>
 
                 </td>
