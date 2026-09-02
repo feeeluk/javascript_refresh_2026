@@ -2,7 +2,7 @@
 // //////////////////////////////////////// 
 
 document.getElementById("code").onclick = () =>
-  window.location = "/javascript/oop/object.js";
+  window.location = "/javascript/oop/objects.js";
 
 // Example 1
 
