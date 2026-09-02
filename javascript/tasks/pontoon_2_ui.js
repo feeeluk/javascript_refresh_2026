@@ -5,6 +5,7 @@
 // Variables
 // ////////////////////////////////////////
 
+    const play = document.getElementById("play");
 
 // Functions
 // ////////////////////////////////////////
@@ -12,4 +13,8 @@
 
 // Event Listeners
 // ////////////////////////////////////////
+
+    document.getElementById("playButton").addEventListener("click", event => {
+        play.style.zIndex = -1;
+    })
 

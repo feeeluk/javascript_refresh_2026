@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontoon V2</title>
     <link rel="stylesheet" href="/styles/style.css">
-    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v001">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v008">
     <script src="/javascript/tasks/pontoon_2_deck.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_game_state.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_ui.js" defer></script>
@@ -13,9 +13,39 @@
 </head>
 <body>
 
-    <div id="" class="">
-        
-        <h1>Pontoon V2</h1>
+    <div id="gameArea">
+
+        <div id="titleArea"><h1>Pontoon V2</h1></div>
+
+        <div id="play">
+            <button id="playButton">Play Game</button>
+        </div>
+
+        <div id="usersArea">
+
+            <div id="playerArea">
+                <h4>Player</h4>
+                <div id="pCards" class="cards"><span>Cards:</span></div>
+                <div id="pScore" class="score"><span>Score:</span></div>
+                <div id="pCount" class="count"><span>Count:</span></div>
+                <div id="pHistory" class="history"><span>History:</span></div>
+            </div>
+
+            <div id="computerArea">
+                <h4>Computer</h4>
+                <div id="cCards" class="cards"><span>Cards:</span></div>
+                <div id="cScore" class="score"><span>Score:</span></div>
+                <div id="cCount" class="count"><span>Count:</span></div>
+                <div id="cHistory" class="history"><span>History:</span></div>
+            </div>
+
+        </div>
+
+        <div id="resultArea">
+            <span id="result1">Result:</span>
+            <span id="result2">test</span>
+            <span id="result1"></span>
+        </div>
 
     </div>
 

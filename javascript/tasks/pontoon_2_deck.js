@@ -21,15 +21,12 @@
         }
     }
 
-    console.log(originalDeck);
-
     // create copy of originalDeck
     let deck = [...originalDeck]; // clone the original array by using SPREAD
 
     // randomise the deck
     shuffle(deck);
 
-    console.log(deck);
 
 // Functions
 // ////////////////////////////////////////
@@ -40,6 +37,11 @@
 
             [array[i], array[random]] = [ array[random], array[i]];
         }
+    }
+
+    function dealCard(deck, targetArray){
+        const card = deck.pop(); // take the last card
+        targetArray.push(card); // pass it to the player's or computer's relevant array
     }
 
 // Event Listeners
