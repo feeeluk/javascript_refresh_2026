@@ -22,11 +22,13 @@
 // Functions
 // ////////////////////////////////////////
 
-   function dealCard(deck, targetArray){
-        const card = deck.pop(); // take the last card
-        targetArray.push(card); // pass it to the player's or computer's relevant array
-    }
+function startGame(){
+    createDeck();
+}   
 
-// Event Listeners
-// ////////////////////////////////////////
+function dealCard(deck, targetArray){
+    const card = deck.pop(); // take the last card
+    targetArray.push(card); // pass it to the player's or computer's relevant array      
+}
+
 

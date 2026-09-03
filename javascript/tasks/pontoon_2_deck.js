@@ -51,5 +51,3 @@
             [array[i], array[random]] = [ array[random], array[i]];
         }
     }
-
- 

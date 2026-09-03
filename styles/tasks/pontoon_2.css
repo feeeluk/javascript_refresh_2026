@@ -26,13 +26,16 @@ body{
 }
 
 #play{
-    top: 10vh;
+    position: absolute;
+    top: 0;
     z-index: 1;
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     background-color: red;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: left;
     align-items: center;
 }
 

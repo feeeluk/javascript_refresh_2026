@@ -37,6 +37,6 @@
 
     document.getElementById("playButton").addEventListener("click", event => {
         play.style.display = "none";
-        createDeck();
+        startGame();
     })
 
