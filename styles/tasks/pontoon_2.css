@@ -18,7 +18,7 @@ body{
     height: calc(10% - 20px);
     margin: 10px;
     border-radius: 5px;
-    background-color:blanchedalmond;
+    background-color:cornflowerblue;
     display: flex;
     flex-wrap: nowrap;
     justify-content: center;
@@ -91,12 +91,21 @@ body{
 .result2{
     height: 75%;
     width: 80%;
+    padding: 0 5% 0 5%;
     background-color: green;
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
 }
+
+    #resultMessage{
+        width: 100%;
+        padding-bottom: 10px;
+        text-align: center;
+    }
 
 .header{
     width: 100%;
@@ -114,7 +123,34 @@ body{
     padding: 5px;
     background-color: white;
     border-radius: 5px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 70% auto auto;
 }
+    .cardsTitle{
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    #pCards{
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .choices{
+        width: 100%;
+        height: 20px;
+    }
+
+    #twist{
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    #stick{
+        grid-column: 1;
+        grid-row: 4;
+    }
 
 .score{
     width: 100%;
@@ -139,3 +175,4 @@ body{
     background-color: white;
     border-radius: 5px;
 }
+

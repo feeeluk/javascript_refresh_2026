@@ -40,3 +40,14 @@
         startGame();
     })
 
+    document.getElementById("twist").addEventListener("click", event => {
+
+    })
+
+    document.getElementById("stick").addEventListener("click", event => {
+        
+    })
+
+    document.getElementById("playAgain").addEventListener("click", event => {
+        
+    })

@@ -28,7 +28,12 @@
                 
             <div id="playerArea">
                 <div class="header"><h4>Player</h4></div>
-                <div class="cards">Cards:<span id="pCards"></span></div>
+                <div class="cards">
+                    <span class="cardsTitle">Cards:</span>
+                    <span id="pCards"></span>
+                    <button id="twist" class="choices">Twist</button>
+                    <button id="stick" class="choices">Stick</button>
+                </div>
                 <div class="score">Score:<span id="pScore"></span></div>
                 <div class="count">Count:<span id="pCount"></span></div>
                 <div class="history">History:<span id="pHistory"></span></div>
@@ -36,7 +41,10 @@
 
             <div id="dealerArea">
                 <div class="header"><h4>Player</h4></div>
-                <div class="cards">Cards:<span id="dCards"></span></div>
+                <div class="cards">
+                    <span class="cardsTitle">Cards:</span>
+                    <span id="dCards"></span>
+                </div>
                 <div class="score">Score:<span id="dScore"></span></div>
                 <div class="count">Count:<span id="dCount"></span></div>
                 <div class="history">History:<span id="dHistory"></span></div>
@@ -46,7 +54,10 @@
 
         <div id="resultArea">
             <span id="result1" class="result1">Result:</span>
-            <span id="result2" class="result2"><button id="playAgain">Play Again</button></span>
+            <span id="result2" class="result2">
+                <span id="resultMessage">Result message</span>
+                <button id="playAgain">Play Again</button>
+            </span>
             <span id="result3" class="result1"></span>
         </div>
 
