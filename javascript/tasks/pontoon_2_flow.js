@@ -23,10 +23,46 @@
 // ////////////////////////////////////////
 
     function startGame(){
-        reset();
-        createDeck();
+        
+        createGame();
+
+        initialDeal();
+
+        revealCards("player", state.player.cards);
+        // revealCard("player", state.player.cards);
+
     }   
     
+    function createGame(){
+        reset();
+        createDeck();
+    }
+
+    function initialDeal(){
+        dealCard(state.player.cards);
+        showCard("player");
+
+        dealCard(state.dealer.cards);
+        showCard("dealer");
+
+        dealCard(state.player.cards);
+        showCard("player");
+
+        dealCard(state.dealer.cards);
+        showCard("dealer");
+
+        console.log("player cards: ", state.player.cards);
+        console.log("dealer cards: ", state.dealer.cards);
+    }
+    
+    function dealCard(targetArray){
+        const card = deck.pop(); // take the last card
+        targetArray.push(card); // pass it to the player's or computer's relevant array      
+    }
+
+    function calculateScore(){
+    }
+
     function playerTwist(){
         
     }
@@ -42,26 +78,23 @@
     function determineWinner(){
         
     }
-
-    function initialDeal(){
-        
-    }
     
-    function dealCard(deck, targetArray){
-        const card = deck.pop(); // take the last card
-        targetArray.push(card); // pass it to the player's or computer's relevant array      
-    }
+
 
 
 
     // click start game
+        // reset game
         // initialise deck
-        // deal 2 cards (face down) to the dealer
-        // deal 2 cards (face down) to the player
-        // reveal player cards one at a time
-            // show card card (face up)
-        // show player score
-        // show player count        
+        // deal a card to the player
+        // deal a card to the dealer
+        // deal a card to the player
+        // deal a card to the dealer
+
+        // reveal card/change state 
+            // change score
+            // change count
+            // change face from down to up        
 
     // twist
         // deal card face up

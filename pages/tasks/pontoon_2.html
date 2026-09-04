@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontoon V2</title>
-    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v013">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v014">
     <script src="/javascript/tasks/pontoon_2_deck.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_state.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_ui.js" defer></script>
@@ -28,11 +28,13 @@
                 
             <div id="playerArea">
                 <div class="header"><h4>Player</h4></div>
-                <div class="cards">
+                <div class="cardsArea">
                     <span class="cardsTitle">Cards:</span>
                     <span id="pCards"></span>
-                    <button id="twist" class="choices">Twist</button>
-                    <button id="stick" class="choices">Stick</button>
+                    <button id="aceOne" class="choices" disabled>1</button>
+                    <button id="aceEleven" class="choices" disabled>11</button>
+                    <button id="twist" class="choices" disabled>Twist</button>
+                    <button id="stick" class="choices" disabled>Stick</button>
                 </div>
                 <div class="score">Score:<span id="pScore"></span></div>
                 <div class="count">Count:<span id="pCount"></span></div>
@@ -41,7 +43,7 @@
 
             <div id="dealerArea">
                 <div class="header"><h4>Player</h4></div>
-                <div class="cards">
+                <div class="cardsArea">
                     <span class="cardsTitle">Cards:</span>
                     <span id="dCards"></span>
                 </div>
@@ -56,7 +58,7 @@
             <span id="result1" class="result1">Result:</span>
             <span id="result2" class="result2">
                 <span id="resultMessage">Result message</span>
-                <button id="playAgain">Play Again</button>
+                <button id="playAgain" disabled>Play Again</button>
             </span>
             <span id="result3" class="result1"></span>
         </div>

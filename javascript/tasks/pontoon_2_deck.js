@@ -26,11 +26,12 @@
 
         const suits = ["H", "D", "S", "C"]; 
         const ranks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+        const faces = ["up", "down"];
 
-        // create a new object for each suit and rank, and then push it into the deck array
+        // create a new object for each suit, rank, and face, and then push it into the deck array
         for(const suit of suits){
             for(const rank of ranks){
-                originalDeck.push({rank, suit}) 
+                originalDeck.push({rank, suit, face: faces[1]})
             }
         }
 

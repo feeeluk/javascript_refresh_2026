@@ -18,15 +18,17 @@
     const state = {
         player: {
             score: 0,
+            count: 0,
             cards: [],
+            revealedCount: 0,
             stick: false,
-            face: "down"
         },
         dealer: {
             score: 0,
+            count: 0,
             cards: [],
+            revealedCount: 0,
             stick: false,
-            face: "down"
         },
 
         result: null,
@@ -38,13 +40,19 @@
 
     function reset(){
         state.player.score = 0;
+        state.player.count = 0;
         state.player.cards = [];
+        state.player.revealedCount = 0,
         state.player.stick = false;
-        state.player.face = "down";
+        
         state.dealer.score = 0;
+        state.dealer.count = 0;
         state.dealer.cards = [];
+        state.dealer.revealedCount = 0,
         state.dealer.stick = false;
-        state.dealer.face = "down";
+        
         state.result = null;
         state.result = false;
+
+        // all the variables are reset but I still need to actually show the changes.s
     }
