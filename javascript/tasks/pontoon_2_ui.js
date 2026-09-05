@@ -50,36 +50,56 @@
 
     }
 
-    function revealCards(who, cards){
+    function delay(delayMiliseconds){
+        return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
+    }
+
+    async function revealCards(who, cards){
 
         let nodeList;
+        let showCount;
 
         // create a nodeList of the image elements within the (WHO's) div
         switch(who){
                 case "player":
                     nodeList = showPlayerCards.querySelectorAll("img");
+                    showCount = showPlayerCount;
                     break;
 
                 case "dealer":
                     nodeList = showDealerCards.querySelectorAll("img");
+                    showCount = showDealerCount;
                     break;
         }
 
         // how many cards have already been revealed?
         let revealedCount = state[who].revealedCount;
 
+        // what is the card count?
+        let newCount = state[who].count;
+
         // reveal only the new card
         for(let i = revealedCount; i < cards.length; i++){
+            
+            // include a delay before each reveal
+            await delay(1000);
+
+            // edit the src of each card
             nodeList[i].src = "/resources/images/cards/front/" + cards[i].rank + cards[i].suit + ".png";
+
+            // increment count
+            newCount ++;
+            
+            // show count
+            console.log(newCount);
+            showCount.textContent = newCount;
+            
+            // calculate score
+            // show score
         }
 
         // update the revealed count
-        revealedCount = cards.length;
-        
-        // increment count
-        // show count
-        // calculate score
-        // show score
+        revealedCount = cards.length; // the loop shows all the cards in the array, so we can say the number of cards shown is the same value as the array length
     }
 
 
