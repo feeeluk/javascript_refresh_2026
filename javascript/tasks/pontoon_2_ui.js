@@ -50,6 +50,23 @@
 
     }
 
+    function showHistory(who, card){       
+        // add li element
+        const newElement = document.createElement("li");
+        newElement.textContent =  card;
+
+        // append to div
+        switch(who){
+            case "player":
+                showPlayerHistory.append(newElement);
+                break;
+
+            case "dealer":
+                showDealerHistory.append(newElement);
+                break;
+        }
+    }
+
     function delay(delayMiliseconds){
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
     }
@@ -75,9 +92,6 @@
         // how many cards have already been revealed?
         let revealedCount = state[who].revealedCount;
 
-        // what is the card count?
-        let newCount = state[who].count;
-
         // reveal only the new card
         for(let i = revealedCount; i < cards.length; i++){
             
@@ -88,18 +102,20 @@
             nodeList[i].src = "/resources/images/cards/front/" + cards[i].rank + cards[i].suit + ".png";
 
             // increment count
-            newCount ++;
+            incrementCount(who);
             
             // show count
-            console.log(newCount);
-            showCount.textContent = newCount;
+            showCount.textContent = state[who].count;
             
+            // show history
+            showHistory(who, (cards[i].rank + cards[i].suit));
+
             // calculate score
             // show score
         }
 
-        // update the revealed count
-        revealedCount = cards.length; // the loop shows all the cards in the array, so we can say the number of cards shown is the same value as the array length
+        // // update the revealed count
+        // revealedCount = cards.length; // the loop shows all the cards in the array, so we can say the number of cards shown is the same value as the array length
     }
 
 

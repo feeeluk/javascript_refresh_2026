@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pontoon V2</title>
-    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v014">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_2.css?v015">
     <script src="/javascript/tasks/pontoon_2_deck.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_state.js" defer></script>
     <script src="/javascript/tasks/pontoon_2_ui.js" defer></script>
@@ -31,14 +31,18 @@
                 <div class="cardsArea">
                     <span class="cardsTitle">Cards:</span>
                     <span id="pCards"></span>
+
+                    <span id="aceChoice">Ace value:</span>
                     <button id="aceOne" class="choices" disabled>1</button>
                     <button id="aceEleven" class="choices" disabled>11</button>
+
+                    <span id="playerActions">Player actions:</span>
                     <button id="twist" class="choices" disabled>Twist</button>
                     <button id="stick" class="choices" disabled>Stick</button>
                 </div>
                 <div class="score">Score:<span id="pScore"></span></div>
                 <div class="count">Count:<span id="pCount"></span></div>
-                <div class="history">History:<span id="pHistory"></span></div>
+                <div class="history">History:<span><ul id="pHistory"></ul></span></div>
             </div>
 
             <div id="dealerArea">
@@ -49,7 +53,7 @@
                 </div>
                 <div class="score">Score:<span id="dScore"></span></div>
                 <div class="count">Count:<span id="dCount"></span></div>
-                <div class="history">History:<span id="dHistory"></span></div>
+                <div class="history">History:<span><ul id="dHistory"></ul></span></div>
             </div>
 
         </div>

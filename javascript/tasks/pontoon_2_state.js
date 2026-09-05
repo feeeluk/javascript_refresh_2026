@@ -56,3 +56,7 @@
 
         // all the variables are reset but I still need to actually show the changes.s
     }
+
+    function incrementCount(who){
+        state[who].count ++;
+    }
