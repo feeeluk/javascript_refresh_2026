@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/advanced/amber/error_handling.js" defer></script>
+</head> 
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Error Handling</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Error Handling ensures the program can gracefully respond when something fails (like a network error or invalid <a class="topic" href="\pages\advanced\green\json.html">JSON</a>) instead of crashing.
+                        <br>
+                        There are several different types of error, but unless they are handled correctly they will interrupt the flow of the program, and the program may not even complete.
+                    </p>
+
+                    <p>
+                        When we say 'handle' we mean use 'try()', 'catch()', and 'finally()' blocks.
+                    </p>
+
+                    <p>
+                        <ul>
+                            <li>try{ } = encloses code that might potentially cause an error</li>
+                            <li>catch{ } = Catch and handle any thrown errors from try()</li>
+                            <li>finally{ } = optional, but always executes. Used mostly for clean up, e.g. closes files, close connections, release resources.</li>
+                        </ul>
+                    </p>
+
+                    <p>
+                        'Throwing' errors is different than generically catching all errors. We can 'throw' errors for specific situations. These errors have to be thrown in the 'try' block. 
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        An error is an object that is created to represent a problem that occurs.
+                        <br>
+                        They often occur with user input or establishing a connection.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+
+                    <p>
+                        <button id="exampleOne">Example 1 - No try/catch without error</button>
+                        <br>
+                        <button id="exampleTwo">Example 2 - No try/catch with error</button>
+                        <br>
+                        <button id="exampleThree">Example 3 - caught error</button>
+                        <br>
+                        <button id="exampleFour">Example 4 - Throwing errors</button>
+                        <br>
+                        <button id="exampleFive">5</button>
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=NwoAZF66_Go&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=61">BroCode - Error Handling</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

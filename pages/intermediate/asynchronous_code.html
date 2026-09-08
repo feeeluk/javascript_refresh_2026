@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous Code</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/intermediate/asynchronous_code.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Asynchronous Code</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Synchronous = Executed line by line consecutively in a sequential manner. Code that waits for an operation to complete.
+                        <br>
+                        Asynchronous = Allows multiple operations to be performed concurrently without waiting. Doesn't block the execution flow and allows the program to continue.
+                    </p>
+                    <p>
+                        Different ways of working can be achieved by mixing these concepts.. For example, you could set one function to run asynchronously, but then be followed by synchronous code that will not execute until the asynchronous function has finished.
+                    </p>
+
+                    <p>
+                        In the examples used, we create an async function that calls functions that already return a promise. 
+                    </p>
+
+                    <button id="exampleOne">Example 1 - Demonstration of synchronous code</button>
+                    <br>
+                    <button id="exampleTwo">Example 2 - Demonstration of asynchronous code</button>
+                    <br>
+                    <button id="exampleThree">Example 3 - Demonstration of asynchronous code used alongside synchronous code (via callbacks)</button>
+                    <br>
+                    <button id="exampleFour">Example 4 - Demonstration of multiple async functions running at the same time</button>
+                    <br>
+                    <!-- <button id="exampleFive">Example 5</button>
+                    <br> -->
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                    
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=Coyy79wRz_s&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=60">BroCode - Asynchronous code</a>
+                        <br>
+                        <a href="https://www.youtube.com/watch?v=9j1dZwFEJ-c&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=76">BroCode - Async / Await</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

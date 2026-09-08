@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async / Await</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/advanced/green/async_await.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Async / Await</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Async = makes a function return a promise.
+                        <br>
+                        Await = make an async function WAIT for a promise to complete.
+                    </p>
+
+                    <p>
+                        <u>Using Async without await is common practice!!!!!!!!!!!</u>
+                        <br>
+                        <b>You DO NOT HAVE TO USE AWAIT!</b>
+                        <br>
+                        Using AWAIT allows you to write asynhronous code in an synchronous manner.
+                        <br>Everything after Await is placed in an event queue.
+                        <br>
+                        AWAIT literally pauses the flow of the program until the promise has returned (literal meaning. It 'awaits' the return of the promise before continuing).
+                        <br>
+                        <br>
+                        Async promises don't have resolve or reject parameters.
+                    </p>
+
+                    <p>
+                        Async functions always return a promise (Promise&lt;Response&gt;) e.g. <span class="example">Promise { 42 }</span>
+                        <br>
+                        To get access to the value contained within the promise (i.e. to 'unwrap it') there are two methods.
+                        <ul>
+                            <li>.then (for use inside a non 'async' function)</li>
+                            <li>await (for clean, readable, step‑by‑step code inside an 'async' function)</li>
+                        </ul>
+                    </p>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        Async / Await — allows asynchronous code to be written in a readable, top‑to‑bottom style (e.g., const data = await fetch(url)), making API workflows feel synchronous.
+                        <br>
+                        Ideal for use with I/O operations, network requests, fetching data.
+                        Handled with: <a class="topic" href="\pages\intermediate\callbacks.html">Callbacks</a>, <a class="topic" href="\pages\advanced\green\promises.html">Promises</a>, <a class="topic" href="\pages\advanced\green\async_await.html">Async/Await</a>.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+
+                    <p>
+                        <button id="exampleOne">Example 1 - Single call to an async function</button>
+                        <br>
+                        <button id="exampleTwo">Example 2 - Two calls to async functions</button>
+                        <br>
+                        <button id="exampleThree">Example 3 - Three calls to async functions</button>
+                        <br>
+                        <button id="exampleFour">Example 4 - Four calls to async functions</button>
+                        <br>
+                        <button id="exampleFive">Example 5 - Four calls to async functions inside try/catch blocks</button>
+                        <br>
+                        <button id="exampleSix">Example 6 - Four calls to async functions inside individual try/catch blocks</button>
+                        <br>
+                        <button id="exampleSeven">Example 7 - Four calls to async functions in parallel</button>
+                        <br>
+                    </p>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=9j1dZwFEJ-c&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=76">BroCode - Async / Await</a>
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

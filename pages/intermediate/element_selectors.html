@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Element Selectors</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/intermediate/element_selectors.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Element Selectors</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Methods used to target and manipulate HTML elements. They allow you to select one of multiple HTML elements from the DOM.
+
+                            <ul  class="example">
+                                <li>document.getElementById() // Element or Null</li>
+                                <li>document.getElementsClassName() // HTML Collection</li>
+                                <li>document.getElementByTagName() // HTML Collection</li>
+                                <li>document.querySelector() // Element of Null</li>
+                                <li>document.querySelectorAll() // Nodelist</li>
+                            </ul>
+                        
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        Element Selectors allow a developer to grab specific elements from the page (e.g., buttons, inputs, sections) so they can update content, attach events, or manipulate the UI.
+                        <br>
+                        This is a CORE part of JavaScript as it is one of the ways that JavaScript interacts with HTML.
+                    </p>
+
+                    <p>
+                        QUERY SELECTORS are INSANELY powerful things. They harness CSS selectors to identify the elements to return. Think of how specific you can be with CSS selectors (i.e. psuedo, siblings, parents, specific elements that follow other specific elements)... you can use the exact same selectors. That is the point.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+
+                    <div>
+                        <h4 id="example1Header">Example 1 - getElementById():</h4>
+
+                        <h4>Example 2 - getElementsByClassName()</h4>
+
+                            <div class="fruits">Apple</div>
+                            <div class="fruits">Orange</div>
+                            <div class="fruits">Banana</div>
+
+
+                        <h4>Example 3 - getElementsByClassName() with For Loop:</h4>
+
+                            <div class="fruits1">Apple</div>
+                            <div class="fruits1">Orange</div>
+                            <div class="fruits1">Banana</div>
+
+
+                        <h4>Example 4 - getElementsByClassName() with forEach():</h4>
+
+                            <div class="fruits2">Apple</div>
+                            <div class="fruits2">Orange</div>
+                            <div class="fruits2">Banana</div>
+
+
+                        <h4>Example 5 - getElementsByTagName(): </h4>
+
+                            <ul>
+                                <li>Beets</li>
+                                <li>Carrots</li>
+                                <li>Potatos</li>
+                            </ul>                       
+
+
+
+                        <h4>Example 6 - getElementsByTagName() with For Loop: </h4>
+
+                            <ul>
+                                <li>Beets</li>
+                                <li>Carrots</li>
+                                <li>Potatos</li>
+                            </ul>
+                    
+
+
+                        <h4>Example 7 - getElementsByTagName() with forEach():</h4>
+
+                            <ul>
+                                <li>Beets</li>
+                                <li>Carrots</li>
+                                <li>Potatos</li>
+                            </ul>
+                            
+
+
+                        <h4>Example 8 - querySelector():</h4>
+
+                            <div class="box">Box 1</div>
+                            <div class="box">Box 2</div>
+                            <div class="box">Box 3</div>
+
+
+
+                        <h4>Example 9 - querySelectorAll():</h4>
+
+                            <div class="box2">Box 1</div>
+                            <div class="box2">Box 2</div>
+                            <div class="box2">Box 3</div>
+
+
+                        <h4>Example 10 - querySelectorAll() with forEach()</h4>
+                        
+                            <div class="box3">Box 1</div>
+                            <div class="box3">Box 2</div>
+                            <div class="box3">Box 3</div>
+
+
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=FQtjI1PC5Z0&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=64">BroCode - Element Selectors</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

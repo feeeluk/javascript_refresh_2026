@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <style>
+        .counterLabel{
+            display: block;
+            text-align: center;
+            font-size: 10rem;
+            font-family: helvetica;
+        }
+
+        .container{
+            text-align: center;
+        }
+        
+
+        .button{
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            color: white;
+            background-color: blue;
+            border-radius: 5px;
+            cursor: pointer;
+
+        }
+    </style>
+    <script src="/javascript/tasks/counter.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Counter</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output for more detail.
+                    </p>
+
+                    <p>
+                        <label id="counterLabel" class="counterLabel">0</label>
+                        <br>
+                        <div id="container" class="container">
+                            <button id="decreaseButton" class="button">decrease</button>
+                            <button id="resetButton" class="button">reset</button>
+                            <button id="increaseButton" class="button">increase</button>
+                        </div>
+                        
+                    </p>
+                    
+
+                    
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=uSJXZ3LkABE&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=7">BroCode - Counter Program</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

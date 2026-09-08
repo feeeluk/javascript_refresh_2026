@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontoon V1</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/tasks/pontoon_1.css?v009">
+    <script src="/javascript/tasks/pontoon_1.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Pontoon V1</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                        
+                    <div id="playerActions" class="visible">
+
+                        <button id="startGame" class="visible" enabled>Start Game</button>
+                        <div class="break"></div>
+
+                        <button id="twist" class="visible" disabled>Twist</button>
+                        <button id="stick" class="visible" disabled>Stick</button>
+                    
+                    </div>
+
+                    <div id="playerArea" class="visible">
+                        
+                        <h3>Player Area</h3>
+                        <div class="break"></div>
+
+                        <span id="showPlayerCards" class="visible"></span>
+                        <div class="break"></div>
+                        
+                        Score: <span id="showPlayerScore" class="visible"></span>
+                        <div class="break"></div>
+
+                        Number of cards: <span id="showPlayerNumberOfCards" class="visible"></span>
+                        <div class="break"></div>                      
+
+                        History:
+                        <div class="break"></div>
+                        <ul id="showPlayerHandHistory" class="visible"></ul>
+
+                    </div>
+
+                    <div id="computerArea" class="visible">
+
+                        <h3>Computer Area</h3>
+                        <div class="break"></div>
+
+                        <span id="showComputerCards" class="visible"></span>
+                        <div class="break"></div>
+                        
+                        Score: <span id="showComputerScore"></span>
+                        <div class="break"></div>
+
+                        Number of cards: <span id="showComputerNumberOfCards"></span>
+                        <div class="break"></div>
+
+                        History:
+                        <div class="break"></div>
+                        <ul id="showComputerHandHistory"></ul>
+
+                    </div>   
+
+                    <div id="resultArea" class="visible">
+
+                        Result: <span id="showResults"></span>
+
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

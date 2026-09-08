@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/intermediate/dom.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>DOM / Document Object Model</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        DOM (Document Object Model) represents the actual web page structure.
+                        <br>
+                        It is an <a class="topic" href="\pages\OOP\objects.html">object</a> that represents the page you see in the web browser and provides you with an API to interact with it.
+                        <br>
+                        Web browsers construct the DOM when they load a HTML document, and structure all the elements in a tree-like representation.
+                        <br>
+                        JavaScript can access the DOM and dynamically change the content, structure, and style of a web page.
+                    </p>
+
+                    <p>
+                        DOM navigation is the process of navigating through the structure of an HTML document using JavaScript.
+                    </p>
+
+                    <ul>
+                        <li>.firstElementChild</li>
+                        <li>.lastElementChild</li>
+                        <li>.nextElementSibling</li>
+                        <li>.previousElementSibling</li>
+                        <li>.parentElement</li>
+                        <li>.children</li>
+                        <li>.querySelectorAll()</li>
+                    </ul>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        By manipulating the DOM developers are able to read and modify elements, text, attributes, and layout using JavaScript code (no HTML!).
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+
+                    <h3>Example 1</h3>
+
+                        <h4 id="welcomeMsg1">Welcome </h4>
+                        <h4 id="welcomeMsg2">Welcome </h4>
+
+                    <h3>Example 2</h3>
+                        
+                        <ul id="fruits01">
+                            <li>apple</li>
+                            <li>orange</li>
+                            <li>banana</li>
+                        </ul>
+
+                        <ul id="vegetables01">
+                            <li>carrot</li>
+                            <li>onion</li>
+                            <li>potato</li>
+                        </ul>
+
+                        <ul id="desserts01">
+                            <li>cake</li>
+                            <li>pie</li>
+                            <li>ice cream</li>
+                        </ul>
+
+                    <h3>Example 3</h3>
+
+                        <ul id="fruits02">
+                            <li>apple</li>
+                            <li>orange</li>
+                            <li>banana</li>
+                        </ul>
+
+                        <ul id="vegetables02">
+                            <li>carrot</li>
+                            <li>onion</li>
+                            <li>potato</li>
+                        </ul>
+
+                        <ul id="desserts02">
+                            <li>cake</li>
+                            <li>pie</li>
+                            <li>ice cream</li>
+                        </ul>
+
+                    <h3>Example 4</h3>
+
+                        <ul id="fruits03">
+                            <li>apple</li>
+                            <li>orange</li>
+                            <li>banana</li>
+                        </ul>
+
+                        <ul id="vegetables03">
+                            <li>carrot</li>
+                            <li>onion</li>
+                            <li>potato</li>
+                        </ul>
+
+                        <ul id="desserts03">
+                            <li>cake</li>
+                            <li>pie</li>
+                            <li>ice cream</li>
+                        </ul>
+
+                    <h3>Example 5</h3>
+
+                        <ul id="fruits04">
+                            <li id="">apple</li>
+                            <li id="">orange</li>
+                            <li id="">banana</li>
+                        </ul>
+
+                        <ul id="vegetables04">
+                            <li id="">carrot</li>
+                            <li id="">onion</li>
+                            <li id="">potato</li>
+                        </ul>
+
+                        <ul id="desserts04">
+                            <li id="">cake</li>
+                            <li id="">pie</li>
+                            <li id="">ice cream</li>
+                        </ul>
+
+                    <h3>Example 6</h3>
+
+                        <ul id="fruits05">
+                            <li id="">apple</li>
+                            <li id="">orange</li>
+                            <li id="">banana</li>
+                        </ul>
+
+                        <ul id="vegetables05">
+                            <li id="">carrot</li>
+                            <li id="">onion</li>
+                            <li id="">potato</li>
+                        </ul>
+
+                        <ul id="desserts05">
+                            <li id="">cake</li>
+                            <li id="">pie</li>
+                            <li id="">ice cream</li>
+                        </ul>
+
+                    <h3>Example 7</h3>
+
+                        <ul id="fruits06">
+                            <li id="">apple</li>
+                            <li id="">orange</li>
+                            <li id="">banana</li>
+                        </ul>
+
+                        <ul id="vegetables06">
+                            <li id="">carrot</li>
+                            <li id="">onion</li>
+                            <li id="">potato</li>
+                        </ul>
+
+                        <ul id="desserts06">
+                            <li id="">cake</li>
+                            <li id="">pie</li>
+                            <li id="">ice cream</li>
+                        </ul>
+
+                    <h3>Example 9</h3>
+
+                        <ul id="fruits07">
+                            <li id="apple07">apple</li>
+                            <li id="">orange</li>
+                            <li id="">banana</li>
+                        </ul>
+
+                        <ul id="vegetables07">
+                            <li id="">carrot</li>
+                            <li id="">onion</li>
+                            <li id="">potato</li>
+                        </ul>
+
+                        <ul id="desserts07">
+                            <li id="">cake</li>
+                            <li id="">pie</li>
+                            <li id="">ice cream</li>
+                        </ul>
+                    
+                    <h3>Example 10</h3>
+
+                        <ul id="fruits08">
+                            <li id="">apple</li>
+                            <li id="">orange</li>
+                            <li id="">banana</li>
+                        </ul>
+
+                        <ul id="vegetables08">
+                            <li id="">carrot</li>
+                            <li id="">onion</li>
+                            <li id="">potato</li>
+                        </ul>
+
+                        <ul id="desserts08">
+                            <li id="">cake</li>
+                            <li id="">pie</li>
+                            <li id="">ice cream</li>
+                        </ul>    
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=RKXIMnSwUcg&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=65">BroCode - DOM</a>
+                        <br>
+                        <a href="https://www.youtube.com/watch?v=RKXIMnSwUcg&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=65">BroCode - DOM Navigation</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

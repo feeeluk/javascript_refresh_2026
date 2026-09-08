@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promises</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script src="/javascript/advanced/green/promises.js" defer></script>
+</head>
+<body>
+
+    <div id="topic" class="topic">
+
+        <table>
+
+            <tr>
+                <td id="title" class="title">
+                    <h1>Promises</h1>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="link" class="link">
+                    <a href="/index.html">Back</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="description" class="description">
+                    <h3>Description</h3>
+                
+                    <p>
+                        Promises provide a structured way to handle operations that complete later (like API calls), ensuring the code can react when the data finally arrives.
+                    </p>
+
+                    <p>
+                        A promise does not have to live inside an async function, however if you want that promise to resolve before doing something else, then it needs an 'await' when it is called.
+                    </p>
+
+                    <p>
+                        A 'promise' is an object. A new instance of that object can be instantiated using the 'Promise' constructor.
+                        <br>
+                        Promises contain state (pending, fulfilled, rejected), and a result (the value or error).
+
+                    </p>
+
+                    <p class="example">
+                        new Promise((resolve, reject) => {})
+                    </p>
+
+                    <p>
+                        This hands an arrow function expression to the Promise constructor.
+                        <br>
+                        Then JavaScript does this:
+                        <ol>
+                            <li>It creates a new Promise object.</li>
+                            <li>It immediately calls your function.</li>
+                            <li>It passes two arguments into your function:
+                                <br>
+                                <ul>
+                                    <li>a function called resolve (parameter)</li>
+                                    <li>a function called reject (parameter)</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="why" class="why">
+                    <h3>How is it used / why is it important?</h3>
+                
+                    <p>
+                        Promises provide a structured way to handle operations that complete later (like API calls), ensuring the code can react when the data finally arrives.
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="main" class="main">
+                    <p>
+                        See console output.
+                    </p>
+
+                    <button id="independent">Independent / Parallel</button>
+                    <button id="sequential">Sequential / Chained</button>
+
+                    <p>
+                        If one of the chained promises rejects, then the chain stops. None of the following chained functions will run.
+                    </p>
+                    
+                    <p>
+                        Whereas if one of the independent promises rejects, then it makes no difference. It might appear at first that this is 'better' but it's simply a case of 'horses for courses'.
+                    </p>
+                    
+                    <button id="sequential2">Sequential / Chained with a promise that fails early in the chain</button>
+                    <button id="independent2">Independent / Parallel with a promise that fails</button>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <h3>Resources</h3>
+                    <p>
+                        <a href="https://www.youtube.com/watch?v=NOzi4wBHn0o&list=PLZPZq0r_RZOO1zkgO4bIdfuLpizCeHYKv&index=75">BroCode - Promises</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td id="code" class="code">
+                    <button id="code">View Code</button>
+                </td>
+            </tr>
+            
+        </table>       
+
+    </div>
+
+</body>
+</html>

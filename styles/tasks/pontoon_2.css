@@ -1,0 +1,223 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    margin: 5px 0 0 0;
+}
+
+#gameArea{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: top;
+}
+
+#titleArea{
+    width: 100%;
+    height: calc(10% - 20px);
+    margin: 10px;
+    border-radius: 5px;
+    background-color:cornflowerblue;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#play{
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: left;
+    align-items: center;
+}
+
+#usersArea{
+    width: 100%;
+    height: 70%;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#playerArea{
+    padding: 10px;
+    margin: 0;
+    width: calc(49% - 20px);
+    background-color: tomato;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#dealerArea{
+    padding: 10px;
+    margin: 0;
+    width: calc(49% - 20px);
+    border-radius: 5px;
+    background-color: purple;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#resultArea{
+    width: 100%;
+    margin: 10px;
+    padding: 5px;
+    height: calc(20% - 30px);
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.result1{
+    width: 10%;
+    height: 100%;
+}
+
+.result2{
+    height: 75%;
+    width: 80%;
+    padding: 0 5% 0 5%;
+    color: transparent;
+    background-color: transparent;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+    #resultMessage{
+        width: 100%;
+        padding-bottom: 10px;
+        text-align: center;
+    }
+
+.header{
+    width: 100%;
+    height: 4%;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.cardsArea{
+    width: 100%;
+    height: 50%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% 60% auto auto auto auto;
+}
+    .cardsTitle{
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    #pCards, #dCards{
+        grid-column: 1 / span 2;
+        grid-row: 2;
+    }
+
+        .card{
+            max-width: 100px;
+            width: 20%;
+            min-width: 50px;
+        }
+
+            .highlighted{
+                border: 3px solid yellow;
+            }
+
+    .choices{
+        width: 100%;
+        height: 28px;
+    }
+
+    #pAceTitle{
+        grid-column: 1 / span 2;
+        grid-row: 3;
+        text-align: center;
+    }
+        .disabled{
+            color: lightgray;
+        }
+
+        .enabled{
+            color: black;
+        }
+
+    #pAceOne{
+        grid-column: 1;
+        grid-row: 4;
+       
+    }
+
+    #pAceEleven{
+        grid-column: 2;
+        grid-row: 4;
+    }
+
+    #pActionTitle{
+        grid-column: 1 / span 2;
+        grid-row: 5;
+        text-align: center;
+    }
+
+    #pActionTwist{
+        grid-column: 1;
+        grid-row: 6;
+    }
+
+    #pActionStick{
+        grid-column: 2;
+        grid-row: 6;
+    }
+
+.score{
+    width: 100%;
+    height:  3%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.count{
+    width: 100%;
+    height: 3%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.history{
+    width: 100%;
+    height: 30%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+
