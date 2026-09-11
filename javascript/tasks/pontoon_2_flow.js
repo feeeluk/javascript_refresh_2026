@@ -1,129 +1,184 @@
 // Pontoon V2 - Flow (run the game rules) 
 // ////////////////////////////////////////
-
-// Functions
 // ////////////////////////////////////////
 
-    async function startGame(){
+// Game Mechanics
+// ////////////////////////////////////////
+
+    async function startGame()
+    {
         createGame();
         await initialDeal();
-        await turnCardOver("player", 0);
-        await turnCardOver("player", 1);
-        handleScore("player");
+        await revealDeal();
         // playerActions();
-    }   
-    
-    function createGame(){
-        reset();
-        createDeck();
     }
 
-    async function initialDeal(){
-        await delay(500);
+        function createGame()
+        {
+            reset();
+            createDeck();
+        }
 
-        dealCard(state.player.cards);
-        showDealtCard("player");
-        await delay(500);
+        async function initialDeal()
+        {
 
-        dealCard(state.dealer.cards);
-        showDealtCard("dealer");
-        await delay(500);
+            const initialDeal = true;
 
-        dealCard(state.player.cards);
-        showDealtCard("player");
-        await delay(500);
+            await delay(500);
 
-        dealCard(state.dealer.cards);
-        showDealtCard("dealer");
-        await delay(500);
-    }
-    
-    function dealCard(targetArray){
-        const card = deck.pop(); // take the last card
-        targetArray.push(card); // pass it to the player's or computer's relevant array      
-    }
+            dealCard("player");
+            showCard("player", initialDeal);
+            await delay(500);
 
-    async function turnCardOver(who, whichCard){
-        await showCard(who, whichCard);
-        handleCount(who);
-        handleHistory(who);
-    }
+            dealCard("dealer");
+            showCard("dealer", initialDeal);
+            await delay(500);
 
-    function handleCount(who){
+            dealCard("player");
+            showCard("player", initialDeal);
+            await delay(500);
+
+            dealCard("dealer");
+            showCard("dealer", initialDeal);
+            await delay(500);
+        }
+
+        async function revealDeal()
+        {
+
+            // this is not the initial deal
+            const initialDeal = false;
+
+            // it is the first time the score is being revealed
+            const initialScore = true;
+
+            // show the first card
+            showCard("player", initialDeal);
+            handleCount("player");
+            handleHistory("player");
+            handleScore("player", initialScore);
+            await delay(500);
+
+            // show the second card
+            showCard("player", initialDeal);
+            handleCount("player");
+            handleHistory("player");
+            handleScore("player", initialScore);
+
+            // update and show scores
+            // BUT ace values can only be set AFTER both cards have been seen, but set INDIVIDUALLY
+            await delay(500);
+            await handleAces("player", initialScore);
+            handleScore("player", initialScore);
+
+            await handleAces("player", initialScore);
+            handleScore("player", initialScore);
+        }
+
+        function playerActions()
+        {
+
+        }
+
+// Controller Functions
+// ////////////////////////////////////////
+ 
+    function handleCount(who)
+    {
         calculateCount(who);
         showCount(who);
     }
 
-    function handleHistory(who){
+    function handleHistory(who)
+    {
         const numberOfItemsToShow = calculateHistory(who);
         showHistory(who, numberOfItemsToShow);
     }
 
-    async function handleScore(who){
-        await handleAces(who);
-        calculateScore(who);;
+    function handleScore(who, initialScore)
+    {
+        calculateScore(who, initialScore);
         showScore(who);
     }
 
-    async function handleAces(who){
+    async function handleAces(who, initialScore)
+    {
 
-        const pontoon = checkForPontoon(who);
-
-        // if any card within the Player's hand is an ace AND Player HAS Pontoon
-        if( state.player.cards.some(cards => cards.rank.startsWith("A")) 
-            && pontoon)
+        // actions only relevant if working with the initially dealt cards
+        if(initialScore)
         {
-            const lengthOfArray = state.player.cards.length;;
 
-            for(let i = 0; i < lengthOfArray; i++){
-                
-                if( state.player.cards[i].rank.startsWith("A") &&
-                    state.player.cards[i].value === null){
+            const pontoon = checkForPontoon(who);
 
-                    let aceValue = 11;
+            // if any card within the Player's hand is an ace AND Player HAS Pontoon then mark that ace as value 11
+            if( state.player.cards.some(cards => cards.rank.startsWith("A")) 
+                &&
+                pontoon)
+            {
+                const lengthOfArray = state.player.cards.length;
 
-                    // assign the value of the card
-                    setAceValue(state.player.cards[i], aceValue);
+                for(let i = 0; i < lengthOfArray; i++)
+                {
+                    
+                    if( state.player.cards[i].rank.startsWith("A")
+                        &&
+                        state.player.cards[i].value === 0)
+                    {
+                        let aceValue = 11;
+
+                        // assign the value of the card
+                        setAceValue(state.player.cards[i], aceValue);
+                    }
                 }
             }
-        }
 
-        // if any card within the Player's hand is an ace AND Player DOES NOT HAVE Pontoon
-        else if( state.player.cards.some(cards => cards.rank.startsWith("A")) 
-            && !pontoon)
-        {
-        
-            const lengthOfArray = state.player.cards.length;
-            const nodelistOfImages = showPlayerCards.querySelectorAll("img");
-
-            for(let i = 0; i < lengthOfArray; i++){
+            // if any card within the Player's hand is an ace AND Player DOES NOT HAVE Pontoon then allow the Player to chose the value of the ace/s
+            else if(state.player.cards.some(cards => cards.rank.startsWith("A")) 
+                    &&
+                    !pontoon)
+            {
+                const nodelistOfImages = showPlayerCards.querySelectorAll("img");
+                const lengthOfArray = state.player.cards.length -1;
                 
-                if( state.player.cards[i].rank.startsWith("A") &&
-                    state.player.cards[i].value === null){
+                for(let i = 0; i <= lengthOfArray; i++)
+                {
+                    
+                    if(state.player.cards[i].value === 0)
+                    {
+                        // highlight the current card
+                        toggleHighlightCard(nodelistOfImages[i]);
 
-                    // highlight the current card
-                    toggleHighlightCard(nodelistOfImages[i]);
+                        // enable the choices
+                        toggleShowAceChoices();
 
-                    // enable the choices
-                    toggleShowAceChoices();
+                        // get the user's input
+                        let aceValue = await aceChoice();
 
-                    // get the user's input
-                    let aceValue = await aceChoice();
+                        // assign user's choice to the value of the card
+                        setAceValue(state.player.cards[i], aceValue);
 
-                    // assign user's choice to the value of the card
-                    setAceValue(state.player.cards[i], aceValue);
+                        // remove highlight from the card
+                        toggleHighlightCard(nodelistOfImages[i]);
 
-                    // remove highlight from the card
-                    toggleHighlightCard(nodelistOfImages[i]);
+                        // disable the choices
+                        toggleShowAceChoices();
 
-                    // disable the choices
-                    toggleShowAceChoices();
+                        // calculate the score
+                        calculateScore(who, initialScore)
+
+                        // show score
+                        showScore(who);
+
+                        break;
+                    }
                 }
-            }
+            }                
         }
     }
 
-    function handlePlayerActions(who){
+    // move to 'game machanics' equiv function
+    function handlePlayerActions(who)
+    {
 
         // don't show any button if bust
         if(state.player.score > 21){
@@ -160,9 +215,12 @@
         }
     }
 
-    function checkForBust(who){
+// Helper Functions
+// ////////////////////////////////////////
+        
+    function checkForBust(who)
+    {
         if( state[who].score > 21){
-
             return true;
         }
 
@@ -171,15 +229,16 @@
         }
     }
     
-    function checkForPontoon(who){
+    function checkForPontoon(who)
+    {
         if( state[who].count === 2
             && state.player.cards.some(cards => cards.rank.startsWith("A"))
             && (
                 state[who].cards.some(cards => cards.rank.startsWith("K")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("Q")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("J"))
-              )){
-
+              ))
+        {
             return true;
         }
 
@@ -188,11 +247,11 @@
         }
     }
 
-    function checkForFourCards(who){
+    function checkForFourCards(who)
+    {
         if( state[who].count === 4
-            && state[who].score <= 21
-        ){
-
+            && state[who].score <= 21)
+        {
             return true;
         }
 
@@ -201,11 +260,11 @@
         }        
     }
 
-    function checkForFiveCards(who){
+    function checkForFiveCards(who)
+    {
         if( state[who].count === 5
-            && state[who].score <= 21
-        ){
-
+            && state[who].score <= 21)
+        {
             return true;
         }
 
@@ -213,7 +272,6 @@
             return false;
         }         
     }
-
 
     // twist
         // deal card face up

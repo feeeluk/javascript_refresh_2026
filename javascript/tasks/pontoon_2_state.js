@@ -4,7 +4,7 @@
 // Variables
 // ////////////////////////////////////////
 
-    const state = {
+    const initialState = {
         player: {
             score: 0,
             count: 0,
@@ -26,35 +26,34 @@
         gameOver: false
     };
 
+    let state = structuredClone(initialState);
+
 // Functions
 // ////////////////////////////////////////
 
-    function reset(){
-        state.player.score = 0;
-        state.player.count = 0;
-        state.player.cards = [];
-        state.player.history = [];
-        state.player.revealedCount = 0,
-        state.player.stick = false;
-        
-        state.dealer.score = 0;
-        state.dealer.count = 0;
-        state.dealer.cards = [];
-        state.dealer.history = [];
-        state.dealer.revealedCount = 0,
-        state.dealer.stick = false;
-        
-        state.result = null;
-        state.result = false;
+    function reset()
+    {
 
-        // all the variables are reset but I still need to actually show the changes.s
+        state = structuredClone(initialState);
+        originalDeck.length = 0;
+        deck = undefined;
+
+        // all the variables are reset but I still need to actually show the changes
     }
 
-    function calculateCount(who){
+    function dealCard(who)
+    {
+        const card = deck.pop(); // take the last card
+        state[who].cards.push(card); // pass it to the relevant array      
+    }
+
+    function calculateCount(who)
+    {
         state[who].count ++;
     }
 
-    function calculateHistory(who){
+    function calculateHistory(who)
+    {
 
         // add last array element to history 
         let numberOfCardsDealt = state[who].cards.length;
@@ -63,8 +62,8 @@
         
         // check 'named' hands
         // pontoon
-        if(checkForPontoon(who)){
-            
+        if(checkForPontoon(who))
+        {
             // add "Pontoon!" to state history
             state[who].history.push("Pontoon!");
 
@@ -72,7 +71,8 @@
         }
 
         // 4 card
-        else if(checkForFiveCards(who)){
+        else if(checkForFiveCards(who))
+        {
             // add "4 card hand!" to state history
             state[who].history.push("5 card hand!");
 
@@ -80,7 +80,8 @@
         }
 
         // 5 card
-        else if(checkForFourCards(who)){
+        else if(checkForFourCards(who))
+        {
             // add "4 card hand!" to state history
             state[who].history.push("5 card hand!");
 
@@ -88,7 +89,8 @@
         }
 
         // bust
-        else if(checkForBust(who)){
+        else if(checkForBust(who))
+        {
             // add "4 card hand!" to state history
             state[who].history.push("5 card hand!");
 
@@ -100,24 +102,38 @@
         }
     }
 
-    function calculateScore(who){
+    function calculateScore(who, initialScore)
+    {
+        let revealedCount = state[who].revealedCount;
 
-        const revealedCount = state[who].revealedCount;
-        
-        // add the values of each of the cards
-        if(state[who].revealedCount === 2){
-
-            for(let i = 0; i < revealedCount; i++){
-                state[who].score += state[who].cards[i].value;
-                // console.log(`${i}: ${state[who].score}`);
-            }
+        if(checkForPontoon)
+        {
+            state[who].score = 21;
         }
 
-        else{
-            state[who].score += state[who].cards[revealedCount-1].value;
+        if(revealedCount === 1)
+        {
+            state[who].score = state[who].cards[0].value;
         }
+
+        else if(revealedCount === 2)
+        {
+            state[who].score = state[who].cards[0].value + state[who].cards[1].value;
+        }
+
+        else
+        {
+            const temporaryArray = state[who].cards
+                .map(card => card.value)        // extract the value from each object
+                .reduce((sum, v) => sum + v, 0); // sum the rest
+
+            // assign the sum of the temporaryArray as the score
+            state[who].score = temporaryArray; // NOTE the use of EQUALS not 'plus equals' - very important
+        }
+            
     }
 
-    function setAceValue(card, value){
+    function setAceValue(card, value)
+    {
         card.value = value;
     }

@@ -27,60 +27,69 @@
 // Functions
 // ////////////////////////////////////////
 
-    function showDealtCard(who){       
-        // add img element
-        const newElement = document.createElement("img");
-        newElement.classList.add("card");
-        newElement.src = "/resources/images/cards/back/back-blue.png";
-
-        // append to div
-        switch(who){
-            case "player":
-                showPlayerCards.append(newElement);
-                break;
-
-            case "dealer":
-                showDealerCards.append(newElement);
-                break;
-        }
-    }
-
-    function delay(delayMiliseconds){
+    function delay(delayMiliseconds)
+    {
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
     }
 
-    async function showCard(who, whichCard){
+    async function showCard(who, initialDeal)
+    {
 
-        // include a delay based on how many cards have been revealed
-        if(state[who].revealedCount >= 1){
-            await delay(1000);
+        // show initial cards (face down)
+        if(initialDeal === true)
+        {
+
+            // add img element
+            const newElement = document.createElement("img");
+            
+            // add the class
+            newElement.classList.add("card");
+
+            // change the src to show the back of the card
+            newElement.src = "/resources/images/cards/back/back-blue.png";
+
+            // apend the new image to the relevant player
+            (who === "player") ? showPlayerCards.append(newElement) : showDealerCards.append(newElement);
         }
-        
-        // create a nodeList of the image elements within the (WHO's) div
-        let nodeList;
 
-        switch(who){
-            case "player":
-                nodeList = showPlayerCards.querySelectorAll("img");
-                break;
+        // reveal initial cards (face up)
+        else if(state[who].revealedCount <= 2)
+        {
 
-            case "dealer":
-                nodeList = showDealerCards.querySelectorAll("img");
-                break;
+            // create a nodeList of the existing image elements
+            let nodeList;
+
+            switch(who)
+            {
+                case "player":
+                    nodeList = showPlayerCards.querySelectorAll("img");
+                    break;
+
+                case "dealer":
+                    nodeList = showDealerCards.querySelectorAll("img");
+                    break;
+            }
+
+            // edit the src of each card
+            nodeList[state[who].revealedCount].src = "/resources/images/cards/front/" + state[who].cards[state[who].revealedCount].rank + state[who].cards[state[who].revealedCount].suit + ".png";
+
+            // update the number of cards that have been revealed
+            state[who].revealedCount++;
+        }         
+
+        else
+        {
+
         }
-
-        // edit the src of each card
-        nodeList[whichCard].src = "/resources/images/cards/front/" + state[who].cards[whichCard].rank + state[who].cards[whichCard].suit + ".png";
-
-        // update the number of cards that have been revealed
-        state[who].revealedCount++;
     }
 
-    function showCount(who){
+    function showCount(who)
+    {
 
         let showCount;
 
-        switch(who){
+        switch(who)
+        {
             case "player":
                 showCount = showPlayerCount;
                 break;
@@ -93,9 +102,11 @@
         showCount.textContent = state[who].count;
     }
 
-    function showHistory(who, itemsToShow){
+    function showHistory(who, itemsToShow)
+    {
         
-        if(itemsToShow ===1){
+        if(itemsToShow ===1)
+        {
 
             const newElement = document.createElement("li");
             
@@ -106,9 +117,11 @@
 
         }
 
-        else if(itemsToShow > 1){
+        else if(itemsToShow > 1)
+        {
             
-            for(let i = 2; i > 0; i--){
+            for(let i = 2; i > 0; i--)
+            {
 
                 // add li element for each item
                 const newElement = document.createElement("li");
@@ -121,21 +134,23 @@
         }
     }
 
-    function aceChoice(){
+    function aceChoice()
+    {
 
         // return a promise
-        return new Promise(resolve => {
+        return new Promise(resolve =>
+        {
             
             // create a nodelist of buttons with the class of "aceChoice"
             const buttons = document.querySelectorAll(".aceChoice");
 
             // for each button set it's value
-            buttons.forEach(button => {
-                button.addEventListener("click", () => {
-                    
+            buttons.forEach(button =>
+            {
+                button.addEventListener("click", () =>
+                {
                     // send the value back
                     resolve(Number(button.value));
-
                 });
             });
         });
@@ -152,7 +167,8 @@
         playerAceEleven.disabled = playerAceEleven.disabled ? false : true;;
     }
 
-    function showScore(who){
+    function showScore(who)
+    {
 
         let show;
 
