@@ -17,15 +17,12 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        handleHistory("user");
-        
-        // calculate User's hand
-        calculateHand("user");
-        
-        // if game over
-        showResultOfGame();
+        calculateHistory("user");
+        showHistory("user");
 
-        // if not then give User options
+        // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
+        
+
         // userActions()       
     }
 
@@ -122,12 +119,6 @@
 
 // Grouped functions
 // ////////////////////////////////////////
-
-    function handleHistory(who)
-    {
-        const numberOfItemsToShow = calculateHistory(who);
-        showHistory(who, numberOfItemsToShow);
-    }
 
     function handleScore(who)
     {
