@@ -60,7 +60,8 @@
         showCard(who);
         incrementCount(who);
         showCount(who);
-        handleScore(who);
+        calculateScore(who);
+        showScore(who);
         pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
         showHistory(who, 1);
         await delayUI(time);
@@ -69,7 +70,8 @@
         showCard(who);
         incrementCount(who);
         showCount(who);
-        handleScore(who);
+        calculateScore(who);
+        showScore(who);
         pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
         showHistory(who, 1);
 
@@ -120,12 +122,6 @@
 // Grouped functions
 // ////////////////////////////////////////
 
-    function handleScore(who)
-    {
-        calculateScore(who);
-        showScore(who);
-    }
-
     async function handleAce(who)
     {
 
@@ -166,12 +162,12 @@
                         toggleShowAceChoices();
 
                         // calculate and show score new score
-                        handleScore(who);
+                        calculateScore(who);
+                        showScore(who);
 
                         // add and show chosen value in history
                         pushItemToHistory(who, `Ace value: ${aceValue}`);
                         showHistory(who, 1);
-                        console.log(state[who].history);
 
                         break;
                     }
