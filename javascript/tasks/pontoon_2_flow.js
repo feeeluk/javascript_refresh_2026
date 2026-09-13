@@ -1,93 +1,125 @@
-// Pontoon V2 - Flow (run the game rules) 
-// ////////////////////////////////////////
+// FLOW
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // - game mechanics
+    // - game rules
+    // - running order
+
+
+//  Variables
 // ////////////////////////////////////////
 
-// Game Mechanics
+
+// Game mechanic functions
 // ////////////////////////////////////////
 
     async function startGame()
     {
-        createGame();
-        await initialDeal();
-        await revealDeal();
-        // playerActions();
+        createGame(); 
+        await initialDeal("player");
+        await revealHand("player");
+        handleHistory("player");
+        
+        // calculate Player's hand
+        calculateHand("player");
+        
+        // if game over
+        showResultOfGame();
+
+        // if not then give Player options
+        // playerActions()       
     }
 
-        function createGame()
-        {
-            reset();
-            createDeck();
-        }
-
-        async function initialDeal()
-        {
-
-            const initialDeal = true;
-
-            await delay(500);
-
-            dealCard("player");
-            showCard("player", initialDeal);
-            await delay(500);
-
-            dealCard("dealer");
-            showCard("dealer", initialDeal);
-            await delay(500);
-
-            dealCard("player");
-            showCard("player", initialDeal);
-            await delay(500);
-
-            dealCard("dealer");
-            showCard("dealer", initialDeal);
-            await delay(500);
-        }
-
-        async function revealDeal()
-        {
-
-            // this is not the initial deal
-            const initialDeal = false;
-
-            // it is the first time the score is being revealed
-            const initialScore = true;
-
-            // show the first card
-            showCard("player", initialDeal);
-            handleCount("player");
-            handleHistory("player");
-            handleScore("player", initialScore);
-            await delay(500);
-
-            // show the second card
-            showCard("player", initialDeal);
-            handleCount("player");
-            handleHistory("player");
-            handleScore("player", initialScore);
-
-            // update and show scores
-            // BUT ace values can only be set AFTER both cards have been seen, but set INDIVIDUALLY
-            await delay(500);
-            await handleAces("player", initialScore);
-            handleScore("player", initialScore);
-
-            await handleAces("player", initialScore);
-            handleScore("player", initialScore);
-        }
-
-        function playerActions()
-        {
-
-        }
-
-// Controller Functions
-// ////////////////////////////////////////
- 
-    function handleCount(who)
+    function createGame()
     {
-        calculateCount(who);
-        showCount(who);
+        resetState();
+        resetUI();
+        createDeck();
     }
+
+    async function initialDeal()
+    {
+        await delayUI(time);
+
+        getCardFromDeck("player");
+        dealCard("player");
+        await delayUI(time);
+
+        getCardFromDeck("dealer");
+        dealCard("dealer");
+        await delayUI(time);
+
+        getCardFromDeck("player");
+        dealCard("player");
+        await delayUI(time);
+
+        getCardFromDeck("dealer");
+        dealCard("dealer");
+        await delayUI(time);
+    }
+
+    async function revealHand(who)
+    {
+        // show the first card
+        showCard(who);
+        handleCount(who);
+        handleScore(who);
+        pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
+        showHistory(who, 1);
+        await delayUI(time);
+
+        // show the second card
+        showCard(who);
+        handleCount(who);
+        handleScore(who);
+        pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
+        showHistory(who, 1);
+
+        // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
+        await delayUI(time);
+        await handleAce(who);
+        await handleAce(who);
+    }
+
+    function playerActions(who)
+    {
+
+        // don't show any button if bust
+        if(state.player.score > 21){
+            playerActionTwist.disabled = true; // disable twist
+            playerActionStick.disabled = true; // disable stick
+        }
+
+        // show twist button if score is lower than 15
+        else if(state.player.score < 15){
+            playerActionTwist.disabled = false; // enable twist
+        }
+
+        // only show 'stick' button if player has Pontoon
+        else if(
+            state.player.cards.some(cards => cards.rank.startsWith("A")) &&
+            (
+                state.player.cards.some(cards => cards.rank.startsWith("K")) ||
+                state.player.cards.some(cards => cards.rank.startsWith("Q")) ||
+                state.player.cards.some(cards => cards.rank.startsWith("J"))
+            )){
+            
+            playerActionStick.disabled = false; // enable stick
+        }
+
+        // only show 'stick' button if player has 21
+        else if(state.player.score === 21){
+            playerActionStick.disabled = false; // enable stick
+        }
+
+        // for anything else, show both 
+        else {
+            playerActionTwist.disabled = false; // enable twist
+            playerActionStick.disabled = false; // enable stick
+        }
+    }
+
+// Grouped functions
+// ////////////////////////////////////////
 
     function handleHistory(who)
     {
@@ -95,45 +127,28 @@
         showHistory(who, numberOfItemsToShow);
     }
 
-    function handleScore(who, initialScore)
+    function handleCount(who)
     {
-        calculateScore(who, initialScore);
+        calculateCount(who);
+        showCount(who);
+    }
+
+    function handleScore(who)
+    {
+        calculateScore(who);
         showScore(who);
     }
 
-    async function handleAces(who, initialScore)
+    async function handleAce(who)
     {
 
         // actions only relevant if working with the initially dealt cards
-        if(initialScore)
+        if(state[who].count <= 2)
         {
-
             const pontoon = checkForPontoon(who);
 
-            // if any card within the Player's hand is an ace AND Player HAS Pontoon then mark that ace as value 11
-            if( state.player.cards.some(cards => cards.rank.startsWith("A")) 
-                &&
-                pontoon)
-            {
-                const lengthOfArray = state.player.cards.length;
-
-                for(let i = 0; i < lengthOfArray; i++)
-                {
-                    
-                    if( state.player.cards[i].rank.startsWith("A")
-                        &&
-                        state.player.cards[i].value === 0)
-                    {
-                        let aceValue = 11;
-
-                        // assign the value of the card
-                        setAceValue(state.player.cards[i], aceValue);
-                    }
-                }
-            }
-
             // if any card within the Player's hand is an ace AND Player DOES NOT HAVE Pontoon then allow the Player to chose the value of the ace/s
-            else if(state.player.cards.some(cards => cards.rank.startsWith("A")) 
+            if(state.player.cards.some(cards => cards.rank.startsWith("A")) 
                     &&
                     !pontoon)
             {
@@ -163,57 +178,20 @@
                         // disable the choices
                         toggleShowAceChoices();
 
-                        // calculate the score
-                        calculateScore(who, initialScore)
+                        // calculate and show score new score
+                        handleScore(who);
 
-                        // show score
-                        showScore(who);
+                        // add and show chosen value in history
+                        pushItemToHistory(who, `Ace value: ${aceValue}`);
+                        showHistory(who, 1);
+                        console.log(state[who].history);
 
                         break;
                     }
                 }
-            }                
+            }
         }
-    }
-
-    // move to 'game machanics' equiv function
-    function handlePlayerActions(who)
-    {
-
-        // don't show any button if bust
-        if(state.player.score > 21){
-            playerActionTwist.disabled = true; // disable twist
-            playerActionStick.disabled = true; // disable stick
-        }
-
-        // show twist button if score is lower than 15
-        else if(state.player.score < 15){
-            playerActionTwist.disabled = false; // enable twist
-        }
-
-        // only show 'stick' button if player has Pontoon
-        else if(
-              state.player.cards.some(cards => cards.rank.startsWith("A")) &&
-              (
-                state.player.cards.some(cards => cards.rank.startsWith("K")) ||
-                state.player.cards.some(cards => cards.rank.startsWith("Q")) ||
-                state.player.cards.some(cards => cards.rank.startsWith("J"))
-              )){
-               
-            playerActionStick.disabled = false; // enable stick
-        }
-
-        // only show 'stick' button if player has 21
-        else if(state.player.score === 21){
-            playerActionStick.disabled = false; // enable stick
-        }
-
-        // for anything else, show both 
-        else {
-            playerActionTwist.disabled = false; // enable twist
-            playerActionStick.disabled = false; // enable stick
-        }
-    }
+    }    
 
 // Helper Functions
 // ////////////////////////////////////////
@@ -272,30 +250,3 @@
             return false;
         }         
     }
-
-    // twist
-        // deal card face up
-        // if it is an ace decide on which value (1 or 11)
-        // increase score
-        // increase count
-        // check for bust
-
-    // stick -> dealers turn
-
-    // dealers turn
-        // reveal dealer cards one at a time
-            // show card (face up)
-        // show score
-        // show count
-        // if there is not an immediate winner, dealer draws cards until there is a winner
-            // rank in decending order:
-            // dealer pontoon beats everything
-            // player pontoon
-            // 5 card (or 5 card and highest score if dealer and player both have 5 cards)
-            // 4 card (or 4 card and highest score if dealer and player both have 5 cards)
-            // highest score
-
-        // show result (win or lose. No draws in Pontoon)
-        // show click restart to play again
-    
-    // game end

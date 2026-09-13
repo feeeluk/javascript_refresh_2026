@@ -1,8 +1,12 @@
-// Pontoon V2 - UI (display the game and handle input) 
-// ////////////////////////////////////////
+// UI  
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // - display the game
+    // - handle input
 
 // Variables
 // ////////////////////////////////////////
+
+    const time = 100;
 
     const play = document.getElementById("play");
 
@@ -24,21 +28,45 @@
     const showDealerCount = document.getElementById("dCount");
     const showDealerHistory = document.getElementById("dHistory");
 
+    const showResultBox = document.getElementById("resultBox");
+    const showResultMessage = document.getElementById("resultMessage");
+    const showResultButton = document.getElementById("playAgain");
+
 // Functions
 // ////////////////////////////////////////
 
-    function delay(delayMiliseconds)
+    function resetUI()
+    {
+        showPlayerCards.innerHTML = "";
+        showPlayerScore.innerHTML = "";
+        showPlayerCount.innerHTML = "";
+        showPlayerHistory.innerHTML = "";
+
+        playerActionTitle.style.class = "disabled";
+        playerActionTwist.disabled = true;
+        playerActionStick.disabled = true;
+
+        playerAceTitle.style.class = "disabled";
+        playerAceOne.disabled = true;
+        playerAceEleven.disabled = true;
+
+        showDealerCards.innerHTML = "";
+        showDealerScore.innerHTML = "";
+        showDealerCount.innerHTML = "";
+        showDealerHistory.innerHTML = "";
+
+        showResultBox.style.backgroundColor = "cornflowerblue";
+        showResultMessage.innerHTML = "";
+        showResultButton.disabled = true;
+    }
+
+    function delayUI(delayMiliseconds)
     {
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
     }
 
-    async function showCard(who, initialDeal)
+    function dealCard(who)
     {
-
-        // show initial cards (face down)
-        if(initialDeal === true)
-        {
-
             // add img element
             const newElement = document.createElement("img");
             
@@ -50,62 +78,32 @@
 
             // apend the new image to the relevant player
             (who === "player") ? showPlayerCards.append(newElement) : showDealerCards.append(newElement);
-        }
+    }
 
+    async function showCard(who)
+    {
         // reveal initial cards (face up)
-        else if(state[who].revealedCount <= 2)
+        if(state[who].count <= 2)
         {
-
             // create a nodeList of the existing image elements
             let nodeList;
 
-            switch(who)
-            {
-                case "player":
-                    nodeList = showPlayerCards.querySelectorAll("img");
-                    break;
-
-                case "dealer":
-                    nodeList = showDealerCards.querySelectorAll("img");
-                    break;
-            }
+            (who === "player") ? nodeList = showPlayerCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
 
             // edit the src of each card
-            nodeList[state[who].revealedCount].src = "/resources/images/cards/front/" + state[who].cards[state[who].revealedCount].rank + state[who].cards[state[who].revealedCount].suit + ".png";
-
-            // update the number of cards that have been revealed
-            state[who].revealedCount++;
+            nodeList[state[who].count].src = "/resources/images/cards/front/" + state[who].cards[state[who].count].rank + state[who].cards[state[who].count].suit + ".png";
         }         
-
-        else
-        {
-
-        }
     }
 
     function showCount(who)
     {
-
-        let showCount;
-
-        switch(who)
-        {
-            case "player":
-                showCount = showPlayerCount;
-                break;
-
-            case "dealer":
-                showCount = showDealerCount;
-                break;
-        }
-
-        showCount.textContent = state[who].count;
+        (who === "player") ? showPlayerCount.textContent = state.player.count : showDealerCount.textContent = state.dealer.count;
     }
 
-    function showHistory(who, itemsToShow)
+    function showHistory(who, numberOfItemsToShow)
     {
         
-        if(itemsToShow ===1)
+        if(numberOfItemsToShow === 1)
         {
 
             const newElement = document.createElement("li");
@@ -117,7 +115,7 @@
 
         }
 
-        else if(itemsToShow > 1)
+        else if(numberOfItemsToShow > 1)
         {
             
             for(let i = 2; i > 0; i--)
@@ -136,11 +134,9 @@
 
     function aceChoice()
     {
-
         // return a promise
         return new Promise(resolve =>
         {
-            
             // create a nodelist of buttons with the class of "aceChoice"
             const buttons = document.querySelectorAll(".aceChoice");
 
@@ -169,12 +165,24 @@
 
     function showScore(who)
     {
-
         let show;
 
         (who === "player") ? show = showPlayerScore : show = showDealerScore;
 
         show.textContent = state[who].score;
+    }
+
+    function showResultOfGame()
+    {
+        
+        if(state.player.result === "BUST")
+        {
+            showResultBox.style.backgroundColor = "red";
+            showResultMessage.style.color = "white";
+        }
+
+        showResultButton.disabled = false;
+        showResultMessage.textContent = state.result;
     }
 
 // Event Listeners
@@ -198,5 +206,5 @@
     })
 
     document.getElementById("playAgain").addEventListener("click", event => {
-        
+        startGame();
     })

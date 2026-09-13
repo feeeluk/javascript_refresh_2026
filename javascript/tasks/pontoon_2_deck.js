@@ -1,6 +1,9 @@
-// Pontoon V2 - Deck (create and prepare the deck) 
-// ////////////////////////////////////////
+// DECK 
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // - create deck
+    // - work with the deck
 
+    
 // Variables
 // ////////////////////////////////////////
 
@@ -12,10 +15,9 @@
 
     function createDeck()
     {
-
         const suits = ["H", "D", "S", "C"];
-        // const ranks = ["A", "K"];
-        const ranks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+        const ranks = ["A"];
+        // const ranks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
         const values = {
             "A": 0,
             "K": 10,
@@ -37,7 +39,7 @@
         {
             for(const rank of ranks)
             {
-                originalDeck.push({rank, suit, value: values[rank]})
+                originalDeck.push({rank, suit, value: values[rank],})
             }
         }
 
@@ -50,11 +52,18 @@
         console.log(deck);
     }
 
-    function shuffle(array){
+    function shuffle(array)
+    {
         for(let i = array.length -1; i > 1; i--)
         {
             const random = Math.floor(Math.random() * i + 1);
 
             [array[i], array[random]] = [ array[random], array[i]];
         }
+    }
+
+    function getCardFromDeck(who)
+    {
+        const card = deck.pop(); // take the last card
+        state[who].cards.push(card); // pass it to the relevant array      
     }

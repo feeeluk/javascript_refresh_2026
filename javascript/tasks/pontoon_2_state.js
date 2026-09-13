@@ -1,5 +1,7 @@
-// Pontoon V2 - State  (store the current game data) 
-// ////////////////////////////////////////
+// STATE
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //   game data 
+    
 
 // Variables
 // ////////////////////////////////////////
@@ -10,19 +12,18 @@
             count: 0,
             cards: [],
             history: [],
-            revealedCount: 0,
-            stick: false,
+            stick: null,
+            result: null,
         },
         dealer: {
             score: 0,
             count: 0,
             cards: [],
             history: [],
-            revealedCount: 0,
-            stick: false,
+            result: null,
         },
 
-        result: null,
+        resultMessage: null,
         gameOver: false
     };
 
@@ -31,109 +32,155 @@
 // Functions
 // ////////////////////////////////////////
 
-    function reset()
+    function resetState()
     {
-
         state = structuredClone(initialState);
         originalDeck.length = 0;
         deck = undefined;
-
-        // all the variables are reset but I still need to actually show the changes
-    }
-
-    function dealCard(who)
-    {
-        const card = deck.pop(); // take the last card
-        state[who].cards.push(card); // pass it to the relevant array      
     }
 
     function calculateCount(who)
     {
-        state[who].count ++;
+        state[who].count++;
     }
 
     function calculateHistory(who)
     {
-
-        // add last array element to history 
-        let numberOfCardsDealt = state[who].cards.length;
-        let numberOfCardsRevealed = state[who].revealedCount -1;
-        state[who].history.push(state[who].cards[numberOfCardsRevealed].rank + state[who].cards[numberOfCardsRevealed].suit)
-        
-        // check 'named' hands
-        // pontoon
-        if(checkForPontoon(who))
+        // check for bust
+        if(checkForBust(who))
         {
-            // add "Pontoon!" to state history
-            state[who].history.push("Pontoon!");
+            // add "BUST!" to history
+            pushItemToHistory(who, "BUST!");
 
-            return 2;
+            return 1;
         }
 
-        // 4 card
+        // check for pontoon
+        else if(checkForPontoon(who))
+        { 
+            // add "Pontoon!" to history
+            pushItemToHistory(who, "Pontoon!");
+
+            return 1;
+        }
+
+        // check for 4 card hand
         else if(checkForFiveCards(who))
         {
-            // add "4 card hand!" to state history
-            state[who].history.push("5 card hand!");
+            // add "4 card hand!" to history
+            pushItemToHistory(who, "5 card hand!");
 
-            return 2;
+            return 1;
         }
 
-        // 5 card
+        // check for 5 card hand
         else if(checkForFourCards(who))
         {
-            // add "4 card hand!" to state history
-            state[who].history.push("5 card hand!");
+            // add "5 card hand!" to history
+            pushItemToHistory(who, "5 card hand!");
 
-            return 2;
-        }
-
-        // bust
-        else if(checkForBust(who))
-        {
-            // add "4 card hand!" to state history
-            state[who].history.push("5 card hand!");
-
-            return 2;
-        }
-
-        else{
             return 1;
         }
     }
 
-    function calculateScore(who, initialScore)
+    function pushItemToHistory(who, what)
     {
-        let revealedCount = state[who].revealedCount;
+        // add item to history
+        state[who].history.push(what);
+    }
 
-        if(checkForPontoon)
+    function calculateScore(who)
+    {
+        const pontoon = checkForPontoon(who);
+        let revealedCount = state[who].count;
+        
+        // if the Player has Pontoon then give the ace a value of 11, and set score as 21
+        if(checkForPontoon(who)
+                &&
+                revealedCount === 2)
         {
+            const lengthOfArray = state.player.cards.length;
+
+            for(let i = 0; i < lengthOfArray; i++)
+            {
+                
+                if( state.player.cards[i].rank.startsWith("A")
+                    &&
+                    state.player.cards[i].value === 0)
+                {
+                    let aceValue = 11;
+
+                    // assign the value of the card
+                    setAceValue(state.player.cards[i], aceValue);
+                }
+            }
+
             state[who].score = 21;
         }
 
-        if(revealedCount === 1)
-        {
-            state[who].score = state[who].cards[0].value;
-        }
-
+        // if two cards have been revealed then set the score as card 1 + card 2
         else if(revealedCount === 2)
         {
             state[who].score = state[who].cards[0].value + state[who].cards[1].value;
         }
+        
+        // if only one card has been revealed then set the score as that card's value (even if it is an ace)
+        else if(revealedCount === 1)
+        {
+            state[who].score = state[who].cards[0].value;
+        }
 
+        // else none of the above apply - a 'twist' - then calculate the sum of all cards in the array
         else
         {
             const temporaryArray = state[who].cards
                 .map(card => card.value)        // extract the value from each object
-                .reduce((sum, v) => sum + v, 0); // sum the rest
+                .reduce((sum, v) => sum + v, 0); // sum them
 
             // assign the sum of the temporaryArray as the score
             state[who].score = temporaryArray; // NOTE the use of EQUALS not 'plus equals' - very important
         }
-            
     }
 
     function setAceValue(card, value)
     {
         card.value = value;
+    }
+
+    function calculateHand(who)
+    {
+        if(checkForBust(who) === true)
+        {
+            state[who].result = "BUST";
+        }
+    }
+
+    function calculateGameResult()
+    {
+        // if Player is bust => Dealer wins
+        // if Dealer is bust => Player wins
+        // if Player has Pontoon and Dealer does not => Player wins
+        // if Dealer has Pontoon and Player does not => Dealer wins
+        // if both Player and Dealer have Pontoon => Dealer wins
+        // if Player has 5 card hand and Dealer does not => Player wins
+        // if Dealer has 5 card hand and Player does not => Dealer wins
+        // if both Player and Dealer have 5 card hand, and Player has a higher score => Player wins
+        // if both Dealer and Player have 5 card hand, and Dealer has a higher score => Dealer wins
+        // if both Dealer and Player have 5 card hand, and they have the same score => Dealer wins
+        // if Player has 4 card hand and Dealer does not => Player wins
+        // if Dealer has 4 card hand and Player does not => Dealer wins
+        // if both Player and Dealer have 4 card hand, and Player has a higher score => Player wins
+        // if both Dealer and Player have 4 card hand, and Dealer has a higher score => Dealer wins
+        // if both Dealer and Player have 4 card hand, and they have the same score => Dealer wins
+        // Player has a higher score => Player wins
+        // Dealer has a higher score => Dealer wins
+        // both have the same score => Dealer wins
+
+        // set gameOver boolean => create function in state
+        // set resultMessage string => create function in state
+    }
+
+    function toggleGameStatus()
+    {
+
     }
