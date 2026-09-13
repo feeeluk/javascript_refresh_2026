@@ -15,18 +15,18 @@
     async function startGame()
     {
         createGame(); 
-        await initialDeal("player");
-        await revealHand("player");
-        handleHistory("player");
+        await initialDeal("user");
+        await revealHand("user");
+        handleHistory("user");
         
-        // calculate Player's hand
-        calculateHand("player");
+        // calculate User's hand
+        calculateHand("user");
         
         // if game over
         showResultOfGame();
 
-        // if not then give Player options
-        // playerActions()       
+        // if not then give User options
+        // userActions()       
     }
 
     function createGame()
@@ -40,16 +40,16 @@
     {
         await delayUI(time);
 
-        getCardFromDeck("player");
-        dealCard("player");
+        getCardFromDeck("user");
+        dealCard("user");
         await delayUI(time);
 
         getCardFromDeck("dealer");
         dealCard("dealer");
         await delayUI(time);
 
-        getCardFromDeck("player");
-        dealCard("player");
+        getCardFromDeck("user");
+        dealCard("user");
         await delayUI(time);
 
         getCardFromDeck("dealer");
@@ -80,41 +80,41 @@
         await handleAce(who);
     }
 
-    function playerActions(who)
+    function userActions(who)
     {
 
         // don't show any button if bust
-        if(state.player.score > 21){
-            playerActionTwist.disabled = true; // disable twist
-            playerActionStick.disabled = true; // disable stick
+        if(state.user.score > 21){
+            userActionTwist.disabled = true; // disable twist
+            userActionStick.disabled = true; // disable stick
         }
 
         // show twist button if score is lower than 15
-        else if(state.player.score < 15){
-            playerActionTwist.disabled = false; // enable twist
+        else if(state.user.score < 15){
+            userActionTwist.disabled = false; // enable twist
         }
 
-        // only show 'stick' button if player has Pontoon
+        // only show 'stick' button if user has Pontoon
         else if(
-            state.player.cards.some(cards => cards.rank.startsWith("A")) &&
+            state.user.cards.some(cards => cards.rank.startsWith("A")) &&
             (
-                state.player.cards.some(cards => cards.rank.startsWith("K")) ||
-                state.player.cards.some(cards => cards.rank.startsWith("Q")) ||
-                state.player.cards.some(cards => cards.rank.startsWith("J"))
+                state.user.cards.some(cards => cards.rank.startsWith("K")) ||
+                state.user.cards.some(cards => cards.rank.startsWith("Q")) ||
+                state.user.cards.some(cards => cards.rank.startsWith("J"))
             )){
             
-            playerActionStick.disabled = false; // enable stick
+            userActionStick.disabled = false; // enable stick
         }
 
-        // only show 'stick' button if player has 21
-        else if(state.player.score === 21){
-            playerActionStick.disabled = false; // enable stick
+        // only show 'stick' button if user has 21
+        else if(state.user.score === 21){
+            userActionStick.disabled = false; // enable stick
         }
 
         // for anything else, show both 
         else {
-            playerActionTwist.disabled = false; // enable twist
-            playerActionStick.disabled = false; // enable stick
+            userActionTwist.disabled = false; // enable twist
+            userActionStick.disabled = false; // enable stick
         }
     }
 
@@ -147,18 +147,18 @@
         {
             const pontoon = checkForPontoon(who);
 
-            // if any card within the Player's hand is an ace AND Player DOES NOT HAVE Pontoon then allow the Player to chose the value of the ace/s
-            if(state.player.cards.some(cards => cards.rank.startsWith("A")) 
+            // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
+            if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
                     &&
                     !pontoon)
             {
-                const nodelistOfImages = showPlayerCards.querySelectorAll("img");
-                const lengthOfArray = state.player.cards.length -1;
+                const nodelistOfImages = showUserCards.querySelectorAll("img");
+                const lengthOfArray = state.user.cards.length -1;
                 
                 for(let i = 0; i <= lengthOfArray; i++)
                 {
                     
-                    if(state.player.cards[i].value === 0)
+                    if(state.user.cards[i].value === 0)
                     {
                         // highlight the current card
                         toggleHighlightCard(nodelistOfImages[i]);
@@ -170,7 +170,7 @@
                         let aceValue = await aceChoice();
 
                         // assign user's choice to the value of the card
-                        setAceValue(state.player.cards[i], aceValue);
+                        setAceValue(state.user.cards[i], aceValue);
 
                         // remove highlight from the card
                         toggleHighlightCard(nodelistOfImages[i]);
@@ -210,7 +210,7 @@
     function checkForPontoon(who)
     {
         if( state[who].count === 2
-            && state.player.cards.some(cards => cards.rank.startsWith("A"))
+            && state.user.cards.some(cards => cards.rank.startsWith("A"))
             && (
                 state[who].cards.some(cards => cards.rank.startsWith("K")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("Q")) ||

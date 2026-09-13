@@ -7,7 +7,7 @@
 // ////////////////////////////////////////
 
     const initialState = {
-        player: {
+        user: {
             score: 0,
             count: 0,
             cards: [],

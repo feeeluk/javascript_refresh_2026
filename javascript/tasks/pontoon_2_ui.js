@@ -10,18 +10,18 @@
 
     const play = document.getElementById("play");
 
-    const showUserCards = document.getElementById("pCards");
-    const showUserScore = document.getElementById("pScore");
-    const showUserCount = document.getElementById("pCount");
-    const showUserHistory = document.getElementById("pHistory");
+    const showUserCards = document.getElementById("uCards");
+    const showUserScore = document.getElementById("uScore");
+    const showUserCount = document.getElementById("uCount");
+    const showUserHistory = document.getElementById("uHistory");
 
-    const userActionTitle = document.getElementById("pActionTitle");
-    const userActionTwist = document.getElementById("pActionTwist");
-    const userActionStick = document.getElementById("pActionStick");
+    const userActionTitle = document.getElementById("uActionTitle");
+    const userActionTwist = document.getElementById("uActionTwist");
+    const userActionStick = document.getElementById("uActionStick");
 
-    const userAceTitle = document.getElementById("pAceTitle");
-    const userAceOne = document.getElementById("pAceOne");
-    const userAceEleven = document.getElementById("pAceEleven");
+    const userAceTitle = document.getElementById("uAceTitle");
+    const userAceOne = document.getElementById("uAceOne");
+    const userAceEleven = document.getElementById("uAceEleven");
 
     const showDealerCards = document.getElementById("dCards");
     const showDealerScore = document.getElementById("dScore");
