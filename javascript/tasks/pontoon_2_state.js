@@ -13,6 +13,10 @@
             cards: [],
             history: [],
             stick: null,
+            bust: false,
+            pontoon: false,
+            fourCard: false,
+            fiveCard: false,
             result: null,
         },
         dealer: {
@@ -20,6 +24,10 @@
             count: 0,
             cards: [],
             history: [],
+            bust: false,
+            pontoon: false,
+            fourCard: false,
+            fiveCard: false,
             result: null,
         },
 
