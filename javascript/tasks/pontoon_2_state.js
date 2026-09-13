@@ -60,59 +60,6 @@
         state[who].history.push(what);
     }
 
-    function calculateScore(who)
-    {
-        const pontoon = checkForPontoon(who);
-        let revealedCount = state[who].count;
-        
-        // if the Player has Pontoon then give the ace a value of 11, and set score as 21
-        if(checkForPontoon(who)
-                &&
-                revealedCount === 2)
-        {
-            const lengthOfArray = state.player.cards.length;
-
-            for(let i = 0; i < lengthOfArray; i++)
-            {
-                
-                if( state.player.cards[i].rank.startsWith("A")
-                    &&
-                    state.player.cards[i].value === 0)
-                {
-                    let aceValue = 11;
-
-                    // assign the value of the card
-                    setAceValue(state.player.cards[i], aceValue);
-                }
-            }
-
-            state[who].score = 21;
-        }
-
-        // if two cards have been revealed then set the score as card 1 + card 2
-        else if(revealedCount === 2)
-        {
-            state[who].score = state[who].cards[0].value + state[who].cards[1].value;
-        }
-        
-        // if only one card has been revealed then set the score as that card's value (even if it is an ace)
-        else if(revealedCount === 1)
-        {
-            state[who].score = state[who].cards[0].value;
-        }
-
-        // else none of the above apply - a 'twist' - then calculate the sum of all cards in the array
-        else
-        {
-            const temporaryArray = state[who].cards
-                .map(card => card.value)        // extract the value from each object
-                .reduce((sum, v) => sum + v, 0); // sum them
-
-            // assign the sum of the temporaryArray as the score
-            state[who].score = temporaryArray; // NOTE the use of EQUALS not 'plus equals' - very important
-        }
-    }
-
     function setAceValue(card, value)
     {
         card.value = value;
