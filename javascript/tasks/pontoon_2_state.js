@@ -52,44 +52,7 @@
         state[who].count++;
     }
 
-    function calculateHistory(who)
-    {
-        // check for bust
-        if(checkForBust(who))
-        {
-            // add "BUST!" to history
-            pushItemToHistory(who, "BUST!");
-
-            return 1;
-        }
-
-        // check for pontoon
-        else if(checkForPontoon(who))
-        { 
-            // add "Pontoon!" to history
-            pushItemToHistory(who, "Pontoon!");
-
-            return 1;
-        }
-
-        // check for 4 card hand
-        else if(checkForFiveCards(who))
-        {
-            // add "4 card hand!" to history
-            pushItemToHistory(who, "5 card hand!");
-
-            return 1;
-        }
-
-        // check for 5 card hand
-        else if(checkForFourCards(who))
-        {
-            // add "5 card hand!" to history
-            pushItemToHistory(who, "5 card hand!");
-
-            return 1;
-        }
-    }
+    
 
     function pushItemToHistory(who, what)
     {
@@ -155,6 +118,9 @@
         card.value = value;
     }
 
+    
+// NEW FUNCTIONS / IDEAS
+    
     function calculateHand(who)
     {
         if(checkForBust(who) === true)

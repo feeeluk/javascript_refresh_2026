@@ -77,8 +77,8 @@
 
         // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
         await delayUI(time);
-        await handleAce(who);
-        await handleAce(who);
+        await giveAceValue(who);
+        await giveAceValue(who);
     }
 
     function userActions(who)
@@ -122,7 +122,7 @@
 // Grouped functions
 // ////////////////////////////////////////
 
-    async function handleAce(who)
+    async function giveAceValue(who)
     {
 
         // actions only relevant if working with the initially dealt cards
@@ -232,4 +232,43 @@
         else{
             return false;
         }         
+    }
+
+    function calculateHistory(who)
+    {
+        // check for bust
+        if(checkForBust(who))
+        {
+            // add "BUST!" to history
+            pushItemToHistory(who, "BUST!");
+
+            return 1;
+        }
+
+        // check for pontoon
+        else if(checkForPontoon(who))
+        { 
+            // add "Pontoon!" to history
+            pushItemToHistory(who, "Pontoon!");
+
+            return 1;
+        }
+
+        // check for 4 card hand
+        else if(checkForFiveCards(who))
+        {
+            // add "4 card hand!" to history
+            pushItemToHistory(who, "5 card hand!");
+
+            return 1;
+        }
+
+        // check for 5 card hand
+        else if(checkForFourCards(who))
+        {
+            // add "5 card hand!" to history
+            pushItemToHistory(who, "5 card hand!");
+
+            return 1;
+        }
     }
