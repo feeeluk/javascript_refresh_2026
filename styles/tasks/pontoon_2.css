@@ -43,7 +43,7 @@ ul{
     align-items: center;
 }
 
-#usersArea{
+#playersArea{
     width: 100%;
     height: 70%;
     margin: 0;
@@ -54,7 +54,7 @@ ul{
     justify-content: space-evenly;
 }
 
-#playerArea{
+#userArea{
     padding: 10px;
     margin: 0;
     width: calc(49% - 20px);
@@ -137,7 +137,7 @@ ul{
         grid-row: 1;
     }
 
-    #pCards, #dCards{
+    #uCards, #dCards{
         grid-column: 1 / span 2;
         grid-row: 2;
     }
@@ -158,7 +158,7 @@ ul{
         height: 28px;
     }
 
-    #pAceTitle{
+    #uAceTitle{
         grid-column: 1 / span 2;
         grid-row: 3;
         text-align: center;
@@ -171,29 +171,29 @@ ul{
             color: black;
         }
 
-    #pAceOne{
+    #uAceOne{
         grid-column: 1;
         grid-row: 4;
        
     }
 
-    #pAceEleven{
+    #uAceEleven{
         grid-column: 2;
         grid-row: 4;
     }
 
-    #pActionTitle{
+    #uActionTitle{
         grid-column: 1 / span 2;
         grid-row: 5;
         text-align: center;
     }
 
-    #pActionTwist{
+    #uActionTwist{
         grid-column: 1;
         grid-row: 6;
     }
 
-    #pActionStick{
+    #uActionStick{
         grid-column: 2;
         grid-row: 6;
     }
