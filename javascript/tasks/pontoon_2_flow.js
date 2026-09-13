@@ -61,7 +61,8 @@
     {
         // show the first card
         showCard(who);
-        handleCount(who);
+        incrementCount(who);
+        showCount(who);
         handleScore(who);
         pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
         showHistory(who, 1);
@@ -69,7 +70,8 @@
 
         // show the second card
         showCard(who);
-        handleCount(who);
+        incrementCount(who);
+        showCount(who);
         handleScore(who);
         pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
         showHistory(who, 1);
@@ -125,12 +127,6 @@
     {
         const numberOfItemsToShow = calculateHistory(who);
         showHistory(who, numberOfItemsToShow);
-    }
-
-    function handleCount(who)
-    {
-        incrementCount(who);
-        showCount(who);
     }
 
     function handleScore(who)
