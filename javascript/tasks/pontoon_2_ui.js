@@ -10,18 +10,18 @@
 
     const play = document.getElementById("play");
 
-    const showPlayerCards = document.getElementById("pCards");
-    const showPlayerScore = document.getElementById("pScore");
-    const showPlayerCount = document.getElementById("pCount");
-    const showPlayerHistory = document.getElementById("pHistory");
+    const showUserCards = document.getElementById("pCards");
+    const showUserScore = document.getElementById("pScore");
+    const showUserCount = document.getElementById("pCount");
+    const showUserHistory = document.getElementById("pHistory");
 
-    const playerActionTitle = document.getElementById("pActionTitle");
-    const playerActionTwist = document.getElementById("pActionTwist");
-    const playerActionStick = document.getElementById("pActionStick");
+    const userActionTitle = document.getElementById("pActionTitle");
+    const userActionTwist = document.getElementById("pActionTwist");
+    const userActionStick = document.getElementById("pActionStick");
 
-    const playerAceTitle = document.getElementById("pAceTitle");
-    const playerAceOne = document.getElementById("pAceOne");
-    const playerAceEleven = document.getElementById("pAceEleven");
+    const userAceTitle = document.getElementById("pAceTitle");
+    const userAceOne = document.getElementById("pAceOne");
+    const userAceEleven = document.getElementById("pAceEleven");
 
     const showDealerCards = document.getElementById("dCards");
     const showDealerScore = document.getElementById("dScore");
@@ -37,18 +37,18 @@
 
     function resetUI()
     {
-        showPlayerCards.innerHTML = "";
-        showPlayerScore.innerHTML = "";
-        showPlayerCount.innerHTML = "";
-        showPlayerHistory.innerHTML = "";
+        showUserCards.innerHTML = "";
+        showUserScore.innerHTML = "";
+        showUserCount.innerHTML = "";
+        showUserHistory.innerHTML = "";
 
-        playerActionTitle.style.class = "disabled";
-        playerActionTwist.disabled = true;
-        playerActionStick.disabled = true;
+        userActionTitle.style.class = "disabled";
+        userActionTwist.disabled = true;
+        userActionStick.disabled = true;
 
-        playerAceTitle.style.class = "disabled";
-        playerAceOne.disabled = true;
-        playerAceEleven.disabled = true;
+        userAceTitle.style.class = "disabled";
+        userAceOne.disabled = true;
+        userAceEleven.disabled = true;
 
         showDealerCards.innerHTML = "";
         showDealerScore.innerHTML = "";
@@ -76,8 +76,8 @@
             // change the src to show the back of the card
             newElement.src = "/resources/images/cards/back/back-blue.png";
 
-            // apend the new image to the relevant player
-            (who === "player") ? showPlayerCards.append(newElement) : showDealerCards.append(newElement);
+            // apend the new image to the relevant user
+            (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
     }
 
     async function showCard(who)
@@ -88,7 +88,7 @@
             // create a nodeList of the existing image elements
             let nodeList;
 
-            (who === "player") ? nodeList = showPlayerCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
+            (who === "user") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
 
             // edit the src of each card
             nodeList[state[who].count].src = "/resources/images/cards/front/" + state[who].cards[state[who].count].rank + state[who].cards[state[who].count].suit + ".png";
@@ -97,7 +97,7 @@
 
     function showCount(who)
     {
-        (who === "player") ? showPlayerCount.textContent = state.player.count : showDealerCount.textContent = state.dealer.count;
+        (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
     }
 
     function showHistory(who, numberOfItemsToShow)
@@ -111,7 +111,7 @@
             let lengthOfHistoryArray = state[who].history.length-1;
             newElement.textContent = state[who].history[lengthOfHistoryArray];
 
-            (who === "player") ? showPlayerHistory.append(newElement) : showDealerHistory.append(newElement);
+            (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
 
         }
 
@@ -127,7 +127,7 @@
                 let lengthOfHistoryArray = state[who].history.length;
                 newElement.textContent = state[who].history[lengthOfHistoryArray - i];
 
-                (who === "player") ? showPlayerHistory.append(newElement) : showDealerHistory.append(newElement);
+                (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
             }
         }
     }
@@ -157,17 +157,17 @@
     }
 
     function toggleShowAceChoices(){
-        playerAceTitle.classList.toggle("disabled");
-        playerAceTitle.classList.toggle("enabled");
-        playerAceOne.disabled = playerAceOne.disabled ? false : true;
-        playerAceEleven.disabled = playerAceEleven.disabled ? false : true;;
+        userAceTitle.classList.toggle("disabled");
+        userAceTitle.classList.toggle("enabled");
+        userAceOne.disabled = userAceOne.disabled ? false : true;
+        userAceEleven.disabled = userAceEleven.disabled ? false : true;;
     }
 
     function showScore(who)
     {
         let show;
 
-        (who === "player") ? show = showPlayerScore : show = showDealerScore;
+        (who === "user") ? show = showUserScore : show = showDealerScore;
 
         show.textContent = state[who].score;
     }
@@ -175,7 +175,7 @@
     function showResultOfGame()
     {
         
-        if(state.player.result === "BUST")
+        if(state.user.result === "BUST")
         {
             showResultBox.style.backgroundColor = "red";
             showResultMessage.style.color = "white";
@@ -193,15 +193,15 @@
         startGame();
     })
 
-    document.getElementById("pAceOne").addEventListener("click", event => {
+    document.getElementById("uAceOne").addEventListener("click", event => {
 
     })
 
-    document.getElementById("pAceEleven").addEventListener("click", event => {
+    document.getElementById("uAceEleven").addEventListener("click", event => {
         
     })
 
-    document.getElementById("pActionStick").addEventListener("click", event => {
+    document.getElementById("uActionStick").addEventListener("click", event => {
         
     })
 
