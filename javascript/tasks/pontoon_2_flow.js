@@ -129,7 +129,7 @@
 
     function handleCount(who)
     {
-        calculateCount(who);
+        incrementCount(who);
         showCount(who);
     }
 

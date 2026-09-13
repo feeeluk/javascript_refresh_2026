@@ -47,7 +47,7 @@
         deck = undefined;
     }
 
-    function calculateCount(who)
+    function incrementCount(who)
     {
         state[who].count++;
     }
