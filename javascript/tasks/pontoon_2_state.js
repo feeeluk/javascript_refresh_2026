@@ -52,8 +52,6 @@
         state[who].count++;
     }
 
-    
-
     function pushItemToHistory(who, what)
     {
         // add item to history
@@ -67,14 +65,6 @@
 
     
 // NEW FUNCTIONS / IDEAS
-    
-    function calculateHand(who)
-    {
-        if(checkForBust(who) === true)
-        {
-            state[who].result = "BUST";
-        }
-    }
 
     function calculateGameResult()
     {

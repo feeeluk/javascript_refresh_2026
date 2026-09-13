@@ -19,10 +19,7 @@
         await revealHand("user");
         calculateHistory("user");
         showHistory("user");
-
         // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
-        
-
         // userActions()       
     }
 
@@ -323,5 +320,13 @@
 
             // assign the sum of the temporaryArray as the score
             state[who].score = temporaryArray; // NOTE the use of EQUALS not 'plus equals' - very important
+        }
+    }
+
+    function calculateHand(who)
+    {
+        if(checkForBust(who) === true)
+        {
+            state[who].result = "BUST";
         }
     }
