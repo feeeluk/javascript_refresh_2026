@@ -280,8 +280,6 @@
 
     function calculateHand(who)
     {
-        // calculate and show score
-        
         if(checkForBust(who) === true)
         {
             // add result
@@ -294,13 +292,7 @@
             pushItemToHistory(who, "BUST!");
         }
 
-        // show history
-        const newElement = document.createElement("li");
-            
-        let lengthOfHistoryArray = state[who].history.length-1;
-        newElement.textContent = state[who].history[lengthOfHistoryArray];
-
-        (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
+        createHistoryItem(who);
     }
 
     async function giveAceValue(who)

@@ -132,6 +132,19 @@
         }
     }
 
+    function createHistoryItem(who)
+    {
+        // create last history item as a list element
+        const newElement = document.createElement("li");
+            
+        let lengthOfHistoryArray = state[who].history.length-1;
+        newElement.textContent = state[who].history[lengthOfHistoryArray];
+
+        (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
+
+        console.log(`History item for ${who} created`)
+    }
+
     function aceChoice()
     {
         // return a promise
