@@ -293,21 +293,29 @@
 
     function calculateHand(who)
     {
+        console.log("calculateHand => start");
+        
         if(checkForBust(who) === true)
         {
-            // set isBust to true
             changeStateOfHand(who, "handIsBust", true);
             
-            // add "BUST!" to history
             pushItemToHistory(who, "BUST!");
 
             console.log(`${who}: handIsBust = ${state[who].handIsBust}`);
         }
-        
-        // console.log(`handIsPontoon: ${state[who].handIsPontoon}`);
-        // console.log(`handIsFourCard: ${state[who].handIsFourCard}`);
-        // console.log(`handIsFiveCard: ${state[who].handIsFiveCard}`);
+
+        // else if(checkForPontoon(who) === true)
+        // {
+        //     changeStateOfHand(who, "handIsPontoon", true);
+            
+        //     pushItemToHistory(who, "PONTOON!");
+
+        //     console.log(`${who}: handIsPontoon = ${state[who].handIsPontoon}`);
+        // }
+
         createHistoryItem(who);
+
+        console.log("calculateHand => end");
     }
 
     function twist()
