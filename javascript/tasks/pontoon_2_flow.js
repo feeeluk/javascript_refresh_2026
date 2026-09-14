@@ -69,7 +69,8 @@
         calculateScore(who);
         showScore(who);
         pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
-        showHistory(who, 1);
+        // showHistory(who, 1);
+        createHistoryItem(who);
         await delayUI(time);
 
         // show the second card
@@ -79,7 +80,7 @@
         calculateScore(who);
         showScore(who);
         pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
-        showHistory(who, 1);
+        createHistoryItem(who);
 
         // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
         await delayUI(time);
