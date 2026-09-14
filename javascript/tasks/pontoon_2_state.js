@@ -67,8 +67,6 @@
         state[who][whichProperty] = value;
     }
 
-// NEW FUNCTIONS / IDEAS
-
     function calculateGameResult(who)
     {
         // if Player is bust => Dealer wins
@@ -107,3 +105,7 @@
 
         showResultOfGame();
     }
+
+// NEW FUNCTIONS / IDEAS
+
+    

@@ -17,8 +17,6 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        // calculateHistory("user");
-        // showHistory("user");
         calculateHand("user");
         calculateGameResult("user");
         // userActions()       
@@ -186,45 +184,6 @@
         }         
     }
 
-    function calculateHistory(who)
-    {
-        // check for bust
-        if(checkForBust(who))
-        {
-            // add "BUST!" to history
-            pushItemToHistory(who, "BUST!");
-
-            return 1;
-        }
-
-        // check for pontoon
-        else if(checkForPontoon(who))
-        { 
-            // add "Pontoon!" to history
-            pushItemToHistory(who, "Pontoon!");
-
-            return 1;
-        }
-
-        // check for 4 card hand
-        else if(checkForFiveCards(who))
-        {
-            // add "4 card hand!" to history
-            pushItemToHistory(who, "5 card hand!");
-
-            return 1;
-        }
-
-        // check for 5 card hand
-        else if(checkForFourCards(who))
-        {
-            // add "5 card hand!" to history
-            pushItemToHistory(who, "5 card hand!");
-
-            return 1;
-        }
-    }
-
     function calculateScore(who)
     {
         const pontoon = checkForPontoon(who);
@@ -323,7 +282,7 @@
 
                         // add and show chosen value in history
                         pushItemToHistory(who, `Ace value: ${aceValue}`);
-                        showHistory(who, 1);
+                        createHistoryItem(who);
 
                         break;
                     }
