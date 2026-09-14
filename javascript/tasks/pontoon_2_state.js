@@ -102,10 +102,8 @@
         // set resultMessage string => create function in state
         
         console.log(`resultGameOver = ${state.resultGameOver}`);
-
-        // change ui result colour, red for lose, green for win
         console.log(`resultWin = ${state.resultWin}`);
-        
-        // change ui result message
         console.log(`resultMessage = ${state.resultMessage}`);
+
+        showResultOfGame();
     }

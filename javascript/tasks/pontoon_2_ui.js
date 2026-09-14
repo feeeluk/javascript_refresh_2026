@@ -187,15 +187,11 @@
 
     function showResultOfGame()
     {
-        
-        if(state.user.result === "BUST")
-        {
-            showResultBox.style.backgroundColor = "red";
-            showResultMessage.style.color = "white";
-        }
+        (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
+        showResultMessage.style.color = "white";
 
+        showResultMessage.textContent = state.resultMessage;
         showResultButton.disabled = false;
-        showResultMessage.textContent = state.result;
     }
 
 // Event Listeners
