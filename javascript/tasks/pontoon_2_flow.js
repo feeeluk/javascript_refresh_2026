@@ -19,7 +19,7 @@
         await revealHand("user");
         calculateHistory("user");
         showHistory("user");
-        // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
+        calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant - calculate hand will potentially push a new history item and show it
         // calculateGameResult()
         // userActions()       
     }
@@ -86,7 +86,7 @@
         await giveAceValue(who);
         await giveAceValue(who);
 
-        console.log("irevealHand => end");
+        console.log("revealHand => end");
     }
 
     function userActions(who)
@@ -280,10 +280,27 @@
 
     function calculateHand(who)
     {
+        // calculate and show score
+        
         if(checkForBust(who) === true)
         {
-            state[who].result = "BUST";
+            // add result
+            addResult(who, "BUST");
+
+            // set isBust to true
+            changeStateOfHand(who, "handIsBust", true);
+
+            // add "BUST!" to history
+            pushItemToHistory(who, "BUST!");
         }
+
+        // show history
+        const newElement = document.createElement("li");
+            
+        let lengthOfHistoryArray = state[who].history.length-1;
+        newElement.textContent = state[who].history[lengthOfHistoryArray];
+
+        (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
     }
 
     async function giveAceValue(who)

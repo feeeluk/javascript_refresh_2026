@@ -13,22 +13,20 @@
             cards: [],
             history: [],
             stick: null,
-            bust: false,
-            pontoon: false,
-            fourCard: false,
-            fiveCard: false,
-            result: null,
+            handIsBust: false,
+            handIsPontoon: false,
+            handIsFourCard: false,
+            handIsFiveCard: false,
         },
         dealer: {
             score: 0,
             count: 0,
             cards: [],
             history: [],
-            bust: false,
-            pontoon: false,
-            fourCard: false,
-            fiveCard: false,
-            result: null,
+            handIsBust: false,
+            handIsPontoon: false,
+            handIsFourCard: false,
+            handIsFiveCard: false,
         },
 
         resultMessage: null,
@@ -63,6 +61,11 @@
         card.value = value;
     }
 
+    function addResult(who, result)
+    {
+        state[who].result = result;
+    }
+
     
 // NEW FUNCTIONS / IDEAS
 
@@ -94,4 +97,11 @@
     function toggleGameStatus()
     {
 
+    }
+
+    function changeStateOfHand(who, whichProperty, value)
+    {
+        state[who][whichProperty] = value;
+
+        console.log(`${whichProperty} = ${value}`);
     }
