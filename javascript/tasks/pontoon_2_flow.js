@@ -20,18 +20,23 @@
         calculateHistory("user");
         showHistory("user");
         // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
+        // calculateGameResult()
         // userActions()       
     }
 
     function createGame()
     {
+        console.log("createGame => start");
         resetState();
         resetUI();
         createDeck();
+        console.log("createGame => end");
     }
 
     async function initialDeal()
     {
+        console.log("initialDeal => start");
+        
         await delayUI(time);
 
         getCardFromDeck("user");
@@ -49,10 +54,14 @@
         getCardFromDeck("dealer");
         dealCard("dealer");
         await delayUI(time);
+
+        console.log("initialDeal => end");
     }
 
     async function revealHand(who)
     {
+        console.log("revealHand => start");
+        
         // show the first card
         showCard(who);
         incrementCount(who);
@@ -76,6 +85,8 @@
         await delayUI(time);
         await giveAceValue(who);
         await giveAceValue(who);
+
+        console.log("irevealHand => end");
     }
 
     function userActions(who)
@@ -115,63 +126,7 @@
             userActionStick.disabled = false; // enable stick
         }
     }
-
-// Grouped functions
-// ////////////////////////////////////////
-
-    async function giveAceValue(who)
-    {
-
-        // actions only relevant if working with the initially dealt cards
-        if(state[who].count <= 2)
-        {
-            const pontoon = checkForPontoon(who);
-
-            // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
-            if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
-                    &&
-                    !pontoon)
-            {
-                const nodelistOfImages = showUserCards.querySelectorAll("img");
-                const lengthOfArray = state.user.cards.length -1;
-                
-                for(let i = 0; i <= lengthOfArray; i++)
-                {
-                    
-                    if(state.user.cards[i].value === 0)
-                    {
-                        // highlight the current card
-                        toggleHighlightCard(nodelistOfImages[i]);
-
-                        // enable the choices
-                        toggleShowAceChoices();
-
-                        // get the user's input
-                        let aceValue = await aceChoice();
-
-                        // assign user's choice to the value of the card
-                        setAceValue(state.user.cards[i], aceValue);
-
-                        // remove highlight from the card
-                        toggleHighlightCard(nodelistOfImages[i]);
-
-                        // disable the choices
-                        toggleShowAceChoices();
-
-                        // calculate and show score new score
-                        calculateScore(who);
-                        showScore(who);
-
-                        // add and show chosen value in history
-                        pushItemToHistory(who, `Ace value: ${aceValue}`);
-                        showHistory(who, 1);
-
-                        break;
-                    }
-                }
-            }
-        }
-    }    
+        
 
 // Helper Functions
 // ////////////////////////////////////////
@@ -329,4 +284,67 @@
         {
             state[who].result = "BUST";
         }
+    }
+
+    async function giveAceValue(who)
+    {
+
+        // actions only relevant if working with the initially dealt cards
+        if(state[who].count <= 2)
+        {
+            const pontoon = checkForPontoon(who);
+
+            // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
+            if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
+                    &&
+                    !pontoon)
+            {
+                const nodelistOfImages = showUserCards.querySelectorAll("img");
+                const lengthOfArray = state.user.cards.length -1;
+                
+                for(let i = 0; i <= lengthOfArray; i++)
+                {
+                    
+                    if(state.user.cards[i].value === 0)
+                    {
+                        // highlight the current card
+                        toggleHighlightCard(nodelistOfImages[i]);
+
+                        // enable the choices
+                        toggleShowAceChoices();
+
+                        // get the user's input
+                        let aceValue = await aceChoice();
+
+                        // assign user's choice to the value of the card
+                        setAceValue(state.user.cards[i], aceValue);
+
+                        // remove highlight from the card
+                        toggleHighlightCard(nodelistOfImages[i]);
+
+                        // disable the choices
+                        toggleShowAceChoices();
+
+                        // calculate and show score new score
+                        calculateScore(who);
+                        showScore(who);
+
+                        // add and show chosen value in history
+                        pushItemToHistory(who, `Ace value: ${aceValue}`);
+                        showHistory(who, 1);
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function twist()
+    {
+        // deal a card
+        // reveal the card
+        // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
+        // calculateGameResult()
+        // userActions()
     }

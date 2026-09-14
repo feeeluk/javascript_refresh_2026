@@ -49,6 +49,7 @@
         // randomise the deck
         shuffle(deck);
 
+        console.log("The deck of cards: ");
         console.log(deck);
     }
 
