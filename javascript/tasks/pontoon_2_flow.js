@@ -17,116 +17,115 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        calculateHistory("user");
-        showHistory("user");
-        calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant - calculate hand will potentially push a new history item and show it
-        // calculateGameResult()
+        // calculateHistory("user");
+        // showHistory("user");
+        calculateHand("user");
+        calculateGameResult("user");
         // userActions()       
     }
 
-    function createGame()
-    {
-        console.log("createGame => start");
-        resetState();
-        resetUI();
-        createDeck();
-        console.log("createGame => end");
-    }
-
-    async function initialDeal()
-    {
-        console.log("initialDeal => start");
-        
-        await delayUI(time);
-
-        getCardFromDeck("user");
-        dealCard("user");
-        await delayUI(time);
-
-        getCardFromDeck("dealer");
-        dealCard("dealer");
-        await delayUI(time);
-
-        getCardFromDeck("user");
-        dealCard("user");
-        await delayUI(time);
-
-        getCardFromDeck("dealer");
-        dealCard("dealer");
-        await delayUI(time);
-
-        console.log("initialDeal => end");
-    }
-
-    async function revealHand(who)
-    {
-        console.log("revealHand => start");
-        
-        // show the first card
-        showCard(who);
-        incrementCount(who);
-        showCount(who);
-        calculateScore(who);
-        showScore(who);
-        pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
-        // showHistory(who, 1);
-        createHistoryItem(who);
-        await delayUI(time);
-
-        // show the second card
-        showCard(who);
-        incrementCount(who);
-        showCount(who);
-        calculateScore(who);
-        showScore(who);
-        pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
-        createHistoryItem(who);
-
-        // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
-        await delayUI(time);
-        await giveAceValue(who);
-        await giveAceValue(who);
-
-        console.log("revealHand => end");
-    }
-
-    function userActions(who)
-    {
-
-        // don't show any button if bust
-        if(state.user.score > 21){
-            userActionTwist.disabled = true; // disable twist
-            userActionStick.disabled = true; // disable stick
+        function createGame()
+        {
+            console.log("createGame => start");
+            resetState();
+            resetUI();
+            createDeck();
+            console.log("createGame => end");
         }
 
-        // show twist button if score is lower than 15
-        else if(state.user.score < 15){
-            userActionTwist.disabled = false; // enable twist
-        }
-
-        // only show 'stick' button if user has Pontoon
-        else if(
-            state.user.cards.some(cards => cards.rank.startsWith("A")) &&
-            (
-                state.user.cards.some(cards => cards.rank.startsWith("K")) ||
-                state.user.cards.some(cards => cards.rank.startsWith("Q")) ||
-                state.user.cards.some(cards => cards.rank.startsWith("J"))
-            )){
+        async function initialDeal()
+        {
+            console.log("initialDeal => start");
             
-            userActionStick.disabled = false; // enable stick
+            await delayUI(time);
+
+            getCardFromDeck("user");
+            dealCard("user");
+            await delayUI(time);
+
+            getCardFromDeck("dealer");
+            dealCard("dealer");
+            await delayUI(time);
+
+            getCardFromDeck("user");
+            dealCard("user");
+            await delayUI(time);
+
+            getCardFromDeck("dealer");
+            dealCard("dealer");
+            await delayUI(time);
+
+            console.log("initialDeal => end");
         }
 
-        // only show 'stick' button if user has 21
-        else if(state.user.score === 21){
-            userActionStick.disabled = false; // enable stick
+        async function revealHand(who)
+        {
+            console.log("revealHand => start");
+            
+            // show the first card
+            showCard(who);
+            incrementCount(who);
+            showCount(who);
+            calculateScore(who);
+            showScore(who);
+            pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
+            createHistoryItem(who);
+            await delayUI(time);
+
+            // show the second card
+            showCard(who);
+            incrementCount(who);
+            showCount(who);
+            calculateScore(who);
+            showScore(who);
+            pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
+            createHistoryItem(who);
+
+            // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
+            await delayUI(time);
+            await giveAceValue(who);
+            await giveAceValue(who);
+
+            console.log("revealHand => end");
         }
 
-        // for anything else, show both 
-        else {
-            userActionTwist.disabled = false; // enable twist
-            userActionStick.disabled = false; // enable stick
+        function userActions(who)
+        {
+
+            // don't show any button if bust
+            if(state.user.score > 21){
+                userActionTwist.disabled = true; // disable twist
+                userActionStick.disabled = true; // disable stick
+            }
+
+            // show twist button if score is lower than 15
+            else if(state.user.score < 15){
+                userActionTwist.disabled = false; // enable twist
+            }
+
+            // only show 'stick' button if user has Pontoon
+            else if(
+                state.user.cards.some(cards => cards.rank.startsWith("A")) &&
+                (
+                    state.user.cards.some(cards => cards.rank.startsWith("K")) ||
+                    state.user.cards.some(cards => cards.rank.startsWith("Q")) ||
+                    state.user.cards.some(cards => cards.rank.startsWith("J"))
+                )){
+                
+                userActionStick.disabled = false; // enable stick
+            }
+
+            // only show 'stick' button if user has 21
+            else if(state.user.score === 21){
+                userActionStick.disabled = false; // enable stick
+            }
+
+            // for anything else, show both 
+            else {
+                userActionTwist.disabled = false; // enable twist
+                userActionStick.disabled = false; // enable stick
+            }
         }
-    }
         
 
 // Helper Functions
@@ -279,23 +278,6 @@
         }
     }
 
-    function calculateHand(who)
-    {
-        if(checkForBust(who) === true)
-        {
-            // add result
-            addResult(who, "BUST");
-
-            // set isBust to true
-            changeStateOfHand(who, "handIsBust", true);
-
-            // add "BUST!" to history
-            pushItemToHistory(who, "BUST!");
-        }
-
-        createHistoryItem(who);
-    }
-
     async function giveAceValue(who)
     {
 
@@ -348,6 +330,25 @@
                 }
             }
         }
+    }
+
+    function calculateHand(who)
+    {
+        if(checkForBust(who) === true)
+        {
+            // set isBust to true
+            changeStateOfHand(who, "handIsBust", true);
+            
+            // add "BUST!" to history
+            pushItemToHistory(who, "BUST!");
+
+            console.log(`${who}: handIsBust = ${state[who].handIsBust}`);
+        }
+        
+        // console.log(`handIsPontoon: ${state[who].handIsPontoon}`);
+        // console.log(`handIsFourCard: ${state[who].handIsFourCard}`);
+        // console.log(`handIsFiveCard: ${state[who].handIsFiveCard}`);
+        createHistoryItem(who);
     }
 
     function twist()

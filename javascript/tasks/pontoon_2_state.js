@@ -29,8 +29,9 @@
             handIsFiveCard: false,
         },
 
+        resultWin: null,
         resultMessage: null,
-        gameOver: false
+        resultGameOver: false,
     };
 
     let state = structuredClone(initialState);
@@ -60,18 +61,25 @@
     {
         card.value = value;
     }
-
-    function addResult(who, result)
+    
+    function changeStateOfHand(who, whichProperty, value)
     {
-        state[who].result = result;
+        state[who][whichProperty] = value;
     }
 
-    
 // NEW FUNCTIONS / IDEAS
 
-    function calculateGameResult()
+    function calculateGameResult(who)
     {
         // if Player is bust => Dealer wins
+        if(state.user.handIsBust === true)
+        {
+            state.resultWin = false;
+            state.resultGameOver = true;
+            state.resultMessage = "User is BUST";
+        }
+        
+
         // if Dealer is bust => Player wins
         // if Player has Pontoon and Dealer does not => Player wins
         // if Dealer has Pontoon and Player does not => Dealer wins
@@ -92,16 +100,12 @@
 
         // set gameOver boolean => create function in state
         // set resultMessage string => create function in state
-    }
+        
+        console.log(`resultGameOver = ${state.resultGameOver}`);
 
-    function toggleGameStatus()
-    {
-
-    }
-
-    function changeStateOfHand(who, whichProperty, value)
-    {
-        state[who][whichProperty] = value;
-
-        console.log(`${whichProperty} = ${value}`);
+        // change ui result colour, red for lose, green for win
+        console.log(`resultWin = ${state.resultWin}`);
+        
+        // change ui result message
+        console.log(`resultMessage = ${state.resultMessage}`);
     }
