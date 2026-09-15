@@ -17,8 +17,8 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        calculateHand("user");
-        calculateGameResult("user");
+        // calculateHand("user");
+        // calculateGameResult("user");
         // userActions()       
     }
 
@@ -64,8 +64,8 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            calculateScore(who);
-            showScore(who);
+            // calculateScore(who);
+            // showScore(who);
             pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
             createHistoryItem(who);
             await delayUI(time);
@@ -74,15 +74,15 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            calculateScore(who);
-            showScore(who);
+            // calculateScore(who);
+            // showScore(who);
             pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
             createHistoryItem(who);
 
             // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
             await delayUI(time);
             await giveAceValue(who);
-            await giveAceValue(who);
+            // await giveAceValue(who);
 
             console.log("revealHand => end");
         }
@@ -239,55 +239,117 @@
 
     async function giveAceValue(who)
     {
+        // // actions only relevant if working with the initially dealt cards
+        // if(state[who].count <= 2)
+        // {
+        //     const pontoon = checkForPontoon(who);
 
-        // actions only relevant if working with the initially dealt cards
-        if(state[who].count <= 2)
-        {
-            const pontoon = checkForPontoon(who);
-
-            // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
-            if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
-                    &&
-                    !pontoon)
-            {
-                const nodelistOfImages = showUserCards.querySelectorAll("img");
-                const lengthOfArray = state.user.cards.length -1;
+        //     // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
+        //     if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
+        //             &&
+        //             !pontoon)
+        //     {
+        //         const nodelistOfImages = showUserCards.querySelectorAll("img");
+        //         const lengthOfArray = state.user.cards.length -1;
                 
-                for(let i = 0; i <= lengthOfArray; i++)
-                {
+        //         for(let i = 0; i <= lengthOfArray; i++)
+        //         {
                     
-                    if(state.user.cards[i].value === 0)
+        //             if(state.user.cards[i].value === 0)
+        //             {
+        //                 // highlight the current card
+        //                 toggleHighlightCard(nodelistOfImages[i]);
+
+        //                 // enable the choices
+        //                 toggleShowAceChoices();
+
+        //                 // get the user's input
+        //                 let aceValue = await aceChoice();
+
+        //                 // assign user's choice to the value of the card
+        //                 setAceValue(state.user.cards[i], aceValue);
+
+        //                 // remove highlight from the card
+        //                 toggleHighlightCard(nodelistOfImages[i]);
+
+        //                 // disable the choices
+        //                 toggleShowAceChoices();
+
+        //                 // calculate and show score new score
+        //                 calculateScore(who);
+        //                 showScore(who);
+
+        //                 // add and show chosen value in history
+        //                 pushItemToHistory(who, `Ace value: ${aceValue}`);
+        //                 createHistoryItem(who);
+
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // does the hand contain an ace?
+        if(state[who].cards.some(card => card.rank.startsWith("A")))
+        {
+            console.log(`Hand contains an ace? True`)
+
+            // hand contains pontoon?
+            if(checkForPontoon(who))
+            {
+                console.log(`Hand contains pontoon? True`);
+
+                (state[who].cards[0].value === 0) ? state[who].cards[0].value = 11 : state[who].cards[1].value = 11;
+
+                console.log(`value of card 1: ${state[who].cards[0].value}`);
+                console.log(`value of card 1: ${state[who].cards[1].value}`);
+            }
+
+            // hand does not contain pontoon
+            else
+            {
+                console.log(`Hand contains pontoon? False`);
+
+                // is the count 2?
+                if(state[who].count === 2)
+                {
+                    // both cards are aces
+                    if(state[who].cards[0].value === 0
+                        &&
+                        state[who].cards[1].value === 0)
                     {
-                        // highlight the current card
-                        toggleHighlightCard(nodelistOfImages[i]);
+                        console.log("Both cards are aces");
+                    }
 
-                        // enable the choices
-                        toggleShowAceChoices();
+                    // the first card is an ace
+                    else if(state[who].cards[0].value === 0
+                        &&
+                        state[who].cards[1].value !== 0)
+                    {
+                        console.log("The first card is an ace");
+                    }
 
-                        // get the user's input
-                        let aceValue = await aceChoice();
-
-                        // assign user's choice to the value of the card
-                        setAceValue(state.user.cards[i], aceValue);
-
-                        // remove highlight from the card
-                        toggleHighlightCard(nodelistOfImages[i]);
-
-                        // disable the choices
-                        toggleShowAceChoices();
-
-                        // calculate and show score new score
-                        calculateScore(who);
-                        showScore(who);
-
-                        // add and show chosen value in history
-                        pushItemToHistory(who, `Ace value: ${aceValue}`);
-                        createHistoryItem(who);
-
-                        break;
+                    // the second card is an ace
+                    else if(state[who].cards[0].value !== 0
+                        &&
+                        state[who].cards[1].value === 0)
+                    {
+                        console.log("The second card is an ace");
                     }
                 }
+
+                // the count is not 2
+                else
+                {
+                    console.log("Count is not 2");
+                }
             }
+        }
+
+        // hand does not contain an ace
+        else
+        {
+            console.log(`Hand contains an ace? False`)
         }
     }
 
