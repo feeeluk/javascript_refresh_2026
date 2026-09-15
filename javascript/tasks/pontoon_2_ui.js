@@ -102,38 +102,6 @@
         (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
     }
 
-    function showHistory(who, numberOfItemsToShow)
-    {
-        
-        if(numberOfItemsToShow === 1)
-        {
-
-            const newElement = document.createElement("li");
-            
-            let lengthOfHistoryArray = state[who].history.length-1;
-            newElement.textContent = state[who].history[lengthOfHistoryArray];
-
-            (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
-
-        }
-
-        else if(numberOfItemsToShow > 1)
-        {
-            
-            for(let i = 2; i > 0; i--)
-            {
-
-                // add li element for each item
-                const newElement = document.createElement("li");
-
-                let lengthOfHistoryArray = state[who].history.length;
-                newElement.textContent = state[who].history[lengthOfHistoryArray - i];
-
-                (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
-            }
-        }
-    }
-
     function createHistoryItem(who)
     {
         // create last history item as a list element

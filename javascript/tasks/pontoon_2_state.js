@@ -121,7 +121,3 @@
 
         console.log("calculateGameResult => end");
     }
-
-// NEW FUNCTIONS / IDEAS
-
-    
