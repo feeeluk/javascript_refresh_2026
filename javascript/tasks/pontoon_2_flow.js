@@ -64,7 +64,7 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            calculateScore(who);
+            updateScore(who);
             showScore(who);
             pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
             createHistoryItem(who);
@@ -74,7 +74,7 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            calculateScore(who);
+            updateScore(who);
             showScore(who);
             pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
             createHistoryItem(who);
@@ -184,13 +184,7 @@
         }         
     }
 
-    function calculateScore(who)
-    {
-        const calculateValueOfArray = state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0);
-
-        // assign the sum of the temporaryArray as the score (NOTE the use of EQUALS not 'plus equals')
-        state[who].score = calculateValueOfArray;
-    }
+    
 
     async function calculateAceValue(who)
     {

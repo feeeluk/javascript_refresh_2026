@@ -183,7 +183,7 @@
         toggleShowAceChoices();
 
         // calculate and show score new score
-        calculateScore("user");
+        updateScore("user");
         showScore("user");
 
         // add and show chosen value in history
