@@ -313,7 +313,16 @@
         //     console.log(`${who}: handIsPontoon = ${state[who].handIsPontoon}`);
         // }
 
-        createHistoryItem(who);
+        if(checkForBust(who)
+            ||
+            checkForPontoon(who)
+            ||
+            checkForFourCards(who)
+            ||
+            checkForFiveCards(who))
+        {
+            createHistoryItem(who);
+        }
 
         console.log("calculateHand => end");
     }
