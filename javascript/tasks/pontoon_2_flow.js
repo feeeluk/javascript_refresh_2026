@@ -17,8 +17,8 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        // calculateHand("user");
-        // calculateGameResult("user");
+        calculateHand("user");
+        calculateGameResult("user");
         // userActions()       
     }
 
@@ -64,8 +64,8 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            // calculateScore(who);
-            // showScore(who);
+            calculateScore(who);
+            showScore(who);
             pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
             createHistoryItem(who);
             await delayUI(time);
@@ -74,8 +74,8 @@
             showCard(who);
             incrementCount(who);
             showCount(who);
-            // calculateScore(who);
-            // showScore(who);
+            calculateScore(who);
+            showScore(who);
             pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
             createHistoryItem(who);
 
@@ -186,110 +186,15 @@
 
     function calculateScore(who)
     {
-        const pontoon = checkForPontoon(who);
-        let revealedCount = state[who].count;
-        
-        // if the Player has Pontoon then give the ace a value of 11, and set score as 21
-        if(checkForPontoon(who)
-                &&
-                revealedCount === 2)
-        {
-            const lengthOfArray = state.player.cards.length;
+        const calculateValueOfArray = state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0);
 
-            for(let i = 0; i < lengthOfArray; i++)
-            {
-                
-                if( state.player.cards[i].rank.startsWith("A")
-                    &&
-                    state.player.cards[i].value === 0)
-                {
-                    let aceValue = 11;
-
-                    // assign the value of the card
-                    setAceValue(state.player.cards[i], aceValue);
-                }
-            }
-
-            state[who].score = 21;
-        }
-
-        // if two cards have been revealed then set the score as card 1 + card 2
-        else if(revealedCount === 2)
-        {
-            state[who].score = state[who].cards[0].value + state[who].cards[1].value;
-        }
-        
-        // if only one card has been revealed then set the score as that card's value (even if it is an ace)
-        else if(revealedCount === 1)
-        {
-            state[who].score = state[who].cards[0].value;
-        }
-
-        // else none of the above apply - a 'twist' - then calculate the sum of all cards in the array
-        else
-        {
-            const temporaryArray = state[who].cards
-                .map(card => card.value)        // extract the value from each object
-                .reduce((sum, v) => sum + v, 0); // sum them
-
-            // assign the sum of the temporaryArray as the score
-            state[who].score = temporaryArray; // NOTE the use of EQUALS not 'plus equals' - very important
-        }
+        // assign the sum of the temporaryArray as the score (NOTE the use of EQUALS not 'plus equals')
+        state[who].score = calculateValueOfArray;
     }
 
     async function calculateAceValue(who)
     {
         const lengthOfArray = state.user.cards.length -1;
-
-        // // actions only relevant if working with the initially dealt cards
-        // if(state[who].count <= 2)
-        // {
-        //     const pontoon = checkForPontoon(who);
-
-        //     // if any card within the User's hand is an ace AND User DOES NOT HAVE Pontoon then allow the User to chose the value of the ace/s
-        //     if(state.user.cards.some(cards => cards.rank.startsWith("A")) 
-        //             &&
-        //             !pontoon)
-        //     {
-        //         const nodelistOfImages = showUserCards.querySelectorAll("img");
-        //         const lengthOfArray = state.user.cards.length -1;
-                
-        //         for(let i = 0; i <= lengthOfArray; i++)
-        //         {
-                    
-        //             if(state.user.cards[i].value === 0)
-        //             {
-        //                 // highlight the current card
-        //                 toggleHighlightCard(nodelistOfImages[i]);
-
-        //                 // enable the choices
-        //                 toggleShowAceChoices();
-
-        //                 // get the user's input
-        //                 let aceValue = await aceChoice();
-
-        //                 // assign user's choice to the value of the card
-        //                 setAceValue(state.user.cards[i], aceValue);
-
-        //                 // remove highlight from the card
-        //                 toggleHighlightCard(nodelistOfImages[i]);
-
-        //                 // disable the choices
-        //                 toggleShowAceChoices();
-
-        //                 // calculate and show score new score
-        //                 calculateScore(who);
-        //                 showScore(who);
-
-        //                 // add and show chosen value in history
-        //                 pushItemToHistory(who, `Ace value: ${aceValue}`);
-        //                 createHistoryItem(who);
-
-        //                 break;
-        //             }
-        //         }
-        //     }
-        // }
 
         // does the hand contain an ace?
         if(state[who].cards.some(card => card.rank.startsWith("A")))
@@ -327,7 +232,6 @@
                             await aceActions(i);
                             console.log(`Ace ${i + 1 } = ${state.user.cards[i].value}`);
                         }
-                        
                     }
 
                     // the first card is an ace

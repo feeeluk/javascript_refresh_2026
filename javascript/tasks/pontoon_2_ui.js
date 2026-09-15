@@ -148,11 +148,7 @@
 
     function showScore(who)
     {
-        let show;
-
-        (who === "user") ? show = showUserScore : show = showDealerScore;
-
-        show.textContent = state[who].score;
+        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
     }
 
     function showResultOfGame()
@@ -187,8 +183,8 @@
         toggleShowAceChoices();
 
         // calculate and show score new score
-        // calculateScore("user");
-        // showScore("user");
+        calculateScore("user");
+        showScore("user");
 
         // add and show chosen value in history
         pushItemToHistory("user", `Ace value: ${aceValue}`);
