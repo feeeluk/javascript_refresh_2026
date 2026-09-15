@@ -164,6 +164,37 @@
         showResultButton.disabled = false;
     }
 
+    async function aceActions(card)
+    {
+        const nodelistOfImages = showUserCards.querySelectorAll("img");
+        
+        // highlight the current card
+        toggleHighlightCard(nodelistOfImages[card]);
+
+        // enable the choices
+        toggleShowAceChoices();
+
+        // get the user's input
+        let aceValue = await aceChoice();
+
+        // assign user's choice to the value of the card
+        setAceValue(state.user.cards[card], aceValue);
+
+        // remove highlight from the card
+        toggleHighlightCard(nodelistOfImages[card]);
+
+        // disable the choices
+        toggleShowAceChoices();
+
+        // calculate and show score new score
+        // calculateScore("user");
+        // showScore("user");
+
+        // add and show chosen value in history
+        pushItemToHistory("user", `Ace value: ${aceValue}`);
+        createHistoryItem("user");
+    }
+
 // Event Listeners
 // ////////////////////////////////////////
 

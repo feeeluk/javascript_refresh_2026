@@ -81,7 +81,7 @@
 
             // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
             await delayUI(time);
-            await giveAceValue(who);
+            await calculateAceValue(who);
             // await giveAceValue(who);
 
             console.log("revealHand => end");
@@ -237,8 +237,10 @@
         }
     }
 
-    async function giveAceValue(who)
+    async function calculateAceValue(who)
     {
+        const lengthOfArray = state.user.cards.length -1;
+
         // // actions only relevant if working with the initially dealt cards
         // if(state[who].count <= 2)
         // {
@@ -294,7 +296,7 @@
         {
             console.log(`Hand contains an ace? True`)
 
-            // hand contains pontoon?
+            // has an ace, but hand is Pontoon
             if(checkForPontoon(who))
             {
                 console.log(`Hand contains pontoon? True`);
@@ -305,12 +307,12 @@
                 console.log(`value of card 1: ${state[who].cards[1].value}`);
             }
 
-            // hand does not contain pontoon
+            // has an ace, but hand is NOT Pontoon
             else
             {
                 console.log(`Hand contains pontoon? False`);
 
-                // is the count 2?
+                // the number of cards revealed (count) is 2
                 if(state[who].count === 2)
                 {
                     // both cards are aces
@@ -318,7 +320,14 @@
                         &&
                         state[who].cards[1].value === 0)
                     {
-                        console.log("Both cards are aces");
+                        console.log(`Both cards are aces`);
+
+                        for(let i = 0; i <= lengthOfArray; i++)
+                        {
+                            await aceActions(i);
+                            console.log(`Ace ${i + 1 } = ${state.user.cards[i].value}`);
+                        }
+                        
                     }
 
                     // the first card is an ace
@@ -327,6 +336,8 @@
                         state[who].cards[1].value !== 0)
                     {
                         console.log("The first card is an ace");
+                        await aceActions(0);
+                        console.log(`Ace ${0 + 1 } = ${state.user.cards[0].value}`);
                     }
 
                     // the second card is an ace
@@ -335,10 +346,12 @@
                         state[who].cards[1].value === 0)
                     {
                         console.log("The second card is an ace");
+                        await aceActions(1);
+                        console.log(`Ace ${1 + 1 } = ${state.user.cards[1].value}`);
                     }
                 }
 
-                // the count is not 2
+                // the number of cards revealed (count) is not 2
                 else
                 {
                     console.log("Count is not 2");
