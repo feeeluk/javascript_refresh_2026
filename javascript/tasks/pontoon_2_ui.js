@@ -58,6 +58,8 @@
         showResultBox.style.backgroundColor = "cornflowerblue";
         showResultMessage.innerHTML = "";
         showResultButton.disabled = true;
+
+        console.clear();
     }
 
     function delayUI(delayMiliseconds)
