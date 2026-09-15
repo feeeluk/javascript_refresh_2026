@@ -44,6 +44,7 @@
         state = structuredClone(initialState);
         originalDeck.length = 0;
         deck = undefined;
+        console.clear;
     }
 
     function incrementCount(who)
