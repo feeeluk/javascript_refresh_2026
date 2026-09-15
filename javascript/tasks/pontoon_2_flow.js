@@ -377,8 +377,11 @@
         console.log(`resultWin = ${state.resultWin}`);
         console.log(`resultMessage = ${state.resultMessage}`);
 
-        showResultOfGame();
-
+        if(state.resultGameOver === true)
+        {
+            showResultOfGame();
+        }
+    
         console.log("calculateGameResult => end");
     }
 
