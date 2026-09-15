@@ -184,8 +184,6 @@
         }         
     }
 
-    
-
     async function calculateAceValue(who)
     {
         const lengthOfArray = state.user.cards.length -1;
@@ -277,14 +275,14 @@
             console.log(`${who}: handIsBust = ${state[who].handIsBust}`);
         }
 
-        // else if(checkForPontoon(who) === true)
-        // {
-        //     changeStateOfHand(who, "handIsPontoon", true);
+        else if(checkForPontoon(who) === true)
+        {
+            changeStateOfHand(who, "handIsPontoon", true);
             
-        //     pushItemToHistory(who, "PONTOON!");
+            pushItemToHistory(who, "PONTOON!");
 
-        //     console.log(`${who}: handIsPontoon = ${state[who].handIsPontoon}`);
-        // }
+            console.log(`${who}: handIsPontoon = ${state[who].handIsPontoon}`);
+        }
 
         if(checkForBust(who)
             ||
