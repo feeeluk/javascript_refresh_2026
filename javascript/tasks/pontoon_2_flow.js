@@ -334,9 +334,9 @@
         // if Player is bust => Dealer wins
         if(state.user.handIsBust === true)
         {
-            changeStateOfGame(resultGameOver, true);
-            changeStateOfGame(resultWin, false);
-            changeStateOfGame(resultMessage, "User is BUST");
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "User is BUST");
         }
 
         // if Dealer is bust => Player wins
