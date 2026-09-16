@@ -92,13 +92,22 @@
                 console.log("game is still running");
 
                 // give user options
-                toggleShowActions();
+                if(state[who].score < 15)
+                {
+                    toggleEnableTwistButton();
+                }
 
+                else if(state[who].score >= 15)
+                {
+                    toggleEnableTwistButton();
+                    toggleEnableStickButton();
+                }
+                
                 // get user's choice
-                let choice = await getActionChoice();
+                let userChoice = await getActionChoice();
 
                 // what did user decide to do?
-                console.log(`user chose to ${choice}`);
+                console.log(`user chose to ${userChoice}`);
             }
 
             console.log("userActions => end");

@@ -93,11 +93,17 @@
         userAceEleven.disabled = userAceEleven.disabled ? false : true;
     }
 
-    function toggleShowActions()
+    function toggleEnableTwistButton()
     {
         userActionTitle.classList.toggle("disabled");
         userActionTitle.classList.toggle("enabled");
         userActionTwist.disabled = userActionTwist.disabled ? false : true;
+    }
+
+    function toggleEnableStickButton()
+    {
+        userActionTitle.classList.toggle("disabled");
+        userActionTitle.classList.toggle("enabled");
         userActionStick.disabled = userActionStick.disabled ? false : true;
     }
 
