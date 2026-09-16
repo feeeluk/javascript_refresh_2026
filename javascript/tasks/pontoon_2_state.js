@@ -74,8 +74,12 @@
 
     function updateScore(who)
     {
+        console.log("updateScore => start");
+        
         const calculateValueOfArray = state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0);
 
         // assign the sum of the array as the score (NOTE the use of EQUALS not 'plus equals')
         state[who].score = calculateValueOfArray;
+
+        console.log("updateScore => end");
     }

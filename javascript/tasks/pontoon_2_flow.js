@@ -82,7 +82,6 @@
             // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
             await delayUI(time);
             await calculateAceValue(who);
-            // await giveAceValue(who);
 
             console.log("revealHand => end");
         }
@@ -186,22 +185,27 @@
 
     async function calculateAceValue(who)
     {
+        console.log("calculateAceValue => start");
+
         const lengthOfArray = state.user.cards.length -1;
 
         // does the hand contain an ace?
         if(state[who].cards.some(card => card.rank.startsWith("A")))
         {
-            console.log(`Hand contains an ace? True`)
+            console.log(`Hand contains an ace? True`);
 
             // has an ace, but hand is Pontoon
             if(checkForPontoon(who))
             {
                 console.log(`Hand contains pontoon? True`);
 
-                (state[who].cards[0].value === 0) ? state[who].cards[0].value = 11 : state[who].cards[1].value = 11;
+                (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
 
                 console.log(`value of card 1: ${state[who].cards[0].value}`);
                 console.log(`value of card 1: ${state[who].cards[1].value}`);
+
+                updateScore(who);
+                showScore(who);
             }
 
             // has an ace, but hand is NOT Pontoon
@@ -260,6 +264,8 @@
         {
             console.log(`Hand contains an ace? False`)
         }
+
+        console.log("calculateAceValue => end");
     }
 
     function calculateHand(who)
