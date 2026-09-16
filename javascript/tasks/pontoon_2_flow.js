@@ -92,7 +92,12 @@
                 console.log("game is still running");
 
                 // give user options
-                if(state[who].score < 15)
+                if(checkForPontoon(who))
+                {
+                    toggleEnableStickButton();
+                }
+
+                else if(state[who].score < 15)
                 {
                     toggleEnableTwistButton();
                 }
