@@ -5,10 +5,6 @@
     // - running order
 
 
-//  Variables
-// ////////////////////////////////////////
-
-
 // Game mechanic functions
 // ////////////////////////////////////////
 
@@ -19,7 +15,7 @@
         await revealHand("user");
         calculateHand("user");
         calculateGameResult("user");
-        // userActions()       
+        userActions("user");       
     }
 
         function createGame()
@@ -86,102 +82,25 @@
             console.log("revealHand => end");
         }
 
-        function userActions(who)
+        async function userActions(who)
         {
+            console.log("userActions => start");
+            
+            // if game is still running
+            if(!state.resultGameOver)
+            {
+                console.log("game is not over");
 
-            // don't show any button if bust
-            if(state.user.score > 21){
-                userActionTwist.disabled = true; // disable twist
-                userActionStick.disabled = true; // disable stick
+                // give user options
+                // get user's choice (await)
+                // what did user decide to do?
             }
 
-            // show twist button if score is lower than 15
-            else if(state.user.score < 15){
-                userActionTwist.disabled = false; // enable twist
-            }
-
-            // only show 'stick' button if user has Pontoon
-            else if(
-                state.user.cards.some(cards => cards.rank.startsWith("A")) &&
-                (
-                    state.user.cards.some(cards => cards.rank.startsWith("K")) ||
-                    state.user.cards.some(cards => cards.rank.startsWith("Q")) ||
-                    state.user.cards.some(cards => cards.rank.startsWith("J"))
-                )){
-                
-                userActionStick.disabled = false; // enable stick
-            }
-
-            // only show 'stick' button if user has 21
-            else if(state.user.score === 21){
-                userActionStick.disabled = false; // enable stick
-            }
-
-            // for anything else, show both 
-            else {
-                userActionTwist.disabled = false; // enable twist
-                userActionStick.disabled = false; // enable stick
-            }
-        }
-        
-
-// Helper Functions
-// ////////////////////////////////////////
-        
-    function checkForBust(who)
-    {
-        if( state[who].score > 21){
-            return true;
+            console.log("userActions => end");
         }
 
-        else{
-            return false;
-        }
-    }
-    
-    function checkForPontoon(who)
-    {
-        if( state[who].count === 2
-            && state.user.cards.some(cards => cards.rank.startsWith("A"))
-            && (
-                state[who].cards.some(cards => cards.rank.startsWith("K")) ||
-                state[who].cards.some(cards => cards.rank.startsWith("Q")) ||
-                state[who].cards.some(cards => cards.rank.startsWith("J"))
-              ))
-        {
-            return true;
-        }
-
-        else{
-            return false;
-        }
-    }
-
-    function checkForFourCards(who)
-    {
-        if( state[who].count === 4
-            && state[who].score <= 21)
-        {
-            return true;
-        }
-
-        else{
-            return false;
-        }        
-    }
-
-    function checkForFiveCards(who)
-    {
-        if( state[who].count === 5
-            && state[who].score <= 21)
-        {
-            return true;
-        }
-
-        else{
-            return false;
-        }         
-    }
+// Calculate Functions
+// ////////////////////////////////////////    
 
     async function calculateAceValue(who)
     {
@@ -362,11 +281,86 @@
         console.log("calculateGameResult => end");
     }
 
+// Action Functions
+// ////////////////////////////////////////
+
+    function stick()
+    {
+        console.log("stick => start");
+
+        console.log("user chose to STICK");
+
+        console.log("stick => end");
+    }
+    
     function twist()
     {
+        console.log("twist => start");
+
+        console.log("user chose to TWIST");
         // deal a card
         // reveal the card
         // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
         // calculateGameResult()
         // userActions()
+
+        console.log("twist => end");
+    }
+
+// Helper Functions
+// ////////////////////////////////////////
+        
+    function checkForBust(who)
+    {
+        if( state[who].score > 21){
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+    
+    function checkForPontoon(who)
+    {
+        if( state[who].count === 2
+            && state.user.cards.some(cards => cards.rank.startsWith("A"))
+            && (
+                state[who].cards.some(cards => cards.rank.startsWith("K")) ||
+                state[who].cards.some(cards => cards.rank.startsWith("Q")) ||
+                state[who].cards.some(cards => cards.rank.startsWith("J"))
+              ))
+        {
+            return true;
+        }
+
+        else{
+            return false;
+        }
+    }
+
+    function checkForFourCards(who)
+    {
+        if( state[who].count === 4
+            && state[who].score <= 21)
+        {
+            return true;
+        }
+
+        else{
+            return false;
+        }        
+    }
+
+    function checkForFiveCards(who)
+    {
+        if( state[who].count === 5
+            && state[who].score <= 21)
+        {
+            return true;
+        }
+
+        else{
+            return false;
+        }         
     }
