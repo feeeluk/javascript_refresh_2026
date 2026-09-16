@@ -95,20 +95,20 @@
                 if(checkForPontoon(who))
                 {
                     console.log("hand is Pontoon so only allow 'stick'");
-                    toggleEnableStickButton();
+                    enableStickButton();
                 }
 
                 else if(state[who].score < 15)
                 {
                     console.log("hand is less than 15 so only allow 'twist'");
-                    toggleEnableTwistButton();
+                    enableTwistButton();
                 }
 
                 else if(state[who].score >= 15)
                 {
                     console.log("hand is equal to or more than 15 so allow both options");
-                    toggleEnableTwistButton();
-                    toggleEnableStickButton();
+                    enableTwistButton();
+                    enableStickButton();
                 }
                 
                 // get user's choice
@@ -308,7 +308,8 @@
         console.log("stick => start");
 
         console.log("user chose to STICK");
-        toggleEnableStickButton();
+        disableTwistButton();
+        disableStickButton();
 
         console.log("stick => end");
     }

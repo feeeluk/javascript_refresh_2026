@@ -93,18 +93,28 @@
         userAceEleven.disabled = userAceEleven.disabled ? false : true;
     }
 
-    function toggleEnableTwistButton()
+    function enableTwistButton()
     {
-        userActionTitle.classList.toggle("disabled");
         userActionTitle.classList.toggle("enabled");
-        userActionTwist.disabled = userActionTwist.disabled ? false : true;
+        userActionTwist.disabled = false;
     }
 
-    function toggleEnableStickButton()
+    function disableTwistButton()
     {
         userActionTitle.classList.toggle("disabled");
+        userActionTwist.disabled = true;
+    }
+
+    function enableStickButton()
+    {
         userActionTitle.classList.toggle("enabled");
-        userActionStick.disabled = userActionStick.disabled ? false : true;
+        userActionStick.disabled = false;
+    }
+
+    function disableStickButton()
+    {
+        userActionTitle.classList.toggle("disabled");
+        userActionStick.disabled = true;
     }
 
     async function aceActions(card)
