@@ -95,25 +95,29 @@
 
     function enableTwistButton()
     {
-        userActionTitle.classList.toggle("enabled");
+        userActionTitle.classList.add("enabled");
+        userActionTitle.classList.remove("disabled");
         userActionTwist.disabled = false;
     }
 
     function disableTwistButton()
     {
-        userActionTitle.classList.toggle("disabled");
+        userActionTitle.classList.add("disabled");
+        userActionTitle.classList.remove("enabled");
         userActionTwist.disabled = true;
     }
 
     function enableStickButton()
     {
-        userActionTitle.classList.toggle("enabled");
+        userActionTitle.classList.add("enabled");
+        userActionTitle.classList.remove("disabled");
         userActionStick.disabled = false;
     }
 
     function disableStickButton()
     {
-        userActionTitle.classList.toggle("disabled");
+        userActionTitle.classList.add("disabled");
+        userActionTitle.classList.remove("enabled");
         userActionStick.disabled = true;
     }
 
