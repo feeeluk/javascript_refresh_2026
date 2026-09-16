@@ -242,7 +242,11 @@
     })
 
     document.getElementById("uActionStick").addEventListener("click", event => {
-        
+        stick();
+    })
+
+    document.getElementById("uActionTwist").addEventListener("click", event => {
+        twist();
     })
 
     document.getElementById("playAgain").addEventListener("click", event => {

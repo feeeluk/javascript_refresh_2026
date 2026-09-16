@@ -94,25 +94,25 @@
                 // give user options
                 if(checkForPontoon(who))
                 {
+                    console.log("hand is Pontoon so only allow 'stick'");
                     toggleEnableStickButton();
                 }
 
                 else if(state[who].score < 15)
                 {
+                    console.log("hand is less than 15 so only allow 'twist'");
                     toggleEnableTwistButton();
                 }
 
                 else if(state[who].score >= 15)
                 {
+                    console.log("hand is equal to or more than 15 so allow both options");
                     toggleEnableTwistButton();
                     toggleEnableStickButton();
                 }
                 
                 // get user's choice
                 let userChoice = await getActionChoice();
-
-                // what did user decide to do?
-                console.log(`user chose to ${userChoice}`);
             }
 
             console.log("userActions => end");
@@ -308,6 +308,7 @@
         console.log("stick => start");
 
         console.log("user chose to STICK");
+        toggleEnableStickButton();
 
         console.log("stick => end");
     }
