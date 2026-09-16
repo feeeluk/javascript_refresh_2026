@@ -89,11 +89,16 @@
             // if game is still running
             if(!state.resultGameOver)
             {
-                console.log("game is not over");
+                console.log("game is still running");
 
                 // give user options
-                // get user's choice (await)
+                toggleShowActions();
+
+                // get user's choice
+                let choice = await getActionChoice();
+
                 // what did user decide to do?
+                console.log(`user chose to ${choice}`);
             }
 
             console.log("userActions => end");

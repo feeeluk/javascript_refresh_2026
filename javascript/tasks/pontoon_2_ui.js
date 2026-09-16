@@ -82,6 +82,100 @@
             (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
     }
 
+    function toggleHighlightCard(card){
+        card.classList.toggle("highlighted");
+    }
+
+    function toggleShowAceChoices(){
+        userAceTitle.classList.toggle("disabled");
+        userAceTitle.classList.toggle("enabled");
+        userAceOne.disabled = userAceOne.disabled ? false : true;
+        userAceEleven.disabled = userAceEleven.disabled ? false : true;
+    }
+
+    function toggleShowActions()
+    {
+        userActionTitle.classList.toggle("disabled");
+        userActionTitle.classList.toggle("enabled");
+        userActionTwist.disabled = userActionTwist.disabled ? false : true;
+        userActionStick.disabled = userActionStick.disabled ? false : true;
+    }
+
+    async function aceActions(card)
+    {
+        const nodelistOfImages = showUserCards.querySelectorAll("img");
+        
+        // enable the choices
+        toggleShowAceChoices();
+
+        // highlight the current card
+        toggleHighlightCard(nodelistOfImages[card]);
+
+        // get the user's input
+        let aceValue = await getAceChoice();
+
+        // assign user's choice to the value of the card
+        setAceValue(state.user.cards[card], aceValue);
+
+        // remove highlight from the card
+        toggleHighlightCard(nodelistOfImages[card]);
+
+        // disable the choices
+        toggleShowAceChoices();
+
+        // calculate and show score new score
+        updateScore("user");
+        showScore("user");
+
+        // add and show chosen value in history
+        pushItemToHistory("user", `Ace value: ${aceValue}`);
+        createHistoryItem("user");
+    }
+
+    function getAceChoice()
+    {
+        // return a promise
+        return new Promise(resolve =>
+        {
+            // create a nodelist of the ace related buttons
+            const buttons = document.querySelectorAll(".aceChoice");
+
+            // get the value of each button
+            buttons.forEach(button =>
+            {
+                button.addEventListener("click", () =>
+                {
+                    // send the value back
+                    resolve(Number(button.value));
+                });
+            });
+        });
+    }
+
+    async function getActionChoice()
+    {
+        return new Promise(resolve => {
+
+            // create a nodelist of the choice related buttons
+            const buttons = document.querySelectorAll(".actionChoice");
+
+            // get the value of each button
+            buttons.forEach(button =>
+            {
+                button.addEventListener("click", () =>
+                {
+                    // send the value back
+                    resolve(button.value);
+                });
+            });
+        })
+    }
+
+    function showScore(who)
+    {
+        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
+    }
+
     async function showCard(who)
     {
         // reveal initial cards (face up)
@@ -102,6 +196,15 @@
         (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
     }
 
+    function showResultOfGame()
+    {
+        (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
+        showResultMessage.style.color = "white";
+
+        showResultMessage.textContent = state.resultMessage;
+        showResultButton.disabled = false;
+    }
+
     function createHistoryItem(who)
     {
         // create last history item as a list element
@@ -113,83 +216,8 @@
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
 
         console.log(`History item for ${who} created`)
-    }
-
-    function aceChoice()
-    {
-        // return a promise
-        return new Promise(resolve =>
-        {
-            // create a nodelist of buttons with the class of "aceChoice"
-            const buttons = document.querySelectorAll(".aceChoice");
-
-            // for each button set it's value
-            buttons.forEach(button =>
-            {
-                button.addEventListener("click", () =>
-                {
-                    // send the value back
-                    resolve(Number(button.value));
-                });
-            });
-        });
-    }
-
-    function toggleHighlightCard(card){
-        card.classList.toggle("highlighted");
-    }
-
-    function toggleShowAceChoices(){
-        userAceTitle.classList.toggle("disabled");
-        userAceTitle.classList.toggle("enabled");
-        userAceOne.disabled = userAceOne.disabled ? false : true;
-        userAceEleven.disabled = userAceEleven.disabled ? false : true;;
-    }
-
-    function showScore(who)
-    {
-        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
-    }
-
-    function showResultOfGame()
-    {
-        (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
-        showResultMessage.style.color = "white";
-
-        showResultMessage.textContent = state.resultMessage;
-        showResultButton.disabled = false;
-    }
-
-    async function aceActions(card)
-    {
-        const nodelistOfImages = showUserCards.querySelectorAll("img");
-        
-        // highlight the current card
-        toggleHighlightCard(nodelistOfImages[card]);
-
-        // enable the choices
-        toggleShowAceChoices();
-
-        // get the user's input
-        let aceValue = await aceChoice();
-
-        // assign user's choice to the value of the card
-        setAceValue(state.user.cards[card], aceValue);
-
-        // remove highlight from the card
-        toggleHighlightCard(nodelistOfImages[card]);
-
-        // disable the choices
-        toggleShowAceChoices();
-
-        // calculate and show score new score
-        updateScore("user");
-        showScore("user");
-
-        // add and show chosen value in history
-        pushItemToHistory("user", `Ace value: ${aceValue}`);
-        createHistoryItem("user");
-    }
+    } 
+    
 
 // Event Listeners
 // ////////////////////////////////////////
