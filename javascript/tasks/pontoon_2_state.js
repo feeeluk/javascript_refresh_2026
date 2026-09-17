@@ -48,13 +48,21 @@
 
     function incrementCount(who)
     {
+        console.log("incrementCount() => start");
+        
         state[who].count++;
+
+        console.log("incrementCount() => end");
     }
 
     function pushItemToHistory(who, what)
     {
+        console.log("pushItemToHistory() > start");
+
         // add item to history
         state[who].history.push(what);
+        
+        console.log("pushItemToHistory() > end");
     }
 
     function setAceValue(card, value)

@@ -199,7 +199,11 @@
 
     function showScore(who)
     {
+        console.log("showScore() => start");
+
         (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
+
+        console.log("showScore() => end");
     }
 
     async function showCard(who)
@@ -238,7 +242,11 @@
 
     function showCount(who)
     {
+        console.log("showCount() => start");
+        
         (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
+
+        console.log("showCount() => end");
     }
 
     function showResultOfGame()

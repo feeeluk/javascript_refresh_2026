@@ -200,7 +200,6 @@
                 {
                     console.log("Twisted ace");
                     await aceActions(lengthOfArray);
-                    console.log(lengthOfArray);
                     console.log(`Ace = ${state.user.cards[lengthOfArray].value}`);
                 }
             }
