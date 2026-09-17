@@ -192,10 +192,13 @@
                     }
                 }
 
-                // the number of cards revealed (count) is not 2
+                // the number of cards revealed (count) is not 2, so it must be a Twist card
                 else
                 {
-                    console.log("Count is not 2");
+                    console.log("Twisted ace");
+                    const arrayLength = state[who].cards.length;
+                    await aceActions(arrayLength);
+                    console.log(`Ace = ${state.user.cards[arrayLength].value}`);
                 }
             }
         }
@@ -341,7 +344,9 @@
         );
         createHistoryItem(who);
 
-        // handle any aces
+        // calculate the value of any aces
+        await calculateAceValue(who);
+
         // calculateHand()
         // calculateGameResult()
         // userActions()
