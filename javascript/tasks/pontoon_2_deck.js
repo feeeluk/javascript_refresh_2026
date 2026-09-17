@@ -66,5 +66,7 @@
     function getCardFromDeck(who)
     {
         const card = deck.pop(); // take the last card
-        state[who].cards.push(card); // pass it to the relevant array      
+        state[who].cards.push(card); // pass it to the relevant array
+        
+        console.log(card);
     }
