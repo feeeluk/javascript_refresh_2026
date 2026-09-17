@@ -330,8 +330,9 @@
         
         // reveal the card
         showCard(who);
-        
-        // increment the count
+        incrementCount(who);
+        showCount(who);
+
         // show the history
         // show the score
         // handle any aces
