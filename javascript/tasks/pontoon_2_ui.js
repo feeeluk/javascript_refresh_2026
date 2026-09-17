@@ -6,7 +6,7 @@
 // Variables
 // ////////////////////////////////////////
 
-    const time = 100;
+    const time = 200;
 
     const play = document.getElementById("play");
 
@@ -266,7 +266,7 @@
     })
 
     document.getElementById("uActionTwist").addEventListener("click", event => {
-        twist();
+        twist("user");
     })
 
     document.getElementById("playAgain").addEventListener("click", event => {

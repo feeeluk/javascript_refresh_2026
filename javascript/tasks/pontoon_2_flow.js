@@ -15,7 +15,7 @@
         await revealHand("user");
         calculateHand("user");
         calculateGameResult("user");
-        userActions("user");       
+        userChoosesAction("user");       
     }
 
         function createGame()
@@ -82,26 +82,31 @@
             console.log("revealHand => end");
         }
 
-        async function userActions(who)
+        async function userChoosesAction(who)
         {
-            console.log("userActions => start");
+            console.log("userChoosesAction => start");
             
             // if game is still running
             if(!state.resultGameOver)
             {
-                console.log("game is still running");
-
                 // give user options
                 if(checkForPontoon(who))
                 {
                     console.log("hand is Pontoon so only allow 'stick'");
                     enableStickButton();
+
+                    console.log("userChoosesAction => end");
+                    return;
+
                 }
 
                 else if(state[who].score < 15)
                 {
                     console.log("hand is less than 15 so only allow 'twist'");
                     enableTwistButton();
+
+                    console.log("userChoosesAction => end");
+                    return;
                 }
 
                 else if(state[who].score >= 15)
@@ -109,13 +114,11 @@
                     console.log("hand is equal to or more than 15 so allow both options");
                     enableTwistButton();
                     enableStickButton();
-                }
-                
-                // get user's choice
-                let userChoice = await getActionChoice();
-            }
 
-            console.log("userActions => end");
+                    console.log("userChoosesAction => end");
+                    return;
+                }
+            }
         }
 
 // Calculate Functions
@@ -314,14 +317,21 @@
         console.log("stick => end");
     }
     
-    function twist()
+    async function twist(who)
     {
         console.log("twist => start");
 
         console.log("user chose to TWIST");
+        
         // deal a card
+        getCardFromDeck(who);
+        dealCard(who);
+        await delayUI(time);
+        
         // reveal the card
-        // calculateHand("user"); // will eventually replace calculate history and make showHistory() redundant
+        
+
+        // calculateHand()
         // calculateGameResult()
         // userActions()
 
