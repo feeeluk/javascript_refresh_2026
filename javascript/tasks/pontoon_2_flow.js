@@ -334,8 +334,13 @@
         showCount(who);
         updateScore(who);
         showScore(who);
+        const lastIndex = state[who].cards.length - 1
+        pushItemToHistory(
+            who,
+            state[who].cards[lastIndex].rank + state[who].cards[lastIndex].suit
+        );
+        createHistoryItem(who);
 
-        // show the history
         // handle any aces
         // calculateHand()
         // calculateGameResult()
