@@ -158,6 +158,10 @@ ul{
         height: 28px;
     }
 
+        .active{
+            background-color: chartreuse;
+        }
+
     #uAceTitle{
         grid-column: 1 / span 2;
         grid-row: 3;

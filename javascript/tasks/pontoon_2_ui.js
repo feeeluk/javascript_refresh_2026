@@ -90,7 +90,9 @@
         userAceTitle.classList.toggle("disabled");
         userAceTitle.classList.toggle("enabled");
         userAceOne.disabled = userAceOne.disabled ? false : true;
+        userAceOne.disabled ? userAceOne.classList.remove("active") : userAceOne.classList.add("active");
         userAceEleven.disabled = userAceEleven.disabled ? false : true;
+        userAceEleven.disabled ? userAceEleven.classList.remove("active") : userAceEleven.classList.add("active");
     }
 
     function enableTwistButton()
@@ -98,6 +100,7 @@
         userActionTitle.classList.add("enabled");
         userActionTitle.classList.remove("disabled");
         userActionTwist.disabled = false;
+        userActionTwist.classList.add("active");
     }
 
     function disableTwistButton()
@@ -105,6 +108,7 @@
         userActionTitle.classList.add("disabled");
         userActionTitle.classList.remove("enabled");
         userActionTwist.disabled = true;
+        userActionTwist.classList.remove("active");
     }
 
     function enableStickButton()
@@ -112,6 +116,7 @@
         userActionTitle.classList.add("enabled");
         userActionTitle.classList.remove("disabled");
         userActionStick.disabled = false;
+        userActionStick.classList.add("active");
     }
 
     function disableStickButton()
@@ -119,6 +124,7 @@
         userActionTitle.classList.add("disabled");
         userActionTitle.classList.remove("enabled");
         userActionStick.disabled = true;
+        userActionStick.classList.remove("active");
     }
 
     async function aceActions(card)
