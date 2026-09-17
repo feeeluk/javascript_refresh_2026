@@ -192,13 +192,16 @@
                     }
                 }
 
-                // the number of cards revealed (count) is not 2, so it must be a Twist card
-                else
+                // count is greater than 2 (a Twist card) and the new card has a value of 0
+                else if(state[who].count > 2
+                        &&
+                        state[who].cards[lengthOfArray].value === 0
+                )
                 {
                     console.log("Twisted ace");
-                    const arrayLength = state[who].cards.length;
-                    await aceActions(arrayLength);
-                    console.log(`Ace = ${state.user.cards[arrayLength].value}`);
+                    await aceActions(lengthOfArray);
+                    console.log(lengthOfArray);
+                    console.log(`Ace = ${state.user.cards[lengthOfArray].value}`);
                 }
             }
         }

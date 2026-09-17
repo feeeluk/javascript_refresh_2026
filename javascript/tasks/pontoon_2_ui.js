@@ -204,7 +204,9 @@
 
     async function showCard(who)
     {
-        // reveal initial cards (face up)
+        console.log("showCard() => start");
+
+        // reveal initial cards
         if(state[who].count <= 2)
         {
             // create a nodeList of the existing image elements
@@ -214,7 +216,24 @@
 
             // edit the src of each card
             nodeList[state[who].count].src = "/resources/images/cards/front/" + state[who].cards[state[who].count].rank + state[who].cards[state[who].count].suit + ".png";
-        }         
+        }
+
+        // reveal twisted cards
+        else (state[who].cards.length > 2)
+        {
+            // create a nodeList of the existing image elements
+            let nodeList;
+
+            // create variable of array length
+            let lengthOfArray = state[who].cards.length -1; 
+
+            (who === "user") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
+
+            // edit the src of each card
+            nodeList[lengthOfArray].src = "/resources/images/cards/front/" + state[who].cards[lengthOfArray].rank + state[who].cards[lengthOfArray].suit + ".png";
+        }
+
+        console.log("showCard() => end");        
     }
 
     function showCount(who)
@@ -233,6 +252,8 @@
 
     function createHistoryItem(who)
     {
+        console.log("createHistoryItem => start");
+        
         // create last history item as a list element
         const newElement = document.createElement("li");
             
@@ -241,7 +262,7 @@
 
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
 
-        console.log(`History item for ${who} created`)
+        console.log("createHistoryItem => end");
     } 
     
 
