@@ -332,9 +332,10 @@
         showCard(who);
         incrementCount(who);
         showCount(who);
+        updateScore(who);
+        showScore(who);
 
         // show the history
-        // show the score
         // handle any aces
         // calculateHand()
         // calculateGameResult()
