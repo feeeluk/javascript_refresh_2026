@@ -329,8 +329,12 @@
         await delayUI(time);
         
         // reveal the card
+        showCard(who);
         
-
+        // increment the count
+        // show the history
+        // show the score
+        // handle any aces
         // calculateHand()
         // calculateGameResult()
         // userActions()
