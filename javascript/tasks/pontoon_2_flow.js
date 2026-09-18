@@ -371,7 +371,7 @@
         // calculate the value of any aces
         await calculateAceValue(who);
 
-        // calculateHand()
+        calculateHand(who);
         // calculateGameResult()
         // userActions()
 
