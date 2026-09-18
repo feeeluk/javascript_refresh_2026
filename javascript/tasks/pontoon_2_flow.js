@@ -5,7 +5,7 @@
     // - running order
 
 
-// Game mechanic functions
+// Game mechanics functions
 // ////////////////////////////////////////
 
     async function startGame()
@@ -18,108 +18,108 @@
         userChoosesAction("user");       
     }
 
-        function createGame()
+    function createGame()
+    {
+        console.log("createGame => start");
+        resetState();
+        resetUI();
+        createDeck();
+        console.log("createGame => end");
+    }
+
+    async function initialDeal()
+    {
+        console.log("initialDeal => start");
+        
+        await delayUI(time);
+
+        getCardFromDeck("user");
+        dealCard("user");
+        await delayUI(time);
+
+        getCardFromDeck("dealer");
+        dealCard("dealer");
+        await delayUI(time);
+
+        getCardFromDeck("user");
+        dealCard("user");
+        await delayUI(time);
+
+        getCardFromDeck("dealer");
+        dealCard("dealer");
+        await delayUI(time);
+
+        console.log("initialDeal => end");
+    }
+
+    async function revealHand(who)
+    {
+        console.log("revealHand => start");
+        
+        // show the first card
+        showCard(who);
+        incrementCount(who);
+        showCount(who);
+        updateScore(who);
+        showScore(who);
+        pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
+        createHistoryItem(who);
+        await delayUI(time);
+
+        // show the second card
+        showCard(who);
+        incrementCount(who);
+        showCount(who);
+        updateScore(who);
+        showScore(who);
+        pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
+        createHistoryItem(who);
+
+        // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
+        await delayUI(time);
+        await calculateAceValue(who);
+
+        console.log("revealHand => end");
+    }
+
+    async function userChoosesAction(who)
+    {
+        console.log("userChoosesAction => start");
+        
+        // if game is still running
+        if(!state.resultGameOver)
         {
-            console.log("createGame => start");
-            resetState();
-            resetUI();
-            createDeck();
-            console.log("createGame => end");
-        }
-
-        async function initialDeal()
-        {
-            console.log("initialDeal => start");
-            
-            await delayUI(time);
-
-            getCardFromDeck("user");
-            dealCard("user");
-            await delayUI(time);
-
-            getCardFromDeck("dealer");
-            dealCard("dealer");
-            await delayUI(time);
-
-            getCardFromDeck("user");
-            dealCard("user");
-            await delayUI(time);
-
-            getCardFromDeck("dealer");
-            dealCard("dealer");
-            await delayUI(time);
-
-            console.log("initialDeal => end");
-        }
-
-        async function revealHand(who)
-        {
-            console.log("revealHand => start");
-            
-            // show the first card
-            showCard(who);
-            incrementCount(who);
-            showCount(who);
-            updateScore(who);
-            showScore(who);
-            pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
-            createHistoryItem(who);
-            await delayUI(time);
-
-            // show the second card
-            showCard(who);
-            incrementCount(who);
-            showCount(who);
-            updateScore(who);
-            showScore(who);
-            pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
-            createHistoryItem(who);
-
-            // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
-            await delayUI(time);
-            await calculateAceValue(who);
-
-            console.log("revealHand => end");
-        }
-
-        async function userChoosesAction(who)
-        {
-            console.log("userChoosesAction => start");
-            
-            // if game is still running
-            if(!state.resultGameOver)
+            // give user options
+            if(checkForPontoon(who))
             {
-                // give user options
-                if(checkForPontoon(who))
-                {
-                    console.log("hand is Pontoon so only allow 'stick'");
-                    enableStickButton();
+                console.log("hand is Pontoon so only allow 'stick'");
+                enableStickButton();
 
-                    console.log("userChoosesAction => end");
-                    return;
+                console.log("userChoosesAction => end");
+                return;
 
-                }
+            }
 
-                else if(state[who].score < 15)
-                {
-                    console.log("hand is less than 15 so only allow 'twist'");
-                    enableTwistButton();
+            else if(state[who].score < 15)
+            {
+                console.log("hand is less than 15 so only allow 'twist'");
+                enableTwistButton();
 
-                    console.log("userChoosesAction => end");
-                    return;
-                }
+                console.log("userChoosesAction => end");
+                return;
+            }
 
-                else if(state[who].score >= 15)
-                {
-                    console.log("hand is equal to or more than 15 so allow both options");
-                    enableTwistButton();
-                    enableStickButton();
+            else if(state[who].score >= 15)
+            {
+                console.log("hand is equal to or more than 15 so allow both options");
+                enableTwistButton();
+                enableStickButton();
 
-                    console.log("userChoosesAction => end");
-                    return;
-                }
+                console.log("userChoosesAction => end");
+                return;
             }
         }
+    }
 
 // Calculate Functions
 // ////////////////////////////////////////    
@@ -356,7 +356,7 @@
         console.log("twist => end");
     }
 
-// Helper Functions
+// Check Functions
 // ////////////////////////////////////////
         
     function checkForBust(who)

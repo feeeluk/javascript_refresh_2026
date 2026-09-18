@@ -32,11 +32,14 @@
     const showResultMessage = document.getElementById("resultMessage");
     const showResultButton = document.getElementById("playAgain");
 
-// Functions
+
+// Create Game Functions
 // ////////////////////////////////////////
 
     function resetUI()
     {
+        console.log("resetUI => start");
+
         showUserCards.innerHTML = "";
         showUserScore.innerHTML = "";
         showUserCount.innerHTML = "";
@@ -60,11 +63,21 @@
         showResultButton.disabled = true;
 
         console.clear();
+
+        console.log("resetUI => end");
     }
+
+
+// Initial Deal Functions
+// ////////////////////////////////////////
 
     function delayUI(delayMiliseconds)
     {
+        console.log("delay => start");
+
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
+
+        console.log("delay => stop");
     }
 
     function dealCard(who)
@@ -82,129 +95,9 @@
             (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
     }
 
-    function toggleHighlightCard(card){
-        card.classList.toggle("highlighted");
-    }
 
-    function toggleShowAceChoices(){
-        userAceTitle.classList.toggle("disabled");
-        userAceTitle.classList.toggle("enabled");
-        userAceOne.disabled = userAceOne.disabled ? false : true;
-        userAceOne.disabled ? userAceOne.classList.remove("active") : userAceOne.classList.add("active");
-        userAceEleven.disabled = userAceEleven.disabled ? false : true;
-        userAceEleven.disabled ? userAceEleven.classList.remove("active") : userAceEleven.classList.add("active");
-    }
-
-    function enableTwistButton()
-    {
-        userActionTitle.classList.add("enabled");
-        userActionTitle.classList.remove("disabled");
-        userActionTwist.disabled = false;
-        userActionTwist.classList.add("active");
-    }
-
-    function disableTwistButton()
-    {
-        userActionTitle.classList.add("disabled");
-        userActionTitle.classList.remove("enabled");
-        userActionTwist.disabled = true;
-        userActionTwist.classList.remove("active");
-    }
-
-    function enableStickButton()
-    {
-        userActionTitle.classList.add("enabled");
-        userActionTitle.classList.remove("disabled");
-        userActionStick.disabled = false;
-        userActionStick.classList.add("active");
-    }
-
-    function disableStickButton()
-    {
-        userActionTitle.classList.add("disabled");
-        userActionTitle.classList.remove("enabled");
-        userActionStick.disabled = true;
-        userActionStick.classList.remove("active");
-    }
-
-    async function aceActions(card)
-    {
-        const nodelistOfImages = showUserCards.querySelectorAll("img");
-        
-        // enable the choices
-        toggleShowAceChoices();
-
-        // highlight the current card
-        toggleHighlightCard(nodelistOfImages[card]);
-
-        // get the user's input
-        let aceValue = await getAceChoice();
-
-        // assign user's choice to the value of the card
-        setAceValue(state.user.cards[card], aceValue);
-
-        // remove highlight from the card
-        toggleHighlightCard(nodelistOfImages[card]);
-
-        // disable the choices
-        toggleShowAceChoices();
-
-        // calculate and show score new score
-        updateScore("user");
-        showScore("user");
-
-        // add and show chosen value in history
-        pushItemToHistory("user", `Ace value: ${aceValue}`);
-        createHistoryItem("user");
-    }
-
-    function getAceChoice()
-    {
-        // return a promise
-        return new Promise(resolve =>
-        {
-            // create a nodelist of the ace related buttons
-            const buttons = document.querySelectorAll(".aceChoice");
-
-            // get the value of each button
-            buttons.forEach(button =>
-            {
-                button.addEventListener("click", () =>
-                {
-                    // send the value back
-                    resolve(Number(button.value));
-                });
-            });
-        });
-    }
-
-    async function getActionChoice()
-    {
-        return new Promise(resolve => {
-
-            // create a nodelist of the choice related buttons
-            const buttons = document.querySelectorAll(".actionChoice");
-
-            // get the value of each button
-            buttons.forEach(button =>
-            {
-                button.addEventListener("click", () =>
-                {
-                    // send the value back
-                    resolve(button.value);
-                });
-            });
-        })
-    }
-
-    function showScore(who)
-    {
-        console.log("showScore() => start");
-
-        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
-
-        console.log("showScore() => end");
-    }
+// Reveal Hand Functions
+// //////////////////////////////////////// 
 
     async function showCard(who)
     {
@@ -249,6 +142,15 @@
         console.log("showCount() => end");
     }
 
+    function showScore(who)
+    {
+        console.log("showScore() => start");
+
+        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
+
+        console.log("showScore() => end");
+    }  
+
     function showResultOfGame()
     {
         (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
@@ -271,7 +173,130 @@
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
 
         console.log("createHistoryItem => end");
-    } 
+    }
+
+
+// Ace Related Functions
+// ////////////////////////////////////////
+
+    async function aceActions(card)
+    {
+        const nodelistOfImages = showUserCards.querySelectorAll("img");
+        
+        // enable the choices
+        toggleAceChoices();
+
+        // highlight the current card
+        highlightAce(nodelistOfImages[card]);
+
+        // get the user's input
+        let aceValue = await getAceChoice();
+
+        // assign user's choice to the value of the card
+        setAceValue(state.user.cards[card], aceValue);
+
+        // remove highlight from the card
+        highlightAce(nodelistOfImages[card]);
+
+        // disable the choices
+        toggleAceChoices();
+
+        // calculate and show score new score
+        updateScore("user");
+        showScore("user");
+
+        // add and show chosen value in history
+        pushItemToHistory("user", `Ace value: ${aceValue}`);
+        createHistoryItem("user");
+    }
+
+    function highlightAce(card){
+        card.classList.toggle("highlighted");
+    }
+
+    function toggleAceChoices(){
+        userAceTitle.classList.toggle("disabled");
+        userAceTitle.classList.toggle("enabled");
+        userAceOne.disabled = userAceOne.disabled ? false : true;
+        userAceOne.disabled ? userAceOne.classList.remove("active") : userAceOne.classList.add("active");
+        userAceEleven.disabled = userAceEleven.disabled ? false : true;
+        userAceEleven.disabled ? userAceEleven.classList.remove("active") : userAceEleven.classList.add("active");
+    }
+
+    function getAceChoice()
+    {
+        // return a promise
+        return new Promise(resolve =>
+        {
+            // create a nodelist of the ace related buttons
+            const buttons = document.querySelectorAll(".aceChoice");
+
+            // get the value of each button
+            buttons.forEach(button =>
+            {
+                button.addEventListener("click", () =>
+                {
+                    // send the value back
+                    resolve(Number(button.value));
+                });
+            });
+        });
+    }
+
+
+// User Action Related Functions
+// ////////////////////////////////////////
+
+    function enableTwistButton()
+    {
+        userActionTitle.classList.add("enabled");
+        userActionTitle.classList.remove("disabled");
+        userActionTwist.disabled = false;
+        userActionTwist.classList.add("active");
+    }
+
+    function disableTwistButton()
+    {
+        userActionTitle.classList.add("disabled");
+        userActionTitle.classList.remove("enabled");
+        userActionTwist.disabled = true;
+        userActionTwist.classList.remove("active");
+    }
+
+    function enableStickButton()
+    {
+        userActionTitle.classList.add("enabled");
+        userActionTitle.classList.remove("disabled");
+        userActionStick.disabled = false;
+        userActionStick.classList.add("active");
+    }
+
+    function disableStickButton()
+    {
+        userActionTitle.classList.add("disabled");
+        userActionTitle.classList.remove("enabled");
+        userActionStick.disabled = true;
+        userActionStick.classList.remove("active");
+    }
+
+    async function getActionChoice()
+    {
+        return new Promise(resolve => {
+
+            // create a nodelist of the choice related buttons
+            const buttons = document.querySelectorAll(".actionChoice");
+
+            // get the value of each button
+            buttons.forEach(button =>
+            {
+                button.addEventListener("click", () =>
+                {
+                    // send the value back
+                    resolve(button.value);
+                });
+            });
+        })
+    }
     
 
 // Event Listeners
