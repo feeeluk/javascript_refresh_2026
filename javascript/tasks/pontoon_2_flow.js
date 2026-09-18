@@ -120,6 +120,7 @@
             }
         }
     }
+    
 
 // Calculate Functions
 // ////////////////////////////////////////    
@@ -173,18 +174,28 @@
             
             pushItemToHistory(who, "BUST!");
 
-            console.log(`${who}: handIsBust = ${state[who].handIsBust}`);
+            console.log(`${who} is bust!`);
         }
 
-        else if(checkForPontoon(who) === true)
+        if(checkForPontoon(who) === true)
         {
             changeStateOfHand(who, "handIsPontoon", true);
             
             pushItemToHistory(who, "PONTOON!");
 
-            console.log(`${who}: handIsPontoon = ${state[who].handIsPontoon}`);
+            console.log(`${who} has Pontoon!`);
         }
 
+        if(checkForFourCards(who))
+        {
+            changeStateOfHand(who, "handIsFourCard", true);
+            
+            pushItemToHistory(who, "Four Card Hand!");
+
+            console.log(`${who} has Four Card Hand!`);
+        }
+
+        // if any of the named hands are present then add it the history
         if(checkForBust(who)
             ||
             checkForPontoon(who)
