@@ -110,7 +110,7 @@
         }
 
         // score is 21 - stick only
-        if(state[who].score === 21)
+        if(checkForTwentyOne(who))
         {
             console.log("21, so only show 'stick'");
             enableStickButton();
@@ -120,7 +120,7 @@
         }
 
         // if less than 15 only show twist
-        else if(state[who].score < 15)
+        if(state[who].score < 15)
         {
             console.log("hand is less than 15 so only allow 'twist'");
             enableTwistButton();
@@ -219,7 +219,16 @@
             
             pushItemToHistory(who, "Five Card Hand");
 
-            console.log(`${who} has Fiver Card Hand!`);
+            console.log(`${who} has Fiver Card Hand`);
+        }
+
+        if(checkForTwentyOne(who))
+        {
+            changeStateOfHand(who, "handIsTwentyOne", true);
+            
+            pushItemToHistory(who, "TWENTY ONE");
+
+            console.log(`${who} has TWENTY ONE`);
         }
 
         // if any of the named hands are present then add it the history
@@ -229,7 +238,9 @@
             ||
             checkForFourCards(who)
             ||
-            checkForFiveCards(who))
+            checkForFiveCards(who)
+            ||
+            checkForTwentyOne(who))
         {
             createHistoryItem(who);
         }
@@ -422,55 +433,37 @@
         
     function checkForBust(who)
     {
-        if( state[who].score > 21){
-            return true;
-        }
-
-        else{
-            return false;
-        }
+        return state[who].score > 21;
     }
     
     function checkForPontoon(who)
     {
-        if( state[who].count === 2
-            && state.user.cards.some(cards => cards.rank.startsWith("A"))
-            && (
+        return state[who].count === 2
+                &&
+                state.user.cards.some(cards => cards.rank.startsWith("A"))
+                && 
+                (
                 state[who].cards.some(cards => cards.rank.startsWith("K")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("Q")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("J"))
-              ))
-        {
-            return true;
-        }
-
-        else{
-            return false;
-        }
+                );
     }
 
     function checkForFourCards(who)
     {
-        if( state[who].count === 4
-            && state[who].score <= 21)
-        {
-            return true;
-        }
-
-        else{
-            return false;
-        }        
+       return   state[who].count === 4
+                &&
+                state[who].score <= 21;        
     }
 
     function checkForFiveCards(who)
     {
-        if( state[who].count === 5
-            && state[who].score <= 21)
-        {
-            return true;
-        }
+        return  state[who].count === 5
+                &&
+                state[who].score <= 21;         
+    }
 
-        else{
-            return false;
-        }         
+    function checkForTwentyOne(who)
+    {
+        return state[who].score === 21;
     }
