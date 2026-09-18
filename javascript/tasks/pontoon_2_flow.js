@@ -147,6 +147,13 @@
             return;
         }
 
+        // has an ace, but hand is NOT Pontoon
+        if(state[who].count === 2)
+        {
+            await handleTwoCardAce(who);
+            return;
+        }
+
         // const lengthOfArray = state.user.cards.length -1;
 
         // if(state[who].cards.some(card => card.rank.startsWith("A")))
@@ -347,9 +354,37 @@
         (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
     }
 
-    function handleTwoCardAce(who)
+    async function handleTwoCardAce(who)
     {
+        // both cards are aces
+        if(state[who].cards[0].value === 0
+            &&
+            state[who].cards[1].value === 0)
+        {
+            console.log(`Both cards are aces`);
 
+            for(let i = 0; i <= (state[who].cards.length -1); i++)
+            {
+                await aceActions(i);
+                console.log(`Ace ${i + 1 } = ${state.user.cards[i].value}`);
+            }
+        }
+
+        // the first card is an ace
+        else if(state[who].cards[0].value === 0)
+        {
+            console.log("The first card is an ace");
+            await aceActions(0);
+            console.log(`Ace ${0 + 1 } = ${state.user.cards[0].value}`);
+        }
+
+        // the second card is an ace
+        else if(state[who].cards[1].value === 0)
+        {
+            console.log("The second card is an ace");
+            await aceActions(1);
+            console.log(`Ace ${1 + 1 } = ${state.user.cards[1].value}`);
+        }
     }
 
     function handTwistAce(who)
