@@ -195,6 +195,9 @@
         // assign user's choice to the value of the card
         setAceValue(state.user.cards[card], aceValue);
 
+        // log user's choice
+        console.log(`Ace value = ${aceValue}`);
+
         // remove highlight from the card
         highlightAce(nodelistOfImages[card]);
 
