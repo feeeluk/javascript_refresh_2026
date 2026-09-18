@@ -13,7 +13,7 @@
         createGame(); 
         await initialDeal("user");
         await revealHand("user");
-        calculateHand("user");
+        evaluateHand("user");
         calculateGameResult("user");
         userChoosesAction("user");       
     }
@@ -182,9 +182,9 @@
         return;
     }
 
-    function calculateHand(who)
+    function evaluateHand(who)
     {
-        console.log("calculateHand => start");
+        console.log("evaluateHand => start");
         
         if(checkForBust(who) === true)
         {
@@ -245,7 +245,7 @@
             createHistoryItem(who);
         }
 
-        console.log("calculateHand => end");
+        console.log("evaluateHand => end");
     }
 
     function calculateGameResult(who)
@@ -420,7 +420,7 @@
         // calculate the value of any aces
         await calculateAceValue(who);
 
-        calculateHand(who);
+        evaluateHand(who);
         calculateGameResult(who);
         userChoosesAction(who);
 
