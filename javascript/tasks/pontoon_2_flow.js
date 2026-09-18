@@ -86,39 +86,57 @@
     {
         console.log("userChoosesAction => start");
         
-        // if game is still running
-        if(!state.resultGameOver)
+        // if game is still running give user options
+        if(state.resultGameOver) return;
+
+        // if Pontoon then only show stick
+        if(checkForPontoon(who))
         {
-            // give user options
-            if(checkForPontoon(who))
-            {
-                console.log("hand is Pontoon so only allow 'stick'");
-                enableStickButton();
+            console.log("Pontoon, so only show 'stick'");
+            enableStickButton();
 
-                console.log("userChoosesAction => end");
-                return;
-
-            }
-
-            else if(state[who].score < 15)
-            {
-                console.log("hand is less than 15 so only allow 'twist'");
-                enableTwistButton();
-
-                console.log("userChoosesAction => end");
-                return;
-            }
-
-            else if(state[who].score >= 15)
-            {
-                console.log("hand is equal to or more than 15 so allow both options");
-                enableTwistButton();
-                enableStickButton();
-
-                console.log("userChoosesAction => end");
-                return;
-            }
+            console.log("userChoosesAction => end");
+            return;
         }
+
+        // five card hand - stick only
+        if(checkForFiveCards(who))
+        {
+            console.log("Five Card Hand, so only show 'stick'");
+            enableStickButton();
+
+            console.log("userChoosesAction => end");
+            return;
+        }
+
+        // score is 21 - stick only
+        if(state[who].score === 21)
+        {
+            console.log("21, so only show 'stick'");
+            enableStickButton();
+
+            console.log("userChoosesAction => end");
+            return;
+        }
+
+        // if less than 15 only show twist
+        else if(state[who].score < 15)
+        {
+            console.log("hand is less than 15 so only allow 'twist'");
+            enableTwistButton();
+
+            console.log("userChoosesAction => end");
+            return;
+        }
+
+        // for all other scenarios show both
+      
+            console.log("show both options");
+            
+            enableTwistButton();
+            enableStickButton();
+
+            console.log("userChoosesAction => end");
     }
     
 
@@ -172,7 +190,7 @@
         {
             changeStateOfHand(who, "handIsBust", true);
             
-            pushItemToHistory(who, "BUST!");
+            pushItemToHistory(who, "BUST");
 
             console.log(`${who} is bust!`);
         }
@@ -181,18 +199,27 @@
         {
             changeStateOfHand(who, "handIsPontoon", true);
             
-            pushItemToHistory(who, "PONTOON!");
+            pushItemToHistory(who, "PONTOON");
 
-            console.log(`${who} has Pontoon!`);
+            console.log(`${who} has Pontoon`);
         }
 
         if(checkForFourCards(who))
         {
             changeStateOfHand(who, "handIsFourCard", true);
             
-            pushItemToHistory(who, "Four Card Hand!");
+            pushItemToHistory(who, "Four Card Hand");
 
-            console.log(`${who} has Four Card Hand!`);
+            console.log(`${who} has Four Card Hand`);
+        }
+
+        if(checkForFiveCards(who))
+        {
+            changeStateOfHand(who, "handIsFiveCard", true);
+            
+            pushItemToHistory(who, "Five Card Hand");
+
+            console.log(`${who} has Fiver Card Hand!`);
         }
 
         // if any of the named hands are present then add it the history
