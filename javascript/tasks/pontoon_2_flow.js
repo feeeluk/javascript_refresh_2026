@@ -136,6 +136,17 @@
             return;
         }
 
+        // has an ace, but hand is Pontoon
+        if(checkForPontoon(who))
+        {
+            handlePontoonAce(who);
+            updateScore(who);
+            showScore(who);
+
+            console.log("calculateAceValue => end");
+            return;
+        }
+
         // const lengthOfArray = state.user.cards.length -1;
 
         // if(state[who].cards.some(card => card.rank.startsWith("A")))
@@ -331,7 +342,9 @@
 
     function handlePontoonAce(who)
     {
+        console.log("Pontoon Ace value = 11");
 
+        (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
     }
 
     function handleTwoCardAce(who)
