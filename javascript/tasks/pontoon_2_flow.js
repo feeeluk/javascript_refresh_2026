@@ -157,13 +157,10 @@
         }
 
         // twist ace
-        if(state[who].count > 2)
-        {
-            await handleTwistAce(who);
+        await handleTwistAce(who);
 
-            console.log("calculateAceValue => end");
-            return;
-        }
+        console.log("calculateAceValue => end");
+        return;
     }
 
     function calculateHand(who)
@@ -311,12 +308,23 @@
 
     async function handleTwistAce(who)
     {
-        console.log("Twisted ace");
-        console.log("User to choose ace value");
+        if(state[who].count > 2
+            &&
+            state[who].cards[state[who].count-1].value === 0
+        )
+        {
+            console.log("Twisted ace");
+            console.log("User to choose ace value");
 
-        await aceActions(state[who].cards.length -1);
+            await aceActions(state[who].cards.length -1);
 
-        console.log(`Ace value = ${state.user.cards[state[who].cards.length -1].value}`);
+            console.log(`Ace value = ${state.user.cards[state[who].cards.length -1].value}`);
+        }
+
+        else
+        {
+            console.log("Twisted card is not an ace");
+        }
     }
 
 
@@ -351,10 +359,9 @@
         showCount(who);
         updateScore(who);
         showScore(who);
-        const lastIndex = state[who].cards.length - 1
         pushItemToHistory(
             who,
-            state[who].cards[lastIndex].rank + state[who].cards[lastIndex].suit
+            state[who].cards[state[who].cards.length - 1].rank + state[who].cards[state[who].cards.length - 1].suit
         );
         createHistoryItem(who);
 
