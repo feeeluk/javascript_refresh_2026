@@ -73,11 +73,9 @@
 
     function delayUI(delayMiliseconds)
     {
-        console.log("delay => start");
+        console.log("delay");
 
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
-
-        console.log("delay => stop");
     }
 
     function dealCard(who)
