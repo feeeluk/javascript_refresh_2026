@@ -345,8 +345,11 @@
     async function twist(who)
     {
         console.log("twist => start");
-
         console.log("user chose to TWIST");
+
+        // disable actions buttons
+        disableTwistButton();
+        disableStickButton();
         
         // deal a card
         getCardFromDeck(who);
