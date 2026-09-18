@@ -372,8 +372,8 @@
         await calculateAceValue(who);
 
         calculateHand(who);
-        // calculateGameResult()
-        // userActions()
+        calculateGameResult(who);
+        userChoosesAction(who);
 
         console.log("twist => end");
     }
