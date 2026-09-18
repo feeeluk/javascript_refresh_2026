@@ -156,10 +156,14 @@
             return;
         }
 
-        // all other situations - i.e. a twist ace
-        await handTwistAce(who);
+        // twist ace
+        if(state[who].count > 2)
+        {
+            await handleTwistAce(who);
 
-        console.log("calculateAceValue => end");
+            console.log("calculateAceValue => end");
+            return;
+        }
     }
 
     function calculateHand(who)
@@ -305,7 +309,7 @@
         }
     }
 
-    async function handTwistAce(who)
+    async function handleTwistAce(who)
     {
         console.log("Twisted ace");
         console.log("User to choose ace value");
@@ -313,8 +317,8 @@
         await aceActions(state[who].cards.length -1);
 
         console.log(`Ace value = ${state.user.cards[state[who].cards.length -1].value}`);
-
     }
+
 
 // Action Functions
 // ////////////////////////////////////////
@@ -363,6 +367,7 @@
 
         console.log("twist => end");
     }
+
 
 // Check Functions
 // ////////////////////////////////////////
