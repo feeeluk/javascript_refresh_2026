@@ -175,7 +175,7 @@
 // Ace Related Functions
 // ////////////////////////////////////////
 
-    async function aceActions(card)
+    async function resolveAceValue(card)
     {
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         

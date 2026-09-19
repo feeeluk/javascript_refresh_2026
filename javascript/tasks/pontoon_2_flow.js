@@ -320,7 +320,7 @@
 
             for(let i = 0; i <= (state[who].cards.length -1); i++)
             {
-                await aceActions(i);
+                await resolveAceValue(i);
             }
         }
 
@@ -329,7 +329,7 @@
         {
             console.log("The first card is an ace");
             console.log("User to choose ace value");
-            await aceActions(0);
+            await resolveAceValue(0);
         }
 
         // the second card is an ace
@@ -337,7 +337,7 @@
         {
             console.log("The second card is an ace");
             console.log("User to choose ace value");
-            await aceActions(1);
+            await resolveAceValue(1);
         }
     }
 
@@ -351,7 +351,7 @@
             console.log("Twisted ace");
             console.log("User to choose ace value");
 
-            await aceActions(state[who].cards.length -1);
+            await resolveAceValue(state[who].cards.length -1);
 
             console.log(`Ace value = ${state.user.cards[state[who].cards.length -1].value}`);
         }
