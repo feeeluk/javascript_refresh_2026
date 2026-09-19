@@ -453,3 +453,17 @@
     {
         return state[who].score === 21;
     }
+
+
+// Helper Functions
+// ////////////////////////////////////////
+
+    function addHighlight(element)
+    {
+        setHighlight(element, true);
+    }
+
+    function removeHighlight(element)
+    {
+        setHighlight(element, false);
+    }

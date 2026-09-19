@@ -182,8 +182,7 @@
         // enable the choices
         toggleAceChoices();
 
-        // highlight the current card
-        highlightAce(nodelistOfImages[card]);
+        addHighlight(nodelistOfImages[card], true);
 
         // get the user's input
         let aceValue = await getAceChoice();
@@ -194,8 +193,7 @@
         // log user's choice
         console.log(`Ace value = ${aceValue}`);
 
-        // remove highlight from the card
-        highlightAce(nodelistOfImages[card]);
+        removeHighlight(nodelistOfImages[card], false);
 
         // disable the choices
         toggleAceChoices();
@@ -209,11 +207,13 @@
         createHistoryItem("user");
     }
 
-    function highlightAce(card){
-        card.classList.toggle("highlighted");
+    function setHighlight(element, shouldItBeHighlighted)
+    {
+        element.classList.toggle("highlighted", shouldItBeHighlighted);
     }
 
-    function toggleAceChoices(){
+    function toggleAceChoices()
+    {
         userAceTitle.classList.toggle("disabled");
         userAceTitle.classList.toggle("enabled");
         userAceOne.disabled = userAceOne.disabled ? false : true;
