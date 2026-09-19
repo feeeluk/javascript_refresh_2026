@@ -12,7 +12,7 @@
             count: 0,
             cards: [],
             history: [],
-            stick: null,
+            stick: false,
             handIsBust: false,
             handIsPontoon: false,
             handIsTwentyOne: false,

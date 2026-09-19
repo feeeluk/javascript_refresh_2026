@@ -247,38 +247,57 @@
         }
 
         // if Dealer is bust => Player wins
+        if(state.dealer.handIsBust === true)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Dealer is BUST");
+        }
+
+        // if Dealer has Pontoon => Dealer wins
+        if(checkForPontoon("dealer") === true)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "Dealer has Pontoon");
+        }
 
         // if Player has Pontoon and Dealer does not => Player wins
+        if(checkForPontoon("user") === true
+            &&
+            checkForPontoon("dealer") === false)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has Pontoon");
+        }
 
-        // if Dealer has Pontoon and Player does not => Dealer wins
-
-        // if both Player and Dealer have Pontoon => Dealer wins
-
-        // if Player has 5 card hand and Dealer does not => Player wins
-
-        // if Dealer has 5 card hand and Player does not => Dealer wins
-
-        // if both Player and Dealer have 5 card hand, and Player has a higher score => Player wins
-
-        // if both Dealer and Player have 5 card hand, and Dealer has a higher score => Dealer wins
-
-        // if both Dealer and Player have 5 card hand, and they have the same score => Dealer wins
-
-        // if Player has 4 card hand and Dealer does not => Player wins
-
-        // if Dealer has 4 card hand and Player does not => Dealer wins
-
-        // if both Player and Dealer have 4 card hand, and Player has a higher score => Player wins
-
-        // if both Dealer and Player have 4 card hand, and Dealer has a higher score => Dealer wins
-
-        // if both Dealer and Player have 4 card hand, and they have the same score => Dealer wins
+        // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
+        if(checkForFiveCards("user") === true
+            &&
+            checkForPontoon("dealer") === false)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has Five Card Hand");
+        }
 
         // Player has a higher score => Player wins
+        if(state.user.score > state.dealer.score)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has better score");
+        }
 
-        // Dealer has a higher score => Dealer wins
-
-        // both have the same score => Dealer wins
+        // Dealer has an equal or higher score  => Dealer wins
+        if(state.dealer.score >= state.user.score)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", loose);
+            changeStateOfGame("resultMessage", "Dealer wins - score");
+        }
+        
 
         console.log(`resultGameOver = ${state.resultGameOver}`);
         console.log(`resultWin = ${state.resultWin}`);
