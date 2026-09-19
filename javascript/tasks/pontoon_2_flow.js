@@ -188,60 +188,46 @@
         
         if(checkForBust(who) === true)
         {
-            changeStateOfHand(who, "handIsBust", true);
-            
-            pushItemToHistory(who, "BUST");
-
             console.log(`${who} is bust!`);
+
+            changeStateOfHand(who, "handIsBust", true);
+            pushItemToHistory(who, "BUST");
+            createHistoryItem(who);
         }
 
         if(checkForPontoon(who) === true)
         {
-            changeStateOfHand(who, "handIsPontoon", true);
-            
-            pushItemToHistory(who, "PONTOON");
-
             console.log(`${who} has Pontoon`);
+            
+            changeStateOfHand(who, "handIsPontoon", true);
+            pushItemToHistory(who, "PONTOON");
+            createHistoryItem(who);
         }
 
         if(checkForFourCards(who))
         {
-            changeStateOfHand(who, "handIsFourCard", true);
-            
-            pushItemToHistory(who, "Four Card Hand");
-
             console.log(`${who} has Four Card Hand`);
+
+            changeStateOfHand(who, "handIsFourCard", true);
+            pushItemToHistory(who, "Four Card Hand");
+            createHistoryItem(who);
         }
 
         if(checkForFiveCards(who))
         {
-            changeStateOfHand(who, "handIsFiveCard", true);
-            
-            pushItemToHistory(who, "Five Card Hand");
-
             console.log(`${who} has Fiver Card Hand`);
+
+            changeStateOfHand(who, "handIsFiveCard", true);
+            pushItemToHistory(who, "Five Card Hand");
+            createHistoryItem(who);
         }
 
         if(checkForTwentyOne(who))
         {
-            changeStateOfHand(who, "handIsTwentyOne", true);
-            
-            pushItemToHistory(who, "TWENTY ONE");
-
             console.log(`${who} has TWENTY ONE`);
-        }
 
-        // if any of the named hands are present then add it the history
-        if(checkForBust(who)
-            ||
-            checkForPontoon(who)
-            ||
-            checkForFourCards(who)
-            ||
-            checkForFiveCards(who)
-            ||
-            checkForTwentyOne(who))
-        {
+            changeStateOfHand(who, "handIsTwentyOne", true);
+            pushItemToHistory(who, "TWENTY ONE");
             createHistoryItem(who);
         }
 
