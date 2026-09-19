@@ -18,6 +18,10 @@
     const userActionTitle = document.getElementById("uActionTitle");
     const userActionTwist = document.getElementById("uActionTwist");
     const userActionStick = document.getElementById("uActionStick");
+    const actionButtons = {
+        twist: userActionTwist,
+        stick: userActionStick
+        };
 
     const userAceTitle = document.getElementById("uAceTitle");
     const userAceOne = document.getElementById("uAceOne");
@@ -212,13 +216,13 @@
         element.classList.toggle("highlighted", shouldItBeHighlighted);
     }
 
-    function setAceChoices(state)
+    function setAceChoices(shouldTheyBeActive)
     {
-        userAceTitle.classList.toggle("enabled", state);
-        userAceOne.disabled = !state;
-        state ? userAceOne.classList.add("active") : userAceOne.classList.remove("active");
-        userAceEleven.disabled = !state;
-        state ? userAceEleven.classList.add("active") : userAceEleven.classList.remove("active");
+        userAceTitle.classList.toggle("enabled", shouldTheyBeActive);
+        userAceOne.disabled = !shouldTheyBeActive;
+        shouldTheyBeActive ? userAceOne.classList.add("active") : userAceOne.classList.remove("active");
+        userAceEleven.disabled = !shouldTheyBeActive;
+        shouldTheyBeActive ? userAceEleven.classList.add("active") : userAceEleven.classList.remove("active");
     }
 
     function getAceChoice()
@@ -245,37 +249,14 @@
 // User Action Related Functions
 // ////////////////////////////////////////
 
-    function enableTwistButton()
+    function setActionButtons(whichButton, shouldItBeActive)
     {
-        userActionTitle.classList.add("enabled");
-        userActionTitle.classList.remove("disabled");
-        userActionTwist.disabled = false;
-        userActionTwist.classList.add("active");
-    }
+        const button = actionButtons[whichButton];
 
-    function disableTwistButton()
-    {
-        userActionTitle.classList.add("disabled");
-        userActionTitle.classList.remove("enabled");
-        userActionTwist.disabled = true;
-        userActionTwist.classList.remove("active");
-    }
-
-    function enableStickButton()
-    {
-        userActionTitle.classList.add("enabled");
-        userActionTitle.classList.remove("disabled");
-        userActionStick.disabled = false;
-        userActionStick.classList.add("active");
-    }
-
-    function disableStickButton()
-    {
-        userActionTitle.classList.add("disabled");
-        userActionTitle.classList.remove("enabled");
-        userActionStick.disabled = true;
-        userActionStick.classList.remove("active");
-    }
+        button.classList.toggle("enabled", shouldItBeActive);
+        button.disabled = !shouldItBeActive;
+        button.classList.toggle("active", shouldItBeActive);
+    }    
 
     async function getActionChoice()
     {

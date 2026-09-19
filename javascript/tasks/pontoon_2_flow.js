@@ -383,7 +383,7 @@
     }
 
 
-// Action Functions
+// Action Related Functions
 // ////////////////////////////////////////
 
     function stick()
@@ -433,6 +433,26 @@
         console.log("twist => end");
     }
 
+    function enableTwistButton()
+    {
+        setActionButtons("twist", true);
+    }
+
+    function disableTwistButton()
+    {
+        setActionButtons("twist", false);
+    }
+
+    function enableStickButton()
+    {
+        setActionButtons("stick", true);
+    }
+
+    function disableStickButton()
+    {
+        setActionButtons("stick", false);
+    }
+
 
 // Check Functions
 // ////////////////////////////////////////
@@ -472,10 +492,4 @@
     function checkForTwentyOne(who)
     {
         return state[who].score === 21;
-    }
-
-
-// Helper Functions
-// ////////////////////////////////////////
-
-    
+    }    
