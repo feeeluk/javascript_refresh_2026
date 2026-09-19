@@ -15,7 +15,7 @@
         await revealHand("user");
         evaluateHand("user");
         calculateGameResult("user");
-        userChoosesAction("user");       
+        determineAvailableActions("user");       
     }
 
     function createGame()
@@ -82,7 +82,7 @@
         console.log("revealHand => end");
     }
 
-    async function userChoosesAction(who)
+    async function determineAvailableActions(who)
     {
         console.log("userChoosesAction => start");
         
@@ -408,7 +408,7 @@
 
         evaluateHand(who);
         calculateGameResult(who);
-        userChoosesAction(who);
+        determineAvailableActions(who);
 
         console.log("twist => end");
     }
