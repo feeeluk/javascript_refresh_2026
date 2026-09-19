@@ -180,7 +180,7 @@
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         
         // enable the choices
-        toggleAceChoices();
+        enableAceChoices(true);
 
         addHighlight(nodelistOfImages[card], true);
 
@@ -196,7 +196,7 @@
         removeHighlight(nodelistOfImages[card], false);
 
         // disable the choices
-        toggleAceChoices();
+        disableAceChoices(false);
 
         // calculate and show score new score
         updateScore("user");
@@ -212,14 +212,13 @@
         element.classList.toggle("highlighted", shouldItBeHighlighted);
     }
 
-    function toggleAceChoices()
+    function setAceChoices(state)
     {
-        userAceTitle.classList.toggle("disabled");
-        userAceTitle.classList.toggle("enabled");
-        userAceOne.disabled = userAceOne.disabled ? false : true;
-        userAceOne.disabled ? userAceOne.classList.remove("active") : userAceOne.classList.add("active");
-        userAceEleven.disabled = userAceEleven.disabled ? false : true;
-        userAceEleven.disabled ? userAceEleven.classList.remove("active") : userAceEleven.classList.add("active");
+        userAceTitle.classList.toggle("enabled", state);
+        userAceOne.disabled = !state;
+        state ? userAceOne.classList.add("active") : userAceOne.classList.remove("active");
+        userAceEleven.disabled = !state;
+        state ? userAceEleven.classList.add("active") : userAceEleven.classList.remove("active");
     }
 
     function getAceChoice()

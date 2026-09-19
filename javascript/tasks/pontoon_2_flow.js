@@ -362,6 +362,26 @@
         }
     }
 
+    function addHighlight(element)
+    {
+        setHighlight(element, true);
+    }
+
+    function removeHighlight(element)
+    {
+        setHighlight(element, false);
+    }
+
+    function enableAceChoices(state)
+    {
+        setAceChoices(state);
+    }
+
+    function disableAceChoices(state)
+    {
+        setAceChoices(state);
+    }
+
 
 // Action Functions
 // ////////////////////////////////////////
@@ -458,12 +478,4 @@
 // Helper Functions
 // ////////////////////////////////////////
 
-    function addHighlight(element)
-    {
-        setHighlight(element, true);
-    }
-
-    function removeHighlight(element)
-    {
-        setHighlight(element, false);
-    }
+    
