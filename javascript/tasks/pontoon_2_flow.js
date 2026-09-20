@@ -236,79 +236,79 @@
 
     function calculateGameResult(who)
     {
-        console.log("calculateGameResult => start");
+        // console.log("calculateGameResult => start");
         
-        // if Player is bust => Dealer wins
-        if(state.user.handIsBust === true)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", false);
-            changeStateOfGame("resultMessage", "User is BUST");
-        }
+        // // if Player is bust => Dealer wins
+        // if(state.user.handIsBust === true)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", false);
+        //     changeStateOfGame("resultMessage", "User is BUST");
+        // }
 
-        // if Dealer is bust => Player wins
-        if(state.dealer.handIsBust === true)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Dealer is BUST");
-        }
+        // // if Dealer is bust => Player wins
+        // if(state.dealer.handIsBust === true)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", true);
+        //     changeStateOfGame("resultMessage", "Dealer is BUST");
+        // }
 
-        // if Dealer has Pontoon => Dealer wins
-        if(checkForPontoon("dealer") === true)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", false);
-            changeStateOfGame("resultMessage", "Dealer has Pontoon");
-        }
+        // // if Dealer has Pontoon => Dealer wins
+        // if(checkForPontoon("dealer") === true)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", false);
+        //     changeStateOfGame("resultMessage", "Dealer has Pontoon");
+        // }
 
-        // if Player has Pontoon and Dealer does not => Player wins
-        if(checkForPontoon("user") === true
-            &&
-            checkForPontoon("dealer") === false)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has Pontoon");
-        }
+        // // if Player has Pontoon and Dealer does not => Player wins
+        // if(checkForPontoon("user") === true
+        //     &&
+        //     checkForPontoon("dealer") === false)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", true);
+        //     changeStateOfGame("resultMessage", "Player has Pontoon");
+        // }
 
-        // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
-        if(checkForFiveCards("user") === true
-            &&
-            checkForPontoon("dealer") === false)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has Five Card Hand");
-        }
+        // // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
+        // if(checkForFiveCards("user") === true
+        //     &&
+        //     checkForPontoon("dealer") === false)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", true);
+        //     changeStateOfGame("resultMessage", "Player has Five Card Hand");
+        // }
 
-        // Player has a higher score => Player wins
-        if(state.user.score > state.dealer.score)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has better score");
-        }
+        // // Player has a higher score => Player wins
+        // if(state.user.score > state.dealer.score)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", true);
+        //     changeStateOfGame("resultMessage", "Player has better score");
+        // }
 
-        // Dealer has an equal or higher score  => Dealer wins
-        if(state.dealer.score >= state.user.score)
-        {
-            changeStateOfGame("resultGameOver", true);
-            changeStateOfGame("resultWin", loose);
-            changeStateOfGame("resultMessage", "Dealer wins - score");
-        }
+        // // Dealer has an equal or higher score  => Dealer wins
+        // if(state.dealer.score >= state.user.score)
+        // {
+        //     changeStateOfGame("resultGameOver", true);
+        //     changeStateOfGame("resultWin", loose);
+        //     changeStateOfGame("resultMessage", "Dealer wins - score");
+        // }
         
 
-        console.log(`resultGameOver = ${state.resultGameOver}`);
-        console.log(`resultWin = ${state.resultWin}`);
-        console.log(`resultMessage = ${state.resultMessage}`);
+        // console.log(`resultGameOver = ${state.resultGameOver}`);
+        // console.log(`resultWin = ${state.resultWin}`);
+        // console.log(`resultMessage = ${state.resultMessage}`);
 
-        if(state.resultGameOver === true)
-        {
-            showResultOfGame();
-        }
+        // if(state.resultGameOver === true)
+        // {
+        //     showResultOfGame();
+        // }
     
-        console.log("calculateGameResult => end");
+        // console.log("calculateGameResult => end");
     }
 
 
