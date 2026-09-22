@@ -89,7 +89,7 @@
 
         else if(who === "dealer")
         {
-            console.log("dealer calculate ace value")
+            dealerCalculateAceValue(who);
         }
 
         console.log(`revealHand(${who}) => end`);
@@ -200,9 +200,32 @@
         return;
     }
 
-    function dealerCalculateAceValue()
+    function dealerCalculateAceValue(who)
     {
+        console.log("dealerCalculateAceValue => start");
 
+        // if the hand does not contain an ace then end
+        if(!hasAce(who))
+        {
+            console.log("Hand does not contain an ace.");
+            console.log("dealerCalculateAceValue => end");
+            return;
+        }
+
+        if(state[who].score === 0)
+        {
+            dealerHandleTwoAces(who);
+        }
+
+        else
+        {
+            dealerHandleSingleAce(who);
+        }        
+
+        updateScore(who);
+        showScore(who);
+
+        console.log("dealerCalculateAceValue => end");
     }
 
     function evaluateHand(who)
@@ -259,23 +282,23 @@
 
     function calculateGameResult(who)
     {
-        // console.log("calculateGameResult => start");
+        console.log("calculateGameResult => start");
         
         // // if Player is bust => Dealer wins
-        // if(state.user.handIsBust === true)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", false);
-        //     changeStateOfGame("resultMessage", "User is BUST");
-        // }
+        if(state.user.handIsBust === true)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "User is BUST");
+        }
 
-        // // if Dealer is bust => Player wins
-        // if(state.dealer.handIsBust === true)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", true);
-        //     changeStateOfGame("resultMessage", "Dealer is BUST");
-        // }
+        // if Dealer is bust => Player wins
+        if(state.dealer.handIsBust === true)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Dealer is BUST");
+        }
 
         // // if Dealer has Pontoon => Dealer wins
         // if(checkForPontoon("dealer") === true)
@@ -322,16 +345,16 @@
         // }
         
 
-        // console.log(`resultGameOver = ${state.resultGameOver}`);
-        // console.log(`resultWin = ${state.resultWin}`);
-        // console.log(`resultMessage = ${state.resultMessage}`);
+        console.log(`resultGameOver = ${state.resultGameOver}`);
+        console.log(`resultWin = ${state.resultWin}`);
+        console.log(`resultMessage = ${state.resultMessage}`);
 
-        // if(state.resultGameOver === true)
-        // {
-        //     showResultOfGame();
-        // }
+        if(state.resultGameOver === true)
+        {
+            showResultOfGame();
+        }
     
-        // console.log("calculateGameResult => end");
+        console.log("calculateGameResult => end");
     }
 
 
@@ -422,6 +445,23 @@
     function disableAceChoices(state)
     {
         setAceChoices(state);
+    }
+
+    function dealerHandleSingleAce(who)
+    {
+        const indexOfAce = state[who].cards.findIndex(item => item.rank.startsWith("A"));
+        const theAceCard = state[who].cards[indexOfAce];
+
+        (state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22) ? setAceValue(theAceCard, 1) : setAceValue(theAceCard, 11);
+    }
+
+    function dealerHandleTwoAces(who)
+    {
+        const theFirstAce = state[who].cards[0];
+        const theSecondAce = state[who].cards[1];
+        
+        setAceValue(theFirstAce, 1);
+        setAceValue(theSecondAce, 11);
     }
 
 
