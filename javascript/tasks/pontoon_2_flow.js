@@ -161,72 +161,7 @@
 // Calculate Functions
 // ////////////////////////////////////////    
 
-    async function calculateAceValue(who)
-    {
-        console.log("calculateAceValue => start");
-
-        // if the hand does not contain an ace then end
-        if(!hasAce(who))
-        {
-            console.log("Hand does not contain an ace.");
-            console.log("calculateAceValue => end");
-            return;
-        }
-
-        // has an ace, but hand is Pontoon
-        if(checkForPontoon(who))
-        {
-            handlePontoonAce(who);
-            updateScore(who);
-            showScore(who);
-
-            console.log("calculateAceValue => end");
-            return;
-        }
-
-        // has an ace, hand is NOT Pontoon but only 2 cards
-        if(state[who].count === 2)
-        {
-            await handleTwoCardAce(who);
-
-            console.log("calculateAceValue => end");
-            return;
-        }
-
-        // twist ace
-        await handleTwistAce(who);
-
-        console.log("calculateAceValue => end");
-        return;
-    }
-
-    function dealerCalculateAceValue(who)
-    {
-        console.log("dealerCalculateAceValue => start");
-
-        // if the hand does not contain an ace then end
-        if(!hasAce(who))
-        {
-            console.log("Hand does not contain an ace.");
-            console.log("dealerCalculateAceValue => end");
-            return;
-        }
-
-        if(state[who].score === 0)
-        {
-            dealerHandleTwoAces(who);
-        }
-
-        else
-        {
-            dealerHandleSingleAce(who);
-        }        
-
-        updateScore(who);
-        showScore(who);
-
-        console.log("dealerCalculateAceValue => end");
-    }
+    
 
     function evaluateHand(who)
     {
@@ -300,23 +235,27 @@
             changeStateOfGame("resultMessage", "Dealer is BUST");
         }
 
-        // // if Dealer has Pontoon => Dealer wins
-        // if(checkForPontoon("dealer") === true)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", false);
-        //     changeStateOfGame("resultMessage", "Dealer has Pontoon");
-        // }
+        // if Dealer has Pontoon => Dealer wins
+        if(state.dealer.count === 2
+            &&
+            checkForPontoon("dealer") === true)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "Dealer has Pontoon");
+        }
 
-        // // if Player has Pontoon and Dealer does not => Player wins
-        // if(checkForPontoon("user") === true
-        //     &&
-        //     checkForPontoon("dealer") === false)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", true);
-        //     changeStateOfGame("resultMessage", "Player has Pontoon");
-        // }
+        // if Player has Pontoon and Dealer does not => Player wins
+        if(checkForPontoon("user") === true
+            &&
+            (state.dealer.count === 2
+            &&
+            checkForPontoon("dealer") === false))
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has Pontoon");
+        }
 
         // // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
         // if(checkForFiveCards("user") === true
@@ -343,11 +282,6 @@
         //     changeStateOfGame("resultWin", loose);
         //     changeStateOfGame("resultMessage", "Dealer wins - score");
         // }
-        
-
-        console.log(`resultGameOver = ${state.resultGameOver}`);
-        console.log(`resultWin = ${state.resultWin}`);
-        console.log(`resultMessage = ${state.resultMessage}`);
 
         if(state.resultGameOver === true)
         {
@@ -358,8 +292,75 @@
     }
 
 
-// Calculate Ace Related Functions
+// Ace Related Functions
 // ////////////////////////////////////////
+
+    async function calculateAceValue(who)
+    {
+        console.log("calculateAceValue => start");
+
+        // if the hand does not contain an ace then end
+        if(!hasAce(who))
+        {
+            console.log("Hand does not contain an ace.");
+            console.log("calculateAceValue => end");
+            return;
+        }
+
+        // has an ace, but hand is Pontoon
+        if(checkForPontoon(who))
+        {
+            handlePontoonAce(who);
+            updateScore(who);
+            showScore(who);
+
+            console.log("calculateAceValue => end");
+            return;
+        }
+
+        // has an ace, hand is NOT Pontoon but only 2 cards
+        if(state[who].count === 2)
+        {
+            await handleTwoCardAce(who);
+
+            console.log("calculateAceValue => end");
+            return;
+        }
+
+        // twist ace
+        await handleTwistAce(who);
+
+        console.log("calculateAceValue => end");
+        return;
+    }
+
+    function dealerCalculateAceValue(who)
+    {
+        console.log("dealerCalculateAceValue => start");
+
+        // if the hand does not contain an ace then end
+        if(!hasAce(who))
+        {
+            console.log("Hand does not contain an ace.");
+            console.log("dealerCalculateAceValue => end");
+            return;
+        }
+
+        if(state[who].score === 0)
+        {
+            dealerHandleTwoAces(who);
+        }
+
+        else
+        {
+            dealerHandleSingleAce(who);
+        }        
+
+        updateScore(who);
+        showScore(who);
+
+        console.log("dealerCalculateAceValue => end");
+    }
 
     function hasAce(who)
     {
@@ -519,7 +520,7 @@
         setActionButtons("twist", false);
     }
 
-    function stick()
+    async function stick()
     {
         console.log("stick => start");
 
@@ -527,9 +528,10 @@
         disableTwistButton();
         disableStickButton();
 
-        revealHand("dealer");
+        await revealHand("dealer");
+        await evaluateHand("dealer");
+        calculateGameResult();
         // dealer determine actions
-        // dealer twist
 
         console.log("stick => end");
     }
@@ -557,12 +559,13 @@
     {
         return state[who].count === 2
                 &&
-                state.user.cards.some(cards => cards.rank.startsWith("A"))
+                state[who].cards.some(cards => cards.rank.startsWith("A"))
                 && 
                 (
                 state[who].cards.some(cards => cards.rank.startsWith("K")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("Q")) ||
-                state[who].cards.some(cards => cards.rank.startsWith("J"))
+                state[who].cards.some(cards => cards.rank.startsWith("J")) ||
+                state[who].cards.some(cards => cards.rank.startsWith("10"))
                 );
     }
 
