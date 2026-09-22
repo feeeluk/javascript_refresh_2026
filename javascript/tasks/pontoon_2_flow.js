@@ -138,6 +138,11 @@
 
             console.log("userChoosesAction => end");
     }
+
+    function dealerDetermineActions()
+    {
+        
+    }
     
 
 // Calculate Functions
@@ -180,6 +185,11 @@
 
         console.log("calculateAceValue => end");
         return;
+    }
+
+    function dealerCalculateAceValue()
+    {
+
     }
 
     function evaluateHand(who)
@@ -404,17 +414,6 @@
 
 // Action Related Functions
 // ////////////////////////////////////////
-
-    function stick()
-    {
-        console.log("stick => start");
-
-        console.log("user chose to STICK");
-        disableTwistButton();
-        disableStickButton();
-
-        console.log("stick => end");
-    }
     
     async function twist(who)
     {
@@ -452,6 +451,11 @@
         console.log("twist => end");
     }
 
+    function dealerTwist()
+    {
+
+    }
+
     function enableTwistButton()
     {
         setActionButtons("twist", true);
@@ -460,6 +464,21 @@
     function disableTwistButton()
     {
         setActionButtons("twist", false);
+    }
+
+    function stick()
+    {
+        console.log("stick => start");
+
+        console.log("user chose to STICK");
+        disableTwistButton();
+        disableStickButton();
+
+        // reveal cards
+        // dealer determine actions
+        // dealer twist
+
+        console.log("stick => end");
     }
 
     function enableStickButton()
