@@ -154,14 +154,17 @@
 
     function dealerDetermineActions()
     {
+        // while loop
 
+        // while game is still active
+        // dealer twist
+        // evaluate hand
+        // calculate results
     }
     
 
 // Calculate Functions
-// ////////////////////////////////////////    
-
-    
+// ////////////////////////////////////////      
 
     function evaluateHand(who)
     {
