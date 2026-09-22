@@ -101,12 +101,12 @@
 // Reveal Hand Functions
 // //////////////////////////////////////// 
 
-    async function showCard(who)
+    function showCard(who)
     {
         console.log("showCard() => start");
 
         // reveal initial cards
-        if(state[who].count <= 2)
+        if(state[who].count <= 1)
         {
             // create a nodeList of the existing image elements
             let nodeList;
@@ -118,7 +118,7 @@
         }
 
         // reveal twisted cards
-        else (state[who].cards.length > 2)
+        else if(state[who].cards.length > 2)
         {
             // create a nodeList of the existing image elements
             let nodeList;

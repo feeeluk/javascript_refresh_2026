@@ -54,7 +54,10 @@
 
     async function revealHand(who)
     {
-        console.log("revealHand => start");
+        console.log(`revealHand(${who}) => start`);
+
+        const firstCard = state[who].cards[0];
+        const secondCard = state[who].cards[1]
         
         // show the first card
         showCard(who);
@@ -62,7 +65,7 @@
         showCount(who);
         updateScore(who);
         showScore(who);
-        pushItemToHistory(who, (state[who].cards[0].rank + state[who].cards[0].suit));
+        pushItemToHistory(who, (firstCard.rank + firstCard.suit));
         createHistoryItem(who);
         await delayUI(time);
 
@@ -72,14 +75,24 @@
         showCount(who);
         updateScore(who);
         showScore(who);
-        pushItemToHistory(who, (state[who].cards[1].rank + state[who].cards[1].suit));
+        pushItemToHistory(who, (secondCard.rank + secondCard.suit));
         createHistoryItem(who);
 
-        // update and show scores - ace values can only be set AFTER both cards have been seen, but they are set INDIVIDUALLY
+        // update and show scores
+        // ace values can only be set AFTER both cards have been seen
         await delayUI(time);
-        await calculateAceValue(who);
 
-        console.log("revealHand => end");
+        if(who === "user")
+        {
+            await calculateAceValue(who);
+        }
+
+        else if(who === "dealer")
+        {
+            console.log("dealer calculate ace value")
+        }
+
+        console.log(`revealHand(${who}) => end`);
     }
 
     async function determineAvailableActions(who)
@@ -141,7 +154,7 @@
 
     function dealerDetermineActions()
     {
-        
+
     }
     
 
@@ -474,7 +487,7 @@
         disableTwistButton();
         disableStickButton();
 
-        // reveal cards
+        revealHand("dealer");
         // dealer determine actions
         // dealer twist
 
