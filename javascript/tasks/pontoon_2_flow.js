@@ -523,7 +523,15 @@
         createHistoryItem(who);
 
         // calculate the value of any aces
-        await calculateAceValue(who);
+        if(who === "user")
+        {
+            await calculateAceValue(who);
+        }
+
+        else
+        {
+            dealerCalculateAceValue(who);
+        }
 
         evaluateHand(who);
         calculateGameResult(who);
