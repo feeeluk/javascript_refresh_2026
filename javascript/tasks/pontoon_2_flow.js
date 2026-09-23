@@ -152,9 +152,9 @@
             console.log("userDetermineAvailableActions => end");
     }
 
-    function dealerDetermineAction()
+    function dealerDetermineActions()
     {
-        console.log("dealerDetermineAction => start");
+        console.log("dealerDetermineActions => start");
         
         
         while(state.resultGameOver === false)
@@ -162,7 +162,7 @@
             twist("user");
         }
 
-        console.log("dealerDetermineAction => end");
+        console.log("dealerDetermineActions => end");
     }
     
 
