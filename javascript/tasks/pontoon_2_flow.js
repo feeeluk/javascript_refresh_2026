@@ -15,7 +15,7 @@
         await revealHand("user");
         evaluateHand("user");
         calculateGameResult("user");
-        determineAvailableActions("user");       
+        userDetermineAvailableActions("user");       
     }
 
     function createGame()
@@ -84,7 +84,7 @@
 
         if(who === "user")
         {
-            await calculateAceValue(who);
+            await userCalculateAceValue(who);
         }
 
         else if(who === "dealer")
@@ -95,9 +95,9 @@
         console.log(`revealHand(${who}) => end`);
     }
 
-    async function determineAvailableActions(who)
+    async function userDetermineAvailableActions(who)
     {
-        console.log("userChoosesAction => start");
+        console.log("userDetermineAvailableActions => start");
         
         // if game is still running give user options
         if(state.resultGameOver) return;
@@ -105,56 +105,56 @@
         // if Pontoon then only show stick
         if(checkForPontoon(who))
         {
-            console.log("Pontoon, so only show 'stick'");
+            console.log("User has Pontoon, so only show Stick button");
             enableStickButton();
 
-            console.log("userChoosesAction => end");
+            console.log("userDetermineAvailableActions => end");
             return;
         }
 
         // five card hand - stick only
         if(checkForFiveCards(who))
         {
-            console.log("Five Card Hand, so only show 'stick'");
+            console.log("User has Five Card Hand, so only show Stick button");
             enableStickButton();
 
-            console.log("userChoosesAction => end");
+            console.log("userDetermineAvailableActions => end");
             return;
         }
 
         // score is 21 - stick only
         if(checkForTwentyOne(who))
         {
-            console.log("21, so only show 'stick'");
+            console.log("User has21, so only show Stick button");
             enableStickButton();
 
-            console.log("userChoosesAction => end");
+            console.log("userDetermineAvailableActions => end");
             return;
         }
 
         // if less than 15 only show twist
         if(state[who].score < 15)
         {
-            console.log("hand is less than 15 so only allow 'twist'");
+            console.log("User hand is less than 15 so only show Twist button'");
             enableTwistButton();
 
-            console.log("userChoosesAction => end");
+            console.log("userDetermineAvailableActions => end");
             return;
         }
 
         // for all other scenarios show both
       
-            console.log("show both options");
+            console.log("No criteria met, show both Twist and Stick buttons");
             
             enableTwistButton();
             enableStickButton();
 
-            console.log("userChoosesAction => end");
+            console.log("userDetermineAvailableActions => end");
     }
 
-    function dealerDetermineActions()
+    function dealerDetermineAction()
     {
-        console.log("dealerDeterminesAction => start");
+        console.log("dealerDetermineAction => start");
         
         
         while(state.resultGameOver === false)
@@ -162,7 +162,7 @@
             twist("user");
         }
 
-        console.log("dealerDeterminesAction => end");
+        console.log("dealerDetermineAction => end");
     }
     
 
@@ -312,15 +312,15 @@
 // Ace Related Functions
 // ////////////////////////////////////////
 
-    async function calculateAceValue(who)
+    async function userCalculateAceValue(who)
     {
-        console.log("calculateAceValue => start");
+        console.log("userCalculateAceValue => start");
 
         // if the hand does not contain an ace then end
         if(!hasAce(who))
         {
             console.log("Hand does not contain an ace.");
-            console.log("calculateAceValue => end");
+            console.log("userCalculateAceValue => end");
             return;
         }
 
@@ -331,7 +331,7 @@
             updateScore(who);
             showScore(who);
 
-            console.log("calculateAceValue => end");
+            console.log("userCalculateAceValue => end");
             return;
         }
 
@@ -340,14 +340,14 @@
         {
             await handleTwoCardAce(who);
 
-            console.log("calculateAceValue => end");
+            console.log("userCalculateAceValue => end");
             return;
         }
 
         // twist ace
         await handleTwistAce(who);
 
-        console.log("calculateAceValue => end");
+        console.log("userCalculateAceValue => end");
         return;
     }
 
@@ -516,7 +516,7 @@
         // calculate the value of any aces
         if(who === "user")
         {
-            await calculateAceValue(who);
+            await userCalculateAceValue(who);
         }
 
         else
@@ -529,7 +529,7 @@
 
         if(who === "user")
         {
-            determineAvailableActions(who);
+            userDetermineAvailableActions(who);
         }
 
         console.log("twist => end");
@@ -554,10 +554,10 @@
         disableStickButton();
         state.user.stick = true;
 
-        await revealHand("dealer");
-        await evaluateHand("dealer");
-        calculateGameResult();
-        dealerDetermineActions()
+        revealHand("dealer");
+        // evaluateHand("dealer");
+        // calculateGameResult();
+        // dealerDetermineActions()
 
         console.log("stick => end");
     }
