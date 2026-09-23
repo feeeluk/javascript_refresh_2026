@@ -159,15 +159,9 @@
         
         while(state.resultGameOver === false)
         {
-            console.log("game running loop");
+            twist("user");
         }
 
-        // while loop
-
-        // while game is still active
-        // dealer twist
-        // evaluate hand
-        // calculate results
         console.log("dealerDeterminesAction => end");
     }
     
@@ -236,7 +230,7 @@
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", false);
-            changeStateOfGame("resultMessage", "User is BUST");
+            changeStateOfGame("resultMessage", "Dealer wins - User is BUST");
         }
 
         // if Dealer is bust => Player wins
@@ -244,7 +238,7 @@
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Dealer is BUST");
+            changeStateOfGame("resultMessage", "Player wins - Dealer is BUST");
         }
 
         // if Dealer has Pontoon => Dealer wins
@@ -254,7 +248,7 @@
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", false);
-            changeStateOfGame("resultMessage", "Dealer has Pontoon");
+            changeStateOfGame("resultMessage", "Dealer wins - Dealer has Pontoon");
         }
 
         // if Player has Pontoon and Dealer does not => Player wins
@@ -266,7 +260,7 @@
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has Pontoon");
+            changeStateOfGame("resultMessage", "Player wins - Player has Pontoon");
         }
 
         // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
@@ -276,21 +270,25 @@
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has Five Card Hand");
+            changeStateOfGame("resultMessage", "Player wins - Player has Five Card Hand");
         }
 
-        // Player has a higher score => Player wins
+        // Player has a higher score than dealer => Player wins
         else if(state.user.stick === true
+            &&
+            state.dealer.score >= 17
             &&
             state.user.score > state.dealer.score)
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", true);
-            changeStateOfGame("resultMessage", "Player has better score");
+            changeStateOfGame("resultMessage", "Player wins - Player has better score");
         }
 
         // Dealer has an equal score  => Dealer wins
         else if(state.user.stick === true
+            &&
+            state.dealer.score >= 17
             &&
             state.dealer.score === state.user.score)
         {
@@ -301,6 +299,8 @@
 
         // Dealer has a higher score  => Dealer wins
         else if(state.user.stick === true
+            &&
+            state.dealer.score >= 17
             &&
             state.dealer.score > state.user.score)
         {
@@ -498,11 +498,14 @@
     async function twist(who)
     {
         console.log("twist => start");
-        console.log("user chose to TWIST");
+        
+        if(who === "user")
+        {
+            console.log("user chose to TWIST");
 
-        // disable actions buttons
-        disableTwistButton();
-        disableStickButton();
+            disableTwistButton();
+            disableStickButton();
+        } 
         
         // deal a card
         getCardFromDeck(who);
@@ -515,10 +518,8 @@
         showCount(who);
         updateScore(who);
         showScore(who);
-        pushItemToHistory(
-            who,
-            state[who].cards[state[who].cards.length - 1].rank + state[who].cards[state[who].cards.length - 1].suit
-        );
+        const latestCard = state[who].cards.length - 1;
+        pushItemToHistory(who, state[who].cards[latestCard].rank + state[who].cards[latestCard].suit);
         createHistoryItem(who);
 
         // calculate the value of any aces
@@ -526,14 +527,13 @@
 
         evaluateHand(who);
         calculateGameResult(who);
-        determineAvailableActions(who);
+
+        if(who === "user")
+        {
+            determineAvailableActions(who);
+        }
 
         console.log("twist => end");
-    }
-
-    function dealerTwist()
-    {
-        // can I use 'twist' instead?
     }
 
     function enableTwistButton()
