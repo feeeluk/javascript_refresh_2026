@@ -154,12 +154,21 @@
 
     function dealerDetermineActions()
     {
+        console.log("dealerDeterminesAction => start");
+        
+        
+        while(state.resultGameOver === false)
+        {
+            console.log("game running loop");
+        }
+
         // while loop
 
         // while game is still active
         // dealer twist
         // evaluate hand
         // calculate results
+        console.log("dealerDeterminesAction => end");
     }
     
 
@@ -231,7 +240,7 @@
         }
 
         // if Dealer is bust => Player wins
-        if(state.dealer.handIsBust === true)
+        else if(state.dealer.handIsBust === true)
         {
             changeStateOfGame("resultGameOver", true);
             changeStateOfGame("resultWin", true);
@@ -239,7 +248,7 @@
         }
 
         // if Dealer has Pontoon => Dealer wins
-        if(state.dealer.count === 2
+        else if(state.dealer.count === 2
             &&
             checkForPontoon("dealer") === true)
         {
@@ -249,7 +258,7 @@
         }
 
         // if Player has Pontoon and Dealer does not => Player wins
-        if(checkForPontoon("user") === true
+        else if(checkForPontoon("user") === true
             &&
             (state.dealer.count === 2
             &&
@@ -260,31 +269,45 @@
             changeStateOfGame("resultMessage", "Player has Pontoon");
         }
 
-        // // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
-        // if(checkForFiveCards("user") === true
-        //     &&
-        //     checkForPontoon("dealer") === false)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", true);
-        //     changeStateOfGame("resultMessage", "Player has Five Card Hand");
-        // }
+        // if Player has 5 card hand and Dealer does not have Pontoon => Player wins
+        else if(checkForFiveCards("user") === true
+            &&
+            checkForPontoon("dealer") === false)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has Five Card Hand");
+        }
 
-        // // Player has a higher score => Player wins
-        // if(state.user.score > state.dealer.score)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", true);
-        //     changeStateOfGame("resultMessage", "Player has better score");
-        // }
+        // Player has a higher score => Player wins
+        else if(state.user.stick === true
+            &&
+            state.user.score > state.dealer.score)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", true);
+            changeStateOfGame("resultMessage", "Player has better score");
+        }
 
-        // // Dealer has an equal or higher score  => Dealer wins
-        // if(state.dealer.score >= state.user.score)
-        // {
-        //     changeStateOfGame("resultGameOver", true);
-        //     changeStateOfGame("resultWin", loose);
-        //     changeStateOfGame("resultMessage", "Dealer wins - score");
-        // }
+        // Dealer has an equal score  => Dealer wins
+        else if(state.user.stick === true
+            &&
+            state.dealer.score === state.user.score)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "Dealer wins - Dealer has the same score");
+        }
+
+        // Dealer has a higher score  => Dealer wins
+        else if(state.user.stick === true
+            &&
+            state.dealer.score > state.user.score)
+        {
+            changeStateOfGame("resultGameOver", true);
+            changeStateOfGame("resultWin", false);
+            changeStateOfGame("resultMessage", "Dealer wins - Dealer has higher score");
+        }
 
         if(state.resultGameOver === true)
         {
@@ -510,7 +533,7 @@
 
     function dealerTwist()
     {
-
+        // can I use 'twist' instead?
     }
 
     function enableTwistButton()
@@ -530,11 +553,12 @@
         console.log("user chose to STICK");
         disableTwistButton();
         disableStickButton();
+        state.user.stick = true;
 
         await revealHand("dealer");
         await evaluateHand("dealer");
         calculateGameResult();
-        // dealer determine actions
+        dealerDetermineActions()
 
         console.log("stick => end");
     }
