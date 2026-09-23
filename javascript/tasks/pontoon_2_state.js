@@ -50,21 +50,21 @@
 
     function incrementCount(who)
     {
-        console.log("incrementCount() => start");
+        console.log(`${who} - incrementCount() => start`);
         
         state[who].count++;
 
-        console.log("incrementCount() => end");
+        console.log(`${who} - incrementCount() => end`);
     }
 
     function pushItemToHistory(who, what)
     {
-        console.log("pushItemToHistory() > start");
+        console.log(`${who} - pushItemToHistory() > start`);
 
         // add item to history
         state[who].history.push(what);
         
-        console.log("pushItemToHistory() > end");
+        console.log(`${who} - pushItemToHistory() > end`);
     }
 
     function setAceValue(card, value)
@@ -84,12 +84,12 @@
 
     function updateScore(who)
     {
-        console.log("updateScore => start");
+        console.log(`${who} - updateScore() => start`);
         
         const calculateValueOfArray = state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0);
 
         // assign the sum of the array as the score (NOTE the use of EQUALS not 'plus equals')
         state[who].score = calculateValueOfArray;
 
-        console.log("updateScore => end");
+        console.log(`${who} - updateScore() => end`);
     }

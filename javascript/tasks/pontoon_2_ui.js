@@ -84,17 +84,20 @@
 
     function dealCard(who)
     {
-            // add img element
-            const newElement = document.createElement("img");
-            
-            // add the class
-            newElement.classList.add("card");
+        console.log(`${who} - dealCard() => start`);
+        // add img element
+        const newElement = document.createElement("img");
+        
+        // add the class
+        newElement.classList.add("card");
 
-            // change the src to show the back of the card
-            newElement.src = "/resources/images/cards/back/back-blue.png";
+        // change the src to show the back of the card
+        newElement.src = "/resources/images/cards/back/back-blue.png";
 
-            // apend the new image to the relevant user
-            (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
+        // apend the new image to the relevant user
+        (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
+
+        console.log(`${who} - dealCard() => end`);
     }
 
 
@@ -103,7 +106,7 @@
 
     function showCard(who)
     {
-        console.log("showCard() => start");
+        console.log(`${who} - showCard() => start`);
 
         // reveal initial cards
         if(state[who].count <= 1)
@@ -132,39 +135,43 @@
             nodeList[lengthOfArray].src = "/resources/images/cards/front/" + state[who].cards[lengthOfArray].rank + state[who].cards[lengthOfArray].suit + ".png";
         }
 
-        console.log("showCard() => end");        
+        console.log(`${who} - showCard() => end`);        
     }
 
     function showCount(who)
     {
-        console.log("showCount() => start");
+        console.log(`${who} - showCount() => start`);
         
         (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
 
-        console.log("showCount() => end");
+        console.log(`${who} - showCount() => end`);
     }
 
     function showScore(who)
     {
-        console.log("showScore() => start");
+        console.log(`${who} - showScore() => start`);
 
         (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
 
-        console.log("showScore() => end");
+        console.log(`${who} - showScore() => end`);
     }  
 
     function showResultOfGame()
     {
+        console.log(`showResultOfGame() => start`);
+
         (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
         showResultMessage.style.color = "white";
 
         showResultMessage.textContent = state.resultMessage;
         showResultButton.disabled = false;
+
+        console.log(`showResultOfGame() => end`);
     }
 
     function createHistoryItem(who)
     {
-        console.log(`${who} createHistoryItem => start`);
+        console.log(`${who} - createHistoryItem() => start`);
 
         // create last history item as a list element
         const newElement = document.createElement("li");
@@ -174,7 +181,7 @@
 
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
 
-        console.log(`${who} createHistoryItem => end`);
+        console.log(`${who} - createHistoryItem() => end`);
     }
 
 
@@ -183,6 +190,9 @@
 
     async function resolveAceValue(card)
     {
+
+        console.log(`resolveAceValue => start`);
+
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         
         // enable the choices
@@ -211,6 +221,8 @@
         // add and show chosen value in history
         pushItemToHistory("user", `Ace value: ${aceValue}`);
         createHistoryItem("user");
+
+        console.log(`resolveAceValue => end`);
     }
 
     function setHighlight(element, shouldItBeHighlighted)
@@ -286,14 +298,6 @@
     document.getElementById("playButton").addEventListener("click", event => {
         play.style.display = "none";
         startGame();
-    })
-
-    document.getElementById("uAceOne").addEventListener("click", event => {
-
-    })
-
-    document.getElementById("uAceEleven").addEventListener("click", event => {
-        
     })
 
     document.getElementById("uActionStick").addEventListener("click", event => {
