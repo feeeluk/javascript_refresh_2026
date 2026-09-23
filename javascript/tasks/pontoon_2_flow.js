@@ -60,6 +60,7 @@
         const secondCard = state[who].cards[1]
         
         // show the first card
+        console.log(`${who} - Reveal the first card`);
         showCard(who);
         incrementCount(who);
         showCount(who);
@@ -70,6 +71,7 @@
         await delayUI(time);
 
         // show the second card
+        console.log(`${who} - Reveal the second card`);
         showCard(who);
         incrementCount(who);
         showCount(who);
@@ -78,12 +80,12 @@
         pushItemToHistory(who, (secondCard.rank + secondCard.suit));
         createHistoryItem(who);
 
-        // update and show scores
-        // ace values can only be set AFTER both cards have been seen
-        await delayUI(time);
+        // Handle aces
 
         if(who === "user")
         {
+            // ace values can only be set AFTER both cards have been seen
+            await delayUI(time);
             await userCalculateAceValue(who);
         }
 
@@ -358,7 +360,7 @@
         // if the hand does not contain an ace then end
         if(!hasAce(who))
         {
-            console.log("Hand does not contain an ace.");
+            console.log("Dealer's hand does not contain an ace");
             console.log("dealerCalculateAceValue => end");
             return;
         }
@@ -366,11 +368,13 @@
         if(state[who].score === 0)
         {
             dealerHandleTwoAces(who);
+            console.log("Dealer's hand has two aces");
         }
 
         else
         {
             dealerHandleSingleAce(who);
+            console.log("Dealer's hand has a single ace");
         }        
 
         updateScore(who);
@@ -488,7 +492,7 @@
     
     async function twist(who)
     {
-        console.log("twist => start");
+        console.log(`${who} twist => start`);
         
         if(who === "user")
         {
@@ -532,7 +536,7 @@
             userDetermineAvailableActions(who);
         }
 
-        console.log("twist => end");
+        console.log(`${who} twist => end`);
     }
 
     function enableTwistButton()
@@ -555,7 +559,7 @@
         state.user.stick = true;
 
         revealHand("dealer");
-        // evaluateHand("dealer");
+        await evaluateHand("dealer");
         // calculateGameResult();
         // dealerDetermineActions()
 

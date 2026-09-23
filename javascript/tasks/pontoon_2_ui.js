@@ -164,7 +164,7 @@
 
     function createHistoryItem(who)
     {
-        console.log("createHistoryItem => start");
+        console.log(`${who} createHistoryItem => start`);
 
         // create last history item as a list element
         const newElement = document.createElement("li");
@@ -173,6 +173,8 @@
         newElement.textContent = state[who].history[lengthOfHistoryArray];
 
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
+
+        console.log(`${who} createHistoryItem => end`);
     }
 
 
