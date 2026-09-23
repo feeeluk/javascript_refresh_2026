@@ -191,15 +191,6 @@
             createHistoryItem(who);
         }
 
-        if(checkForFourCards(who))
-        {
-            console.log(`${who} has Four Card Hand`);
-
-            changeStateOfHand(who, "handIsFourCard", true);
-            pushItemToHistory(who, "Four Card Hand");
-            createHistoryItem(who);
-        }
-
         if(checkForFiveCards(who))
         {
             console.log(`${who} has Fiver Card Hand`);
@@ -602,13 +593,6 @@
                 state[who].cards.some(cards => cards.rank.startsWith("J")) ||
                 state[who].cards.some(cards => cards.rank.startsWith("10"))
                 );
-    }
-
-    function checkForFourCards(who)
-    {
-       return   state[who].count === 4
-                &&
-                state[who].score <= 21;        
     }
 
     function checkForFiveCards(who)
