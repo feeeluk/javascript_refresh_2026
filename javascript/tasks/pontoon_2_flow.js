@@ -154,13 +154,16 @@
             console.log(`${who} - userDetermineAvailableActions() => end`);
     }
 
-    function dealerDetermineActions()
+    async function dealerDetermineActions()
     {
         console.log("dealerDetermineActions => start");
         
-        console.log(state.resultGameOver);
-        twist("dealer");   
-
+        while(state.resultGameOver === false)
+        {
+            await twist("dealer");
+            calculateGameResult();
+        }
+           
         console.log("dealerDetermineActions => end");
     }
     
@@ -181,7 +184,7 @@
             createHistoryItem(who);
         }
 
-        if(checkForPontoon(who) === true)
+        else if(checkForPontoon(who) === true)
         {
             console.log(`${who} has Pontoon`);
             
@@ -190,7 +193,7 @@
             createHistoryItem(who);
         }
 
-        if(checkForFiveCards(who))
+        else if(checkForFiveCards(who))
         {
             console.log(`${who} has Fiver Card Hand`);
 
