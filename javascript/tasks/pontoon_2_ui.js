@@ -196,9 +196,9 @@
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         
         // enable the choices
-        enableAceChoices(true);
+        userEnableAceChoices(true);
 
-        addHighlight(nodelistOfImages[card], true);
+        userAddHighlightToAce(nodelistOfImages[card], true);
 
         // get the user's input
         let aceValue = await getAceChoice();
@@ -209,10 +209,10 @@
         // log user's choice
         console.log(`Ace value = ${aceValue}`);
 
-        removeHighlight(nodelistOfImages[card], false);
+        userRemoveHighlightFromAce(nodelistOfImages[card], false);
 
         // disable the choices
-        disableAceChoices(false);
+        userDisableAceChoices(false);
 
         // calculate and show score new score
         updateScore("user");
