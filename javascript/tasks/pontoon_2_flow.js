@@ -158,11 +158,9 @@
     {
         console.log("dealerDetermineActions => start");
         
-        
-        while(state.resultGameOver === false)
-        {
-            twist("user");
-        }
+        console.log(state.resultGameOver);
+        twist("dealer");
+    
 
         console.log("dealerDetermineActions => end");
     }
@@ -210,6 +208,8 @@
             pushItemToHistory(who, "TWENTY ONE");
             createHistoryItem(who);
         }
+
+        console.log(`${who} does not have a named hand`);
 
         console.log(`${who} - evaluateHand() => end`);
     }
@@ -562,8 +562,8 @@
 
         await revealHand("dealer");
         await evaluateHand("dealer");
-        // calculateGameResult();
-        // dealerDetermineActions()
+        await calculateGameResult("dealer");
+        dealerDetermineActions()
 
         console.log(`stick() => end`);
     }
