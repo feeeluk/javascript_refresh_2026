@@ -159,8 +159,7 @@
         console.log("dealerDetermineActions => start");
         
         console.log(state.resultGameOver);
-        twist("dealer");
-    
+        twist("dealer");   
 
         console.log("dealerDetermineActions => end");
     }
@@ -473,10 +472,25 @@
 
     function dealerHandleSingleAce(who)
     {
+
+        console.log(`${who} - dealerHandleSingleAce() => start`);
+
         const indexOfAce = state[who].cards.findIndex(item => item.rank.startsWith("A"));
         const theAceCard = state[who].cards[indexOfAce];
 
-        (state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22) ? setAceValue(theAceCard, 1) : setAceValue(theAceCard, 11);
+        if(state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22
+            &&
+            theAceCard.value === 0)
+        {
+            setAceValue(theAceCard, 1);
+        }
+
+        else if(theAceCard.value === 0)
+        {
+            setAceValue(theAceCard, 11);
+        }
+
+        console.log(`${who} - dealerHandleSingleAce() => end`);
     }
 
     function dealerHandleTwoAces(who)
