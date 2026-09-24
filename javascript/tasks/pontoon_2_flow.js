@@ -107,7 +107,7 @@
         // if Pontoon then only show stick
         if(checkForPontoon(who))
         {
-            console.log("User has Pontoon, so only show Stick button");
+            console.log(`${who} - Pontoon, so only show Stick button`);
             enableStickButton();
 
             console.log("userDetermineAvailableActions => end");
@@ -117,7 +117,7 @@
         // five card hand - stick only
         if(checkForFiveCards(who))
         {
-            console.log("User has Five Card Hand, so only show Stick button");
+            console.log(`${who} - Five Card Hand, so only show Stick button`);
             enableStickButton();
 
             console.log(`${who} - userDetermineAvailableActions() => end`);
@@ -127,7 +127,7 @@
         // score is 21 - stick only
         if(checkForTwentyOne(who))
         {
-            console.log("User has 21, so only show Stick button");
+            console.log(`${who} - score is 21, so only show 'stick' button`);
             enableStickButton();
 
             console.log(`${who} - userDetermineAvailableActions() => end`);
@@ -137,7 +137,7 @@
         // if less than 15 only show twist
         if(state[who].score < 15)
         {
-            console.log("User hand is less than 15 so only show Twist button");
+            console.log(`${who} - hand is less than 15, so only show 'twist' button`);
             enableTwistButton();
 
             console.log(`${who} - userDetermineAvailableActions() => end`);
@@ -146,7 +146,7 @@
 
         // for all other scenarios show both
       
-            console.log("No criteria met, show both Twist and Stick buttons");
+            console.log(`${who} - score is 15 or more, show both 'twist' and 'stick' buttons`);
             
             enableTwistButton();
             enableStickButton();
@@ -321,7 +321,7 @@
         // if the hand does not contain an ace then end
         if(!hasAce(who))
         {
-            console.log("User's hand does not contain an ace.");
+            console.log(`${who} - user's hand does not contain an ace.`);
             console.log(`${who} - userCalculateAceValue() => end`);
             return;
         }
@@ -360,7 +360,7 @@
         // if the hand does not contain an ace then end
         if(!hasAce(who))
         {
-            console.log("Dealer's hand does not contain an ace");
+            console.log(`${who} - dealer's hand does not contain an ace`);
             console.log("dealerCalculateAceValue => end");
             return;
         }
@@ -368,13 +368,13 @@
         if(state[who].score === 0)
         {
             dealerHandleTwoAces(who);
-            console.log("Dealer's hand has two aces");
+            console.log(`${who} - dealer's hand has two aces`);
         }
 
         else
         {
             dealerHandleSingleAce(who);
-            console.log("Dealer's hand has a single ace");
+            console.log(`${who} - dealer's hand has a single ace`);
         }        
 
         updateScore(who);
@@ -404,8 +404,8 @@
             &&
             state[who].cards[1].value === 0)
         {
-            console.log(`Both User's cards are aces`);
-            console.log("User to choose ace value:");
+            console.log(`${who} - both user's cards are aces`);
+            console.log(`${who} - user to choose ace values:`);
 
             for(let i = 0; i <= (state[who].cards.length -1); i++)
             {
@@ -416,16 +416,16 @@
         // the first card is an ace
         else if(state[who].cards[0].value === 0)
         {
-            console.log("User's first card is an ace");
-            console.log("User to choose ace value:");
+            console.log(`${who} - user's first card is an ace`);
+            console.log(`${who} - user to choose ace value:`);
             await resolveAceValue(0);
         }
 
         // the second card is an ace
         else if(state[who].cards[1].value === 0)
         {
-            console.log("User's second card is an ace");
-            console.log("User to choose ace value:");
+            console.log(`${who} - user's second card is an ace`);
+            console.log(`${who} - user to choose ace value:`);
             await resolveAceValue(1);
         }
     }
@@ -437,8 +437,8 @@
             state[who].cards[state[who].count-1].value === 0
         )
         {
-            console.log("Twisted ace");
-            console.log("User to choose ace value");
+            console.log(`${who} - Twisted ace`);
+            console.log(`${who} - user to choose ace value:`);
 
             await resolveAceValue(state[who].cards.length -1);
 
@@ -447,7 +447,7 @@
 
         else
         {
-            console.log("Twisted card is not an ace");
+            console.log(`${who} - twisted card is not an ace`);
         }
     }
 
@@ -553,19 +553,19 @@
 
     async function stick()
     {
-        console.log(`${who} - stick() => start`);
+        console.log(`stick() => start`);
 
         console.log("user chose to STICK");
         disableTwistButton();
         disableStickButton();
         state.user.stick = true;
 
-        revealHand("dealer");
+        await revealHand("dealer");
         await evaluateHand("dealer");
         // calculateGameResult();
         // dealerDetermineActions()
 
-        console.log(`${who} - stick() => end`);
+        console.log(`stick() => end`);
     }
 
     function enableStickButton()
