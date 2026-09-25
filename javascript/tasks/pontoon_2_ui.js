@@ -42,7 +42,9 @@
 
     function resetUI()
     {
-        console.log("resetUI => start");
+        console.clear();
+
+        console.log(`resetUI()`);
 
         showUserCards.innerHTML = "";
         showUserScore.innerHTML = "";
@@ -65,10 +67,6 @@
         showResultBox.style.backgroundColor = "cornflowerblue";
         showResultMessage.innerHTML = "";
         showResultButton.disabled = true;
-
-        console.clear();
-
-        console.log("resetUI => end");
     }
 
 
@@ -77,14 +75,14 @@
 
     function delayUI(delayMiliseconds)
     {
-        console.log("delay");
+        console.log(`DELAY (${delayMiliseconds})`);
 
         return new Promise((resolve) => { setTimeout(() => { resolve() }, delayMiliseconds)});
     }
 
     function dealCard(who)
     {
-        console.log(`${who} - dealCard() => start`);
+        console.log(`${who} - dealCard()`);
         // add img element
         const newElement = document.createElement("img");
         
@@ -96,8 +94,6 @@
 
         // apend the new image to the relevant user
         (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
-
-        console.log(`${who} - dealCard() => end`);
     }
 
 
@@ -106,7 +102,7 @@
 
     function showCard(who)
     {
-        console.log(`${who} - showCard() => start`);
+        console.log(`${who} - showCard()`);
 
         // reveal initial cards
         if(state[who].count <= 1)
@@ -133,45 +129,37 @@
 
             // edit the src of each card
             nodeList[lengthOfArray].src = "/resources/images/cards/front/" + state[who].cards[lengthOfArray].rank + state[who].cards[lengthOfArray].suit + ".png";
-        }
-
-        console.log(`${who} - showCard() => end`);        
+        }        
     }
 
     function showCount(who)
     {
-        console.log(`${who} - showCount() => start`);
+        console.log(`${who} - showCount()`);
         
         (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
-
-        console.log(`${who} - showCount() => end`);
     }
 
     function showScore(who)
     {
-        console.log(`${who} - showScore() => start`);
+        console.log(`${who} - showScore()`);
 
         (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
-
-        console.log(`${who} - showScore() => end`);
     }  
 
     function showResultOfGame()
     {
-        console.log(`showResultOfGame() => start`);
+        console.log(`showResultOfGame()`);
 
         (state.resultWin === true) ? showResultBox.style.backgroundColor = "green" : showResultBox.style.backgroundColor = "red";
         showResultMessage.style.color = "white";
 
         showResultMessage.textContent = state.resultMessage;
         showResultButton.disabled = false;
-
-        console.log(`showResultOfGame() => end`);
     }
 
     function createHistoryItem(who)
     {
-        console.log(`${who} - createHistoryItem() => start`);
+        console.log(`${who} - createHistoryItem()`);
 
         // create last history item as a list element
         const newElement = document.createElement("li");
@@ -180,8 +168,6 @@
         newElement.textContent = state[who].history[lengthOfHistoryArray];
 
         (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
-
-        console.log(`${who} - createHistoryItem() => end`);
     }
 
 
@@ -191,7 +177,7 @@
     async function resolveAceValue(card)
     {
 
-        console.log(`resolveAceValue => start`);
+        console.log(`resolveAceValue()`);
 
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         
@@ -221,8 +207,6 @@
         // add and show chosen value in history
         pushItemToHistory("user", `Ace value: ${aceValue}`);
         createHistoryItem("user");
-
-        console.log(`resolveAceValue => end`);
     }
 
     function setHighlight(element, shouldItBeHighlighted)

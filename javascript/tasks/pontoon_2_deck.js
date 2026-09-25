@@ -15,6 +15,9 @@
 
     function createDeck()
     {
+
+        console.log(`createDeck()`);
+
         const suits = ["H", "D", "S", "C"];
         // const ranks = ["A", "K", "9", "4", "2"];
         const ranks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
@@ -48,9 +51,6 @@
 
         // randomise the deck
         shuffle(deck);
-
-        console.log("The deck of cards: ");
-        console.log(deck);
     }
 
     function shuffle(array)
@@ -65,8 +65,8 @@
 
     function getCardFromDeck(who)
     {
+        console.log(`${who} - getCardFromDeck()`);
+
         const card = deck.pop(); // take the last card
         state[who].cards.push(card); // pass it to the relevant array
-        
-        console.log(card);
     }

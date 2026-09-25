@@ -43,6 +43,8 @@
 
     function resetState()
     {
+        console.log(`resetState()`);
+
         state = structuredClone(initialState);
         originalDeck.length = 0;
         deck = undefined;
@@ -50,21 +52,17 @@
 
     function incrementCount(who)
     {
-        console.log(`${who} - incrementCount() => start`);
+        console.log(`${who} - incrementCount()`);
         
         state[who].count++;
-
-        console.log(`${who} - incrementCount() => end`);
     }
 
     function pushItemToHistory(who, what)
     {
-        console.log(`${who} - pushItemToHistory() > start`);
+        console.log(`${who} - pushItemToHistory()`);
 
         // add item to history
         state[who].history.push(what);
-        
-        console.log(`${who} - pushItemToHistory() > end`);
     }
 
     function setAceValue(card, value)
@@ -84,12 +82,10 @@
 
     function updateScore(who)
     {
-        console.log(`${who} - updateScore() => start`);
+        console.log(`${who} - updateScore()`);
         
         const calculateValueOfArray = state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0);
 
         // assign the sum of the array as the score (NOTE the use of EQUALS not 'plus equals')
         state[who].score = calculateValueOfArray;
-
-        console.log(`${who} - updateScore() => end`);
     }
