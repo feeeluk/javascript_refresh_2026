@@ -204,9 +204,12 @@
         state.user.stick = true;
 
         await revealHand("dealer");
-        await evaluateHand("dealer");
-        await calculateGameResult();
-        await dealerDetermineActions();
+        evaluateHand("dealer");
+        calculateGameResult();
+        if(state.resultGameOver === false)
+        {
+            dealerDetermineActions();
+        }
     }
     
 
