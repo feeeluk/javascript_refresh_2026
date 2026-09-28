@@ -185,7 +185,7 @@
 
         else
         {
-            dealerCalculateAceValue(who);
+            dealerCalculateAceValue();
         }
 
         evaluateHand(who);
@@ -506,18 +506,20 @@
 
     // DEALER
 
-    function dealerCalculateAceValue(who)
+    function dealerCalculateAceValue()
     {
-        console.log(`${who} - dealerCalculateAceValue()`);
+        console.log(`dealerCalculateAceValue()`);
+
+        const who = "dealer";
 
         // if the hand does not contain an ace then end
         if(!doesHandContainAce(who))
         {
-            console.log(`${who} - dealer's hand does not contain an ace`);
+            console.log(`dealer's hand does not contain an ace`);
             return;
         }
 
-        if(state[who].score === 0)
+        if(state.dealer.score === 0)
         {
             dealerHandleTwoAces();
             console.log(`${who} - dealer's hand has two aces`);
@@ -526,7 +528,7 @@
         else
         {
             dealerHandleSingleAce();
-            console.log(`${who} - dealer's hand has a single ace`);
+            console.log(`dealer's hand has a single ace`);
         }        
 
         updateScore(who);
