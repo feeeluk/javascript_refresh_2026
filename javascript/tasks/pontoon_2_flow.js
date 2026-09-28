@@ -89,9 +89,11 @@
         }
     }
 
-    async function userDetermineAvailableActions(who)
+    async function userDetermineAvailableActions()
     {
-        console.log(`${who} - userDetermineAvailableActions()`);
+        console.log(`userDetermineAvailableActions()`);
+
+        const who = "user";
         
         // if game is still running give user options
         if(state.resultGameOver) return;
@@ -99,7 +101,7 @@
         // if Pontoon then only show stick
         if(isHandPontoon(who))
         {
-            console.log(`${who} - Pontoon, so only show Stick button`);
+            console.log(`User has Pontoon, so only show Stick button`);
             enableStickButton();
 
             return;
@@ -108,7 +110,7 @@
         // five card hand - stick only
         if(isHandFiveCards(who))
         {
-            console.log(`${who} - Five Card Hand, so only show Stick button`);
+            console.log(`User has a Five Card Hand, so only show Stick button`);
             enableStickButton();
 
             return;
@@ -117,7 +119,7 @@
         // score is 21 - stick only
         if(isHandTwentyOne(who))
         {
-            console.log(`${who} - score is 21, so only show 'stick' button`);
+            console.log(`User has a score of 21, so only show 'stick' button`);
             enableStickButton();
 
             return;
@@ -126,7 +128,7 @@
         // if less than 15 only show twist
         if(state[who].score < 15)
         {
-            console.log(`${who} - hand is less than 15, so only show 'twist' button`);
+            console.log(`User's hand is less than 15, so only show 'twist' button`);
             enableTwistButton();
 
             return;
@@ -134,7 +136,7 @@
 
         // for all other scenarios show both
       
-            console.log(`${who} - score is 15 or more, show both 'twist' and 'stick' buttons`);
+            console.log(`User's score is 15 or more, show both 'twist' and 'stick' buttons`);
             
             enableTwistButton();
             enableStickButton();
@@ -191,7 +193,7 @@
 
         if(who === "user")
         {
-            userDetermineAvailableActions(who);
+            userDetermineAvailableActions();
         }
     }
 
