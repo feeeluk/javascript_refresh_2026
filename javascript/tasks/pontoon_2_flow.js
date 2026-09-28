@@ -523,7 +523,7 @@
 
         else
         {
-            dealerHandleSingleAce(who);
+            dealerHandleSingleAce();
             console.log(`${who} - dealer's hand has a single ace`);
         }        
 
@@ -531,14 +531,14 @@
         showScore(who);
     }
 
-    function dealerHandleSingleAce(who)
+    function dealerHandleSingleAce()
     {
-        console.log(`${who} - dealerHandleSingleAce()`);
+        console.log(`dealerHandleSingleAce()`);
 
-        const indexOfAce = state[who].cards.findIndex(item => item.rank.startsWith("A"));
-        const theAceCard = state[who].cards[indexOfAce];
+        const indexOfAce = state.dealer.cards.findIndex(item => item.rank.startsWith("A"));
+        const theAceCard = state.dealer.cards[indexOfAce];
 
-        if(state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22
+        if(state.dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22
             &&
             theAceCard.value === 0)
         {
