@@ -416,7 +416,7 @@
         }
 
         // twist ace
-        await userHandleTwistAce(who);
+        await userHandleTwistAce();
 
         return;
     }
@@ -462,9 +462,11 @@
         }
     }
 
-    async function userHandleTwistAce(who)
+    async function userHandleTwistAce()
     {
         console.log(`userHandleTwistAce()`);
+
+        const who = "User";
 
         if(state[who].count > 2
             &&
@@ -475,8 +477,6 @@
             console.log(`${who} - User to choose ace value:`);
 
             await resolveAceValue(state[who].cards.length -1);
-
-            console.log(`Ace value = ${state.User.cards[state[who].cards.length -1].value}`);
         }
 
         else
