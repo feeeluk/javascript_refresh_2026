@@ -15,17 +15,17 @@
     const showUserCount = document.getElementById("uCount");
     const showUserHistory = document.getElementById("uHistory");
 
-    const userActionTitle = document.getElementById("uActionTitle");
-    const userActionTwist = document.getElementById("uActionTwist");
-    const userActionStick = document.getElementById("uActionStick");
+    const UserActionTitle = document.getElementById("uActionTitle");
+    const UserActionTwist = document.getElementById("uActionTwist");
+    const UserActionStick = document.getElementById("uActionStick");
     const actionButtons = {
-        twist: userActionTwist,
-        stick: userActionStick
+        twist: UserActionTwist,
+        stick: UserActionStick
         };
 
-    const userAceTitle = document.getElementById("uAceTitle");
-    const userAceOne = document.getElementById("uAceOne");
-    const userAceEleven = document.getElementById("uAceEleven");
+    const UserAceTitle = document.getElementById("uAceTitle");
+    const UserAceOne = document.getElementById("uAceOne");
+    const UserAceEleven = document.getElementById("uAceEleven");
 
     const showDealerCards = document.getElementById("dCards");
     const showDealerScore = document.getElementById("dScore");
@@ -51,13 +51,13 @@
         showUserCount.innerHTML = "";
         showUserHistory.innerHTML = "";
 
-        userActionTitle.style.class = "disabled";
-        userActionTwist.disabled = true;
-        userActionStick.disabled = true;
+        UserActionTitle.style.class = "disabled";
+        UserActionTwist.disabled = true;
+        UserActionStick.disabled = true;
 
-        userAceTitle.style.class = "disabled";
-        userAceOne.disabled = true;
-        userAceEleven.disabled = true;
+        UserAceTitle.style.class = "disabled";
+        UserAceOne.disabled = true;
+        UserAceEleven.disabled = true;
 
         showDealerCards.innerHTML = "";
         showDealerScore.innerHTML = "";
@@ -92,8 +92,8 @@
         // change the src to show the back of the card
         newElement.src = "/resources/images/cards/back/back-blue.png";
 
-        // apend the new image to the relevant user
-        (who === "user") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
+        // apend the new image to the relevant User
+        (who === "User") ? showUserCards.append(newElement) : showDealerCards.append(newElement);
     }
 
 
@@ -110,7 +110,7 @@
             // create a nodeList of the existing image elements
             let nodeList;
 
-            (who === "user") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
+            (who === "User") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
 
             // edit the src of each card
             nodeList[state[who].count].src = "/resources/images/cards/front/" + state[who].cards[state[who].count].rank + state[who].cards[state[who].count].suit + ".png";
@@ -125,7 +125,7 @@
             // create variable of array length
             let lengthOfArray = state[who].cards.length -1; 
 
-            (who === "user") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
+            (who === "User") ? nodeList = showUserCards.querySelectorAll("img") : nodeList = showDealerCards.querySelectorAll("img");
 
             // edit the src of each card
             nodeList[lengthOfArray].src = "/resources/images/cards/front/" + state[who].cards[lengthOfArray].rank + state[who].cards[lengthOfArray].suit + ".png";
@@ -136,14 +136,14 @@
     {
         console.log(`${who} - showCount()`);
         
-        (who === "user") ? showUserCount.textContent = state.user.count : showDealerCount.textContent = state.dealer.count;
+        (who === "User") ? showUserCount.textContent = state.User.count : showDealerCount.textContent = state.Dealer.count;
     }
 
     function showScore(who)
     {
         console.log(`${who} - showScore()`);
 
-        (who === "user") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
+        (who === "User") ? showUserScore.textContent = state[who].score : showDealerScore.textContent = state[who].score;
     }  
 
     function showResultOfGame()
@@ -167,7 +167,7 @@
         let lengthOfHistoryArray = state[who].history.length-1;
         newElement.textContent = state[who].history[lengthOfHistoryArray];
 
-        (who === "user") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
+        (who === "User") ? showUserHistory.append(newElement) : showDealerHistory.append(newElement);
     }
 
 
@@ -186,13 +186,13 @@
 
         userAddHighlightToAce(nodelistOfImages[card], true);
 
-        // get the user's input
+        // get the User's input
         let aceValue = await getAceChoice();
 
-        // assign user's choice to the value of the card
-        setAceValue(state.user.cards[card], aceValue);
+        // assign User's choice to the value of the card
+        setAceValue(state.User.cards[card], aceValue);
 
-        // log user's choice
+        // log User's choice
         console.log(`Ace value = ${aceValue}`);
 
         userRemoveHighlightFromAce(nodelistOfImages[card], false);
@@ -201,12 +201,12 @@
         userDisableAceChoices(false);
 
         // calculate and show score new score
-        updateScore("user");
-        showScore("user");
+        updateScore("User");
+        showScore("User");
 
         // add and show chosen value in history
-        pushItemToHistory("user", `Ace value: ${aceValue}`);
-        createHistoryItem("user");
+        pushItemToHistory("User", `Ace value: ${aceValue}`);
+        createHistoryItem("User");
     }
 
     function setHighlight(element, shouldItBeHighlighted)
@@ -216,11 +216,11 @@
 
     function setAceChoices(shouldTheyBeActive)
     {
-        userAceTitle.classList.toggle("enabled", shouldTheyBeActive);
-        userAceOne.disabled = !shouldTheyBeActive;
-        shouldTheyBeActive ? userAceOne.classList.add("active") : userAceOne.classList.remove("active");
-        userAceEleven.disabled = !shouldTheyBeActive;
-        shouldTheyBeActive ? userAceEleven.classList.add("active") : userAceEleven.classList.remove("active");
+        UserAceTitle.classList.toggle("enabled", shouldTheyBeActive);
+        UserAceOne.disabled = !shouldTheyBeActive;
+        shouldTheyBeActive ? UserAceOne.classList.add("active") : UserAceOne.classList.remove("active");
+        UserAceEleven.disabled = !shouldTheyBeActive;
+        shouldTheyBeActive ? UserAceEleven.classList.add("active") : UserAceEleven.classList.remove("active");
     }
 
     function getAceChoice()
@@ -289,7 +289,7 @@
     })
 
     document.getElementById("uActionTwist").addEventListener("click", event => {
-        twist("user");
+        twist("User");
     })
 
     document.getElementById("playAgain").addEventListener("click", event => {

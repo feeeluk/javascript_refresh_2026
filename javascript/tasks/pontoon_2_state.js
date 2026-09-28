@@ -7,7 +7,7 @@
 // ////////////////////////////////////////
 
     const initialState = {
-        user: {
+        User: {
             score: 0,
             count: 0,
             cards: [],
@@ -19,7 +19,7 @@
             handIsFourCard: false,
             handIsFiveCard: false,
         },
-        dealer: {
+        Dealer: {
             score: 0,
             count: 0,
             cards: [],
