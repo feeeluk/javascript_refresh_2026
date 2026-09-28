@@ -80,7 +80,7 @@
         {
             // ace values can only be set AFTER both cards have been seen
             await delayUI(time);
-            await userCalculateAceValue(who);
+            await userCalculateAceValue();
         }
 
         else if(who === "Dealer")
@@ -386,18 +386,22 @@
 
     // USER
 
-    async function userCalculateAceValue(who)
+    async function userCalculateAceValue()
     {
-        console.log(`${who} - userCalculateAceValue()`);
+        console.log(`userCalculateAceValue()`);
+
+        const who = "User";
 
         // if the hand does not contain an ace then end
         if(!doesHandContainAce(who))
         {
-            console.log(`${who} - User's hand does not contain an ace.`);
+            console.log(`User's hand does not contain an ace.`);
             return;
         }
 
-        // has an ace, but hand is Pontoon
+        // otherwise
+
+        // has an ace, hand is Pontoon
         if(isHandPontoon(who))
         {
             userHandlePontoonAce();
@@ -407,7 +411,7 @@
             return;
         }
 
-        // has an ace, hand is NOT Pontoon but only 2 cards
+        // has an ace, hand is NOT Pontoon, only 2 cards
         if(state[who].count === 2)
         {
             await userHandleTwoCardAce();
@@ -428,7 +432,7 @@
         (state.user.cards[0].value === 0) ?  setAceValue(state.user.cards[0], 11) : setAceValue(state.user.cards[1], 11);
     }
 
-    async function userHandleTwoCardAce(who)
+    async function userHandleTwoCardAce()
     {
         console.log(`userHandleTwoCardAce()`);
 
