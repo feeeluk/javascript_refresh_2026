@@ -517,7 +517,7 @@
 
         if(state[who].score === 0)
         {
-            dealerHandleTwoAces(who);
+            dealerHandleTwoAces();
             console.log(`${who} - dealer's hand has two aces`);
         }
 
@@ -551,12 +551,12 @@
         }
     }
 
-    function dealerHandleTwoAces(who)
+    function dealerHandleTwoAces()
     {
-        e.log(`${who} - dealerHandleTwoAces()`);
+        console.log(`dealerHandleTwoAces()`);
 
-        const theFirstAce = state[who].cards[0];
-        const theSecondAce = state[who].cards[1];
+        const theFirstAce = state.dealer.cards[0];
+        const theSecondAce = state.dealer.cards[1];
         
         setAceValue(theFirstAce, 1);
         setAceValue(theSecondAce, 11);
