@@ -410,7 +410,7 @@
         // has an ace, hand is NOT Pontoon but only 2 cards
         if(state[who].count === 2)
         {
-            await userHandleTwoCardAce(who);
+            await userHandleTwoCardAce();
 
             return;
         }
@@ -432,32 +432,32 @@
     {
         console.log(`userHandleTwoCardAce()`);
 
-        if(state[who].cards[0].value === 0
+        if(state.User.cards[0].value === 0
             &&
-            state[who].cards[1].value === 0)
+            state.User.cards[1].value === 0)
         {
-            console.log(`${who} - both User's cards are aces`);
-            console.log(`${who} - User to choose ace values:`);
+            console.log(`both User's cards are aces`);
+            console.log(`User to choose ace values:`);
 
-            for(let i = 0; i <= (state[who].cards.length -1); i++)
+            for(let i = 0; i <= (state.User.cards.length -1); i++)
             {
                 await resolveAceValue(i);
             }
         }
 
         // the first card is an ace
-        else if(state[who].cards[0].value === 0)
+        else if(state.User.cards[0].value === 0)
         {
-            console.log(`${who} - User's first card is an ace`);
-            console.log(`${who} - User to choose ace value:`);
+            console.log(`User's first card is an ace`);
+            console.log(`User to choose ace value:`);
             await resolveAceValue(0);
         }
 
         // the second card is an ace
-        else if(state[who].cards[1].value === 0)
+        else if(state.User.cards[1].value === 0)
         {
-            console.log(`${who} - User's second card is an ace`);
-            console.log(`${who} - User to choose ace value:`);
+            console.log(`User's second card is an ace`);
+            console.log(`User to choose ace value:`);
             await resolveAceValue(1);
         }
     }
