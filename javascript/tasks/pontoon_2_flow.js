@@ -400,7 +400,7 @@
         // has an ace, but hand is Pontoon
         if(isHandPontoon(who))
         {
-            userHandlePontoonAce(who);
+            userHandlePontoonAce();
             updateScore(who);
             showScore(who);
 
@@ -421,11 +421,11 @@
         return;
     }
 
-    function userHandlePontoonAce(who)
+    function userHandlePontoonAce()
     {
         console.log(`userHandlePontoonAce()`);
 
-        (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
+        (state.user.cards[0].value === 0) ?  setAceValue(state.user.cards[0], 11) : setAceValue(state.user.cards[1], 11);
     }
 
     async function userHandleTwoCardAce(who)
