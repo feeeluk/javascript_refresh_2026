@@ -171,9 +171,9 @@
         showCount(who);
         updateScore(who);
         showScore(who);
-        createHistoryItem(who);
         const latestCard = state[who].cards.length - 1;
         pushItemToHistory(who, state[who].cards[latestCard].rank + state[who].cards[latestCard].suit);
+        createHistoryItem(who);
         
         // calculate the value of any aces
         if(who === "user")
@@ -227,20 +227,24 @@
             changeStateOfHand(who, "handIsBust", true);
             pushItemToHistory(who, "BUST");
             createHistoryItem(who);
+
+            return;
         }
 
-        else if(isHandPontoon(who) === true)
+        if(isHandPontoon(who) === true)
         {
             console.log(`${who} has Pontoon`);
             
             changeStateOfHand(who, "handIsPontoon", true);
             pushItemToHistory(who, "PONTOON");
             createHistoryItem(who);
+
+            return;
         }
 
-        else if(isHandFiveCards(who))
+        if(isHandFiveCards(who))
         {
-            console.log(`${who} has Fiver Card Hand`);
+            console.log(`${who} has Five Card Hand`);
 
             changeStateOfHand(who, "handIsFiveCard", true);
             pushItemToHistory(who, "Five Card Hand");
@@ -256,7 +260,10 @@
             createHistoryItem(who);
         }
 
-        console.log(`${who} does not have a named hand`);
+        else
+        {
+            console.log(`${who} does not have a named hand`);
+        }
     }
 
     function calculateGameResult()

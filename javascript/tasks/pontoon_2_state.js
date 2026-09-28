@@ -61,7 +61,6 @@
     {
         console.log(`${who} - pushItemToHistory()`);
 
-        // add item to history
         state[who].history.push(what);
     }
 
