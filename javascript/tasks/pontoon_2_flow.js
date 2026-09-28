@@ -377,12 +377,7 @@
 
 
 // Ace Related Functions
-// ////////////////////////////////////////
-
-    function doesHandContainAce(who)
-    {
-        return state[who].cards.some(card => card.rank.startsWith("A"));
-    }    
+// ////////////////////////////////////////   
 
     // USER
 
@@ -524,39 +519,64 @@
             return;
         }
 
+        // if the initial hand contains two aces
         if(state.Dealer.score === 0)
         {
             dealerHandleTwoAces();
-            console.log(`${who} - Dealer's hand has two aces`);
+            console.log(`Dealer's hand has two aces`);
         }
 
+        // all other situations with aces
         else
         {
             dealerHandleSingleAce();
-            console.log(`Dealer's hand has a single ace`);
         }        
 
         updateScore(who);
         showScore(who);
+        console.log(state.Dealer.cards);
     }
 
     function dealerHandleSingleAce()
     {
+        //  this function is called if an ace is detected ANYWHERE within the Dealer's hand
+        
         console.log(`dealerHandleSingleAce()`);
 
         const indexOfAce = state.Dealer.cards.findIndex(item => item.rank.startsWith("A"));
-        const theAceCard = state.Dealer.cards[indexOfAce];
+        const theAce = state.Dealer.cards[indexOfAce];
+        const lengthOfArray = state.Dealer.cards.length -1;
+        const theLastCard = state.Dealer.cards[lengthOfArray];
 
-        if(state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 22
-            &&
-            theAceCard.value === 0)
+        // if the initial deal only contains one ace then give that ace a value of 11
+        if(state.Dealer.count <= 2)
         {
-            setAceValue(theAceCard, 1);
+            console.log(`Dealer's hand has an ace in the intitial deal`);
+            setAceValue(theAce, 11);
+            console.log(indexOfAce, theAce);
         }
 
-        else if(theAceCard.value === 0)
+        // if a twisted ace, then give it a value of 1, but if it will not bust the hand give it value of 11
+        else if(state.Dealer.count > 2
+                &&
+                state.Dealer.cards[lengthOfArray].value === 0
+                &&
+                state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 21)
         {
-            setAceValue(theAceCard, 11);
+            console.log(`Dealer twist ace - 1`);
+
+            setAceValue(theLastCard, 1);
+        }
+
+        else if(state.Dealer.count > 2
+                &&
+                state.Dealer.cards[lengthOfArray].value === 0
+                &&
+                state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 < 22)
+        {
+            console.log(`Dealer twist ace - 11`);
+
+            setAceValue(theLastCard, 11);
         }
     }
 
@@ -571,6 +591,12 @@
         setAceValue(theSecondAce, 11);
     }
 
+    // OTHER ACE HELPER FUNCTIONS
+
+    function doesHandContainAce(who)
+    {
+        return state[who].cards.some(card => card.rank.startsWith("A"));
+    }
 
 // Action Related Functions
 // ////////////////////////////////////////
