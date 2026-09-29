@@ -244,8 +244,10 @@
             return;
         }
 
-        if(isHandFiveCards(who))
+        if(isHandFiveCards())
         {
+            const wo = "User";
+            
             console.log(`${who} has Five Card Hand`);
 
             changeStateOfHand(who, "handIsFiveCard", true);
@@ -556,7 +558,7 @@
             console.log(indexOfAce, theAce);
         }
 
-        // if a twisted ace, then give it a value of 1, but if it will not bust the hand give it value of 11
+        // if a twisted ace, and a value of 11 will bust the hand then give it a value of 1
         else if(state.Dealer.count > 2
                 &&
                 state.Dealer.cards[lengthOfArray].value === 0
@@ -568,6 +570,7 @@
             setAceValue(theLastCard, 1);
         }
 
+        // if a twisted ace, and a value of 11 will not bust the hand then give it a value of 11
         else if(state.Dealer.count > 2
                 &&
                 state.Dealer.cards[lengthOfArray].value === 0
@@ -644,11 +647,11 @@
                 );
     }
 
-    function isHandFiveCards(who)
+    function isHandFiveCards()
     {
-        return  state[who].count === 5
+        return  state.User.count === 5
                 &&
-                state[who].score <= 21;         
+                state.User.score <= 21;         
     }
 
     function isHandTwentyOne(who)
