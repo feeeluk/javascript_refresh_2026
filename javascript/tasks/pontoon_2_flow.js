@@ -506,22 +506,22 @@
         return state[who].cards[cardsIndex].rank.startsWith("A");
     }
 
-    function userAddHighlightToAce(element)
+    function addHighlightToAce(element)
     {
         setHighlight(element, true);
     }
 
-    function userRemoveHighlightFromAce(element)
+    function removeHighlightFromAce(element)
     {
         setHighlight(element, false);
     }
 
-    function userEnableAceChoices(state)
+    function enableAceChoices(state)
     {
         setAceChoices(state);
     }
 
-    function userDisableAceChoices(state)
+    function disableAceChoices(state)
     {
         setAceChoices(state);
     }
