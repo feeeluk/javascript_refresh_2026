@@ -77,6 +77,8 @@
         // Handle ace/s
         await delayUI(time);
         await calculateAceValue(who);
+
+        calculateGameResult();
     }
 
     async function userDetermineAvailableActions()
