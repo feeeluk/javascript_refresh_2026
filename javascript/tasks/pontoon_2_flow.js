@@ -594,8 +594,54 @@
         setAceValue(theSecondAce, 11);
     }
 
-    // OTHER ACE HELPER FUNCTIONS
+    // OTHER ACE FUNCTIONS
 
+    function calculateAceValue(who)
+    {
+        if(!doesHandContainAce(who))
+        {
+            console.log(`${who}'s hand does not contain an ace.`);
+            return;
+        }
+
+        if(state[who].count <= 2)
+        {
+            console.log(`${who}'s hand contains one or more aces in the 'initial deal'.`);
+            // handleInitialDealAces(who);
+        }
+
+        else
+        {
+            console.log(`${who}'s has twisted an ace.`);
+            // handleTwistedAce(who);
+        }
+    }
+
+    function handleInitialDealAces(who)
+    {
+
+    }
+
+        function handleInitialDealPontoonAce(who)
+        {
+
+        }
+
+        function handleInitialDealSingleAce(who)
+        {
+
+        }
+
+        function handleInitialDealDoubleAces(who)
+        {
+
+        }
+
+    function handleTwistedAce(who)
+    {
+
+    }
+    
     function doesHandContainAce(who)
     {
         return state[who].cards.some(card => card.rank.startsWith("A"));
