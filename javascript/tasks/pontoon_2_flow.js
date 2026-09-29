@@ -444,7 +444,7 @@
 
             for(let i = 0; i <= (state.User.cards.length -1); i++)
             {
-                await resolveAceValue(i);
+                await selectAceValue(i);
             }
         }
 
@@ -453,7 +453,7 @@
         {
             console.log(`User's first card is an ace`);
             console.log(`User to choose ace value:`);
-            await resolveAceValue(0);
+            await selectAceValue(0);
         }
 
         // the second card is an ace
@@ -461,7 +461,7 @@
         {
             console.log(`User's second card is an ace`);
             console.log(`User to choose ace value:`);
-            await resolveAceValue(1);
+            await selectAceValue(1);
         }
     }
 
@@ -479,7 +479,7 @@
             console.log(`${who} - Twisted ace`);
             console.log(`${who} - User to choose ace value:`);
 
-            await resolveAceValue(state[who].cards.length -1);
+            await selectAceValue(state[who].cards.length -1);
         }
 
         else
@@ -663,7 +663,7 @@
             {
                 for(let i = 0; i <= (state.User.cards.length -1); i++)
                 {
-                    await resolveAceValue(i);
+                    await selectAceValue(i);
                 }
             }
 
@@ -677,12 +677,23 @@
             }
         }
 
-        function handleInitialDealSingleAce(who)
+        async function handleInitialDealSingleAce(who)
         {
             console.log(`${who} - handleInitialDealSingleAce()`);
             if(who === "User")
             {
-                console.log(`User`);
+                if(state.User.cards[0].value === 0)
+                {
+                    console.log(`User's first card is an ace - choose value:`);
+                    await selectAceValue(0);
+                }
+
+                // the second card is an ace
+                else if(state.User.cards[1].value === 0)
+                {
+                    console.log(`User's second card is an ace - choose value:`);
+                    await selectAceValue(1);
+                }
             }
 
             else if(who === "Dealer")
@@ -690,7 +701,6 @@
                 console.log(`Dealer`);
             }
         }
-
         
 
     function handleTwistedAce(who)

@@ -174,10 +174,10 @@
 // Ace Related Functions
 // ////////////////////////////////////////
 
-    async function resolveAceValue(card)
+    async function selectAceValue(card)
     {
 
-        console.log(`resolveAceValue()`);
+        console.log(`selectAceValue()`);
 
         const nodelistOfImages = showUserCards.querySelectorAll("img");
         
