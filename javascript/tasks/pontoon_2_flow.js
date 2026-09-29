@@ -80,12 +80,12 @@
         {
             // ace values can only be set AFTER both cards have been seen
             await delayUI(time);
-            await userCalculateAceValue();
+            // await userCalculateAceValue();
         }
 
         else if(who === "Dealer")
         {
-            dealerCalculateAceValue(who);
+            // dealerCalculateAceValue(who);
         }
     }
 
@@ -180,20 +180,20 @@
         // calculate the value of any aces
         if(who === "User")
         {
-            await userCalculateAceValue(who);
+            // await userCalculateAceValue(who);
         }
 
         else
         {
-            dealerCalculateAceValue();
+            // dealerCalculateAceValue();
         }
 
-        evaluateHand(who);
-        calculateGameResult();
+        // evaluateHand(who);
+        // calculateGameResult();
 
         if(who === "User")
         {
-            userDetermineAvailableActions();
+            // userDetermineAvailableActions();
         }
     }
 
@@ -206,8 +206,8 @@
         state.User.stick = true;
 
         await revealHand("Dealer");
-        evaluateHand("Dealer");
-        calculateGameResult();
+        // evaluateHand("Dealer");
+        // calculateGameResult();
         if(state.resultGameOver === false)
         {
             dealerDetermineActions();
