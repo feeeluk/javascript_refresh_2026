@@ -628,7 +628,7 @@
         // if initial deal is Pontoon
         if(isHandPontoon(who))
         {
-            console.log(`${who}'s initial deal is Pontoon`);
+            console.log(`${who}'s 'initial deal' is Pontoon`);
             handleInitialDealPontoonAce(who);
             return;
         }
@@ -636,13 +636,15 @@
         // if initial deal contains double aces
         if(state[who].score === 0)
         {
-            console.log(`${who}'s initial deal is double aces`);
+            console.log(`${who}'s 'initial deal' is double aces`);
+            handleInitialDealDoubleAces(who);
         }
 
         // if initial deal contains a single ace
         else
         {
-            console.log(`${who}'s initial deal includes a single ace`);
+            console.log(`${who}'s 'initial deal' includes a single ace`);
+            handleInitialDealSingleAce(who);
         }
 
     }
@@ -654,14 +656,39 @@
             (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
         }
 
-        function handleInitialDealDoubleAces(who)
+        async function handleInitialDealDoubleAces(who)
         {
+            console.log(`${who} - handleInitialDealDoubleAces()`);
+            if(who === "User")
+            {
+                for(let i = 0; i <= (state.User.cards.length -1); i++)
+                {
+                    await resolveAceValue(i);
+                }
+            }
 
+            else if(who === "Dealer")
+            {
+                const theFirstAce = state.Dealer.cards[0];
+                const theSecondAce = state.Dealer.cards[1];
+                
+                setAceValue(theFirstAce, 1);
+                setAceValue(theSecondAce, 11);
+            }
         }
 
         function handleInitialDealSingleAce(who)
         {
+            console.log(`${who} - handleInitialDealSingleAce()`);
+            if(who === "User")
+            {
+                console.log(`User`);
+            }
 
+            else if(who === "Dealer")
+            {
+                console.log(`Dealer`);
+            }
         }
 
         

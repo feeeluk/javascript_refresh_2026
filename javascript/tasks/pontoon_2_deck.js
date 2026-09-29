@@ -19,7 +19,7 @@
         console.log(`createDeck()`);
 
         const suits = ["H", "D", "S", "C"];
-        const ranks = ["A", "K"];
+        const ranks = ["A"];
         // const ranks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
         const values = {
             "A": 0,
