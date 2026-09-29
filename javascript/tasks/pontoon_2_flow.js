@@ -302,6 +302,8 @@
         // if User has 5 card hand and Dealer does not have Pontoon => User wins
         else if(isHandFiveCards("User") === true
             &&
+            state.Dealer.count === 2
+            &&
             isHandPontoon("Dealer") === false)
         {
             changeStateOfGame("resultGameOver", true);
