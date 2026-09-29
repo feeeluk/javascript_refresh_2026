@@ -362,221 +362,6 @@
 // Ace Related Functions
 // ////////////////////////////////////////   
 
-    // USER
-
-    async function userCalculateAceValue()
-    {
-        console.log(`userCalculateAceValue()`);
-
-        const who = "User";
-
-        // if the hand does not contain an ace then end
-        if(!doesHandContainAce(who))
-        {
-            console.log(`User's hand does not contain an ace.`);
-            return;
-        }
-
-        // otherwise
-
-        // has an ace, hand is Pontoon
-        if(isHandPontoon(who))
-        {
-            userHandlePontoonAce();
-            updateScore(who);
-            showScore(who);
-
-            return;
-        }
-
-        // has an ace, hand is NOT Pontoon, only 2 cards
-        if(state[who].count === 2)
-        {
-            await userHandleTwoCardAce();
-
-            return;
-        }
-
-        // twist ace
-        await userHandleTwistAce();
-
-        return;
-    }
-
-    function userHandlePontoonAce()
-    {
-        console.log(`userHandlePontoonAce()`);
-
-        (state.user.cards[0].value === 0) ?  setAceValue(state.user.cards[0], 11) : setAceValue(state.user.cards[1], 11);
-    }
-
-    async function userHandleTwoCardAce()
-    {
-        console.log(`userHandleTwoCardAce()`);
-
-        if(state.User.cards[0].value === 0
-            &&
-            state.User.cards[1].value === 0)
-        {
-            console.log(`both User's cards are aces`);
-            console.log(`User to choose ace values:`);
-
-            for(let i = 0; i <= (state.User.cards.length -1); i++)
-            {
-                await selectAceValue(i);
-            }
-        }
-
-        // the first card is an ace
-        else if(state.User.cards[0].value === 0)
-        {
-            console.log(`User's first card is an ace`);
-            console.log(`User to choose ace value:`);
-            await selectAceValue(0);
-        }
-
-        // the second card is an ace
-        else if(state.User.cards[1].value === 0)
-        {
-            console.log(`User's second card is an ace`);
-            console.log(`User to choose ace value:`);
-            await selectAceValue(1);
-        }
-    }
-
-    async function userHandleTwistAce()
-    {
-        console.log(`userHandleTwistAce()`);
-
-        const who = "User";
-
-        if(state[who].count > 2
-            &&
-            state[who].cards[state[who].count-1].value === 0
-        )
-        {
-            console.log(`${who} - Twisted ace`);
-            console.log(`${who} - User to choose ace value:`);
-
-            await selectAceValue(state[who].cards.length -1);
-        }
-
-        else
-        {
-            console.log(`${who} - twisted card is not an ace`);
-        }
-    }
-
-    function userAddHighlightToAce(element)
-    {
-        setHighlight(element, true);
-    }
-
-    function userRemoveHighlightFromAce(element)
-    {
-        setHighlight(element, false);
-    }
-
-    function userEnableAceChoices(state)
-    {
-        setAceChoices(state);
-    }
-
-    function userDisableAceChoices(state)
-    {
-        setAceChoices(state);
-    }
-
-    // DEALER
-
-    function dealerCalculateAceValue()
-    {
-        console.log(`dealerCalculateAceValue()`);
-
-        const who = "Dealer";
-
-        // if the hand does not contain an ace then end
-        if(!doesHandContainAce(who))
-        {
-            console.log(`Dealer's hand does not contain an ace`);
-            return;
-        }
-
-        // if the initial hand contains two aces
-        if(state.Dealer.score === 0)
-        {
-            dealerHandleTwoAces();
-            console.log(`Dealer's hand has two aces`);
-        }
-
-        // all other situations with aces
-        else
-        {
-            dealerHandleSingleAce();
-        }        
-
-        updateScore(who);
-        showScore(who);
-        console.log(state.Dealer.cards);
-    }
-
-    function dealerHandleSingleAce()
-    {
-        //  this function is called if an ace is detected ANYWHERE within the Dealer's hand
-        
-        console.log(`dealerHandleSingleAce()`);
-
-        const indexOfAce = state.Dealer.cards.findIndex(item => item.rank.startsWith("A"));
-        const theAce = state.Dealer.cards[indexOfAce];
-        const lengthOfArray = state.Dealer.cards.length -1;
-        const theLastCard = state.Dealer.cards[lengthOfArray];
-
-        // if the initial deal only contains one ace then give that ace a value of 11
-        if(state.Dealer.count <= 2)
-        {
-            console.log(`Dealer's hand has an ace in the intitial deal`);
-            setAceValue(theAce, 11);
-            console.log(indexOfAce, theAce);
-        }
-
-        // if a twisted ace, and a value of 11 will bust the hand then give it a value of 1
-        else if(state.Dealer.count > 2
-                &&
-                state.Dealer.cards[lengthOfArray].value === 0
-                &&
-                state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 21)
-        {
-            console.log(`Dealer twist ace - 1`);
-
-            setAceValue(theLastCard, 1);
-        }
-
-        // if a twisted ace, and a value of 11 will not bust the hand then give it a value of 11
-        else if(state.Dealer.count > 2
-                &&
-                state.Dealer.cards[lengthOfArray].value === 0
-                &&
-                state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 < 22)
-        {
-            console.log(`Dealer twist ace - 11`);
-
-            setAceValue(theLastCard, 11);
-        }
-    }
-
-    function dealerHandleTwoAces()
-    {
-        console.log(`dealerHandleTwoAces()`);
-
-        const theFirstAce = state.Dealer.cards[0];
-        const theSecondAce = state.Dealer.cards[1];
-        
-        setAceValue(theFirstAce, 1);
-        setAceValue(theSecondAce, 11);
-    }
-
-    // OTHER ACE FUNCTIONS
-
     async function calculateAceValue(who)
     {
         console.log(`${who} - calculateAceValue()`);
@@ -670,13 +455,13 @@
                     if(state[who].cards[0].value === 0)
                     {
                         console.log(`${who}'s first card is an ace`);
-                        (who === "User") ? await selectAceValue(0) : setAceValue(state.Dealer.cards[0], 11);
+                        (who === "User") ? await selectAceValue(0) : setAceValue(state[who].cards[0], 11);
                     }
 
-                    else if(state.User.cards[1].value === 0)
+                    else if(state[who].cards[1].value === 0)
                     {
                         console.log(`${who}'s second card is an ace`);
-                        (who === "User") ? await selectAceValue(1) : setAceValue(state.Dealer.cards[1], 11);
+                        (who === "User") ? await selectAceValue(1) : setAceValue(state[who].cards[1], 11);
                     }
                 }
             }      
@@ -719,6 +504,26 @@
     function doesCardContainAce(who, cardsIndex)
     {
         return state[who].cards[cardsIndex].rank.startsWith("A");
+    }
+
+    function userAddHighlightToAce(element)
+    {
+        setHighlight(element, true);
+    }
+
+    function userRemoveHighlightFromAce(element)
+    {
+        setHighlight(element, false);
+    }
+
+    function userEnableAceChoices(state)
+    {
+        setAceChoices(state);
+    }
+
+    function userDisableAceChoices(state)
+    {
+        setAceChoices(state);
     }
 
 // Action Related Functions
