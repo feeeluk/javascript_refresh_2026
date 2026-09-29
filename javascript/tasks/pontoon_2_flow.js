@@ -581,23 +581,29 @@
     {
         console.log(`${who} - calculateAceValue()`);
 
+        // if the hand does not contain an ace then exit
         if(!doesHandContainAce(who))
         {
             console.log(`${who}'s hand does not contain an ace`);
             return;
         }
 
+        // if 'initial deal' has an ace
         if(state[who].count <= 2)
         {
             console.log(`${who}'s hand contains one or more aces in the 'initial deal'`);
             await handleInitialDealAces(who);
         }
 
-        else
+        // if a twisted card. is it an ace?
+        else if(doesCardContainAce(who, state[who].cards.length -1))
         {
             console.log(`${who} has twisted an ace`);
-            // await handleTwistedAce(who);
+            await handleTwistedAce(who);
         }
+
+        updateScore(who);
+        showScore(who);
     }
 
         async function handleInitialDealAces(who)
@@ -670,20 +676,49 @@
                     else if(state.User.cards[1].value === 0)
                     {
                         console.log(`${who}'s second card is an ace`);
-                        (who === "User") ? await selectAceValue(1) : setAceValue(state.Dealer.cards[0], 11);
+                        (who === "User") ? await selectAceValue(1) : setAceValue(state.Dealer.cards[1], 11);
                     }
                 }
+            }      
+
+        async function handleTwistedAce(who)
+        {
+            console.log(`${who} - handleTwistedAce()`);
+
+            const lastCardIndex = state[who].cards.length -1;
+            const lastCard = state[who].cards[lastCardIndex];
+
+            if(who === "User")
+            {
+                await selectAceValue(lastCardIndex);
             }
             
+            else if(who === "Dealer")
+            {
+                if(state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 21)
+                {
+                    console.log(`Dealer twist ace - ace value = 1`);
 
-        function handleTwistedAce(who)
-        {
+                    setAceValue(lastCard, 1);
+                }
 
+                else if(state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 < 22)
+                {
+                    console.log(`Dealer twist ace - ace value = 11`);
+
+                    setAceValue(lastCard, 11);
+                }
+            }
         }
     
     function doesHandContainAce(who)
     {
         return state[who].cards.some(card => card.rank.startsWith("A"));
+    }
+
+    function doesCardContainAce(who, cardsIndex)
+    {
+        return state[who].cards[cardsIndex].rank.startsWith("A");
     }
 
 // Action Related Functions
