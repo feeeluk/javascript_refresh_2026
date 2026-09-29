@@ -18,9 +18,9 @@
         await createDeck();
         await initialDeal();
         await revealHand("User");
-        await evaluateHand("User");
-        await calculateGameResult("User");
-        userDetermineAvailableActions("User");       
+        // await evaluateHand("User");
+        // await calculateGameResult("User");
+        // userDetermineAvailableActions("User");       
     }
 
     async function initialDeal()
@@ -75,18 +75,20 @@
         createHistoryItem(who);
 
         // Handle aces
+        await delayUI(time);
+        calculateAceValue(who);
 
-        if(who === "User")
-        {
+        // if(who === "User")
+        // {
             // ace values can only be set AFTER both cards have been seen
-            await delayUI(time);
+            // await delayUI(time);
             // await userCalculateAceValue();
-        }
+        // }
 
-        else if(who === "Dealer")
-        {
+        // else if(who === "Dealer")
+        // {
             // dealerCalculateAceValue(who);
-        }
+        // }
     }
 
     async function userDetermineAvailableActions()
@@ -598,31 +600,61 @@
 
     function calculateAceValue(who)
     {
+        console.log(`${who} - calculateAceValue()`);
+
         if(!doesHandContainAce(who))
         {
-            console.log(`${who}'s hand does not contain an ace.`);
+            console.log(`${who}'s hand does not contain an ace`);
             return;
         }
 
         if(state[who].count <= 2)
         {
-            console.log(`${who}'s hand contains one or more aces in the 'initial deal'.`);
-            // handleInitialDealAces(who);
+            console.log(`${who}'s hand contains one or more aces in the 'initial deal'`);
+            handleInitialDealAces(who);
         }
 
         else
         {
-            console.log(`${who}'s has twisted an ace.`);
+            console.log(`${who}'s has twisted an ace`);
             // handleTwistedAce(who);
         }
     }
 
     function handleInitialDealAces(who)
     {
+        console.log(`${who} - handleInitialDealAces()`);
+
+        // if initial deal is Pontoon
+        if(isHandPontoon(who))
+        {
+            console.log(`${who}'s initial deal is Pontoon`);
+            handleInitialDealPontoonAce(who);
+            return;
+        }
+
+        // if initial deal contains double aces
+        if(state[who].score === 0)
+        {
+            console.log(`${who}'s initial deal is double aces`);
+        }
+
+        // if initial deal contains a single ace
+        else
+        {
+            console.log(`${who}'s initial deal includes a single ace`);
+        }
 
     }
 
         function handleInitialDealPontoonAce(who)
+        {
+            console.log(`${who} - handleInitialDealPontoonAce()`);
+
+            (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
+        }
+
+        function handleInitialDealDoubleAces(who)
         {
 
         }
@@ -632,10 +664,7 @@
 
         }
 
-        function handleInitialDealDoubleAces(who)
-        {
-
-        }
+        
 
     function handleTwistedAce(who)
     {
