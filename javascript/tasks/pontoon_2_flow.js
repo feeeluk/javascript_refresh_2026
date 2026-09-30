@@ -518,9 +518,9 @@
         setHighlight(element, false);
     }
 
-    function enableAceChoices(state)
+    function enableAceChoices(enableButtons)
     {
-        setAceChoices(state);
+        setAceChoices(enableButtons);
     }
 
     function disableAceChoices(state)
