@@ -216,7 +216,7 @@
             return;
         }
 
-        if(isHandPontoon(who) === true)
+        if(isHandPontoon("who") === true)
         {
             console.log(`${who} has Pontoon`);
             
@@ -229,13 +229,11 @@
 
         if(isHandFiveCards())
         {
-            const wo = "User";
-            
-            console.log(`${who} has Five Card Hand`);
+            console.log(`User has Five Card Hand`);
 
-            changeStateOfHand(who, "handIsFiveCard", true);
-            pushItemToHistory(who, "Five Card Hand");
-            createHistoryItem(who);
+            changeStateOfHand("User", "handIsFiveCard", true);
+            pushItemToHistory("User", "Five Card Hand");
+            createHistoryItem("User");
         }
 
         if(isHandTwentyOne(who))
