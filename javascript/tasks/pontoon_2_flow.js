@@ -19,7 +19,7 @@
         await initialDeal();
         await revealHand("User");
         await evaluateHand("User");
-        await calculateGameResult("User");
+        await determineResult("User");
         userDetermineAvailableActions("User");       
     }
 
@@ -78,7 +78,7 @@
         await delayUI(time);
         await calculateAceValue(who);
 
-        calculateGameResult();
+        determineResult();
     }
 
     async function userDetermineAvailableActions()
@@ -172,7 +172,7 @@
         await calculateAceValue(who);
 
         evaluateHand(who);
-        calculateGameResult();
+        determineResult();
 
         if(who === "User")
         {
@@ -251,7 +251,7 @@
         }
     }
 
-    function calculateGameResult()
+    function determineResult()
     {
         console.log(`calculateGameResult()`);
         
