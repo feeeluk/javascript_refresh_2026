@@ -136,7 +136,7 @@
     {
         console.log(`${who} - showCount()`);
         
-        (who === "User") ? showUserCount.textContent = state.User.count : showDealerCount.textContent = state.Dealer.count;
+        (who === "User") ? showUserCount.textContent = state.User.countOfRevealedCards : showDealerCount.textContent = state.Dealer.count;
     }
 
     function showScore(who)

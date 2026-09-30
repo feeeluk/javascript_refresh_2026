@@ -576,7 +576,7 @@
 
     function isHandFiveCards()
     {
-        return  state.User.count === 5
+        return  state.User.countOfRevealedCards === 5
                 &&
                 state.User.score <= 21;         
     }

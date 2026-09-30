@@ -28,7 +28,6 @@
             handIsPontoon: false,
             handIsTwentyOne: false,
             handIsFourCard: false,
-            handIsFiveCard: false,
         },
 
         resultWin: null,
