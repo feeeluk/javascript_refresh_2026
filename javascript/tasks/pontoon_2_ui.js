@@ -51,11 +51,11 @@
         showUserCount.innerHTML = "";
         showUserHistory.innerHTML = "";
 
-        UserActionTitle.style.class = "disabled";
+        UserActionTitle.className = "disabled";
         UserActionTwist.disabled = true;
         UserActionStick.disabled = true;
 
-        UserAceTitle.style.class = "disabled";
+        UserAceTitle.className = "disabled";
         UserAceOne.disabled = true;
         UserAceEleven.disabled = true;
 
@@ -209,18 +209,18 @@
         createHistoryItem("User");
     }
 
-    function setHighlight(element, shouldItBeHighlighted)
+    function setHighlight(element, enableHighlight)
     {
-        element.classList.toggle("highlighted", shouldItBeHighlighted);
+        element.classList.toggle("highlighted", enableHighlight);
     }
 
-    function setAceChoices(shouldTheyBeActive)
+    function setAceChoices(enableButtons)
     {
-        UserAceTitle.classList.toggle("enabled", shouldTheyBeActive);
-        UserAceOne.disabled = !shouldTheyBeActive;
-        shouldTheyBeActive ? UserAceOne.classList.add("active") : UserAceOne.classList.remove("active");
-        UserAceEleven.disabled = !shouldTheyBeActive;
-        shouldTheyBeActive ? UserAceEleven.classList.add("active") : UserAceEleven.classList.remove("active");
+        UserAceTitle.classList.toggle("enabled", enableButtons);
+        UserAceOne.disabled = !enableButtons;
+        enableButtons ? UserAceOne.classList.add("active") : UserAceOne.classList.remove("active");
+        UserAceEleven.disabled = !enableButtons;
+        enableButtons ? UserAceEleven.classList.add("active") : UserAceEleven.classList.remove("active");
     }
 
     function getAceChoice()
