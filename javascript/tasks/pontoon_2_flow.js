@@ -216,7 +216,7 @@
             return;
         }
 
-        if(isHandPontoon("who") === true)
+        if(isHandPontoon(who) === true)
         {
             console.log(`${who} has Pontoon`);
             
@@ -402,6 +402,7 @@
             {
                 console.log(`${who}'s 'initial deal' is Pontoon`);
                 handleInitialDealPontoonAce(who);
+                updateAceHistory(who, 11)
                 return;
             }
 
@@ -446,6 +447,8 @@
                     
                     setAceValue(theFirstAce, 1);
                     setAceValue(theSecondAce, 11);
+                    updateAceHistory(who, 1)
+                    updateAceHistory(who, 11)
                 }
             }
 
@@ -453,19 +456,23 @@
             {
                 console.log(`${who} - handleInitialDealSingleAce()`);
 
+                if(state[who].cards[0].value === 0)
                 {
-                    if(state[who].cards[0].value === 0)
-                    {
-                        console.log(`${who}'s first card is an ace`);
-                        (who === "User") ? await selectAceValue(0) : setAceValue(state[who].cards[0], 11);
-                    }
-
-                    else if(state[who].cards[1].value === 0)
-                    {
-                        console.log(`${who}'s second card is an ace`);
-                        (who === "User") ? await selectAceValue(1) : setAceValue(state[who].cards[1], 11);
-                    }
+                    console.log(`${who}'s first card is an ace`);
+                    (who === "User") ? await selectAceValue(0) : setAceValue(state[who].cards[0], 11);
                 }
+
+                else if(state[who].cards[1].value === 0)
+                {
+                    console.log(`${who}'s second card is an ace`);
+                    (who === "User") ? await selectAceValue(1) : setAceValue(state[who].cards[1], 11);
+                }
+
+                if(who === "Dealer")
+                {
+                    updateAceHistory(who, 11)
+                }
+                
             }      
 
         async function handleTwistedAce(who)
@@ -480,20 +487,22 @@
                 await selectAceValue(lastCardIndex);
             }
             
-            else if(who === "Dealer")
+            else
             {
-                if(state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 21)
+                if(state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 > 21)
                 {
-                    console.log(`Dealer twist ace - ace value = 1`);
+                    console.log(`${who} twist ace = Ace value: 1`);
 
                     setAceValue(lastCard, 1);
+                    updateAceHistory(who, 1);
                 }
 
-                else if(state.Dealer.cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 < 22)
+                else if(state[who].cards.map(card => card.value).reduce((sum, v) => sum + v, 0) + 11 < 22)
                 {
-                    console.log(`Dealer twist ace - ace value = 11`);
+                    console.log(`${who} twist ace = Ace value: 11`);
 
                     setAceValue(lastCard, 11);
+                    updateAceHistory(who, 11);
                 }
             }
         }
@@ -510,22 +519,28 @@
 
     function addHighlightToAce(element)
     {
-        setHighlight(element, true);
+        showHighlight(element, true);
     }
 
     function removeHighlightFromAce(element)
     {
-        setHighlight(element, false);
+        showHighlight(element, false);
     }
 
     function enableAceChoices(enableButtons)
     {
-        setAceChoices(enableButtons);
+        showAceChoices(enableButtons);
     }
 
     function disableAceChoices(state)
     {
-        setAceChoices(state);
+        showAceChoices(state);
+    }
+
+    function updateAceHistory(who, aceValue)
+    {
+        pushItemToHistory(who, `Ace value: ${aceValue}`);
+        createHistoryItem(who);
     }
 
 // Action Related Functions
@@ -533,22 +548,22 @@
     
     function enableTwistButton()
     {
-        setActionButtons("twist", true);
+        showActionButtons("twist", true);
     }
 
     function disableTwistButton()
     {
-        setActionButtons("twist", false);
+        showActionButtons("twist", false);
     }
 
     function enableStickButton()
     {
-        setActionButtons("stick", true);
+        showActionButtons("stick", true);
     }
 
     function disableStickButton()
     {
-        setActionButtons("stick", false);
+        showActionButtons("stick", false);
     }
 
 

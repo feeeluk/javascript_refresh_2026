@@ -209,12 +209,12 @@
         createHistoryItem("User");
     }
 
-    function setHighlight(element, enableHighlight)
+    function showHighlight(element, enableHighlight)
     {
         element.classList.toggle("highlighted", enableHighlight);
     }
 
-    function setAceChoices(enableButtons)
+    function showAceChoices(enableButtons)
     {
         UserAceTitle.classList.toggle("enabled", enableButtons);
         UserAceOne.disabled = !enableButtons;
@@ -247,7 +247,7 @@
 // User Action Related Functions
 // ////////////////////////////////////////
 
-    function setActionButtons(whichButton, shouldItBeActive)
+    function showActionButtons(whichButton, shouldItBeActive)
     {
         const button = actionButtons[whichButton];
 
