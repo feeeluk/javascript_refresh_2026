@@ -8,45 +8,45 @@
 // Game Mechanics Functions
 // ////////////////////////////////////////
 
-    async function startGame()
+    async function startGame() // Must be async because child functions perform asynchronous work
     {
         resetUI();
         resetState();
 
         console.log(`startGame()`);
 
-        await createDeck();
-        await initialDeal();
-        await revealHand("User");
-        await evaluateHand("User");
-        await determineResult("User");
-        userDetermineAvailableActions("User");       
+        createDeck();
+        await initialDeal(); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed 
+        await revealHand("User"); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed 
+        evaluateHand("User");
+        determineResult("User");
+        determineAvailableActionsForUser("User");       
     }
 
-    async function initialDeal()
+    async function initialDeal() // Must be async because child functions perform asynchronous work
     {
         console.log(`initialDeal()`);
         
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed 
 
         getCardFromDeck("User");
         dealCard("User");
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         getCardFromDeck("Dealer");
         dealCard("Dealer");
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         getCardFromDeck("User");
         dealCard("User");
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         getCardFromDeck("Dealer");
         dealCard("Dealer");
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
     }
 
-    async function revealHand(who)
+    async function revealHand(who) // Must be async because child functions perform asynchronous work
     {
         console.log(`${who} - revealHand()`);
 
@@ -62,7 +62,7 @@
         showScore(who);
         pushItemToHistory(who, (firstCard.rank + firstCard.suit));
         createHistoryItem(who);
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         // show the second card
         console.log(`${who} - Reveal the second card`);
@@ -75,13 +75,13 @@
         createHistoryItem(who);
 
         // Handle ace/s
-        await delayUI(time);
-        await calculateAceValue(who);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
+        await calculateAceValue(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         determineResult();
     }
 
-    async function userDetermineAvailableActions()
+    function determineAvailableActionsForUser()
     {
         console.log(`userDetermineAvailableActions()`);
 
@@ -133,17 +133,17 @@
             enableStickButton();
     }
 
-    async function dealerDetermineActions()
+    async function determineActionsForDealer() // Must be async because child functions perform asynchronous work
     {
         console.log(`DealerDetermineActions()`);
         
         while(state.resultGameOver === false)
         {
-            await twist("Dealer"); // Must be async because twist() performs asynchronous work.
+            await twist("Dealer"); // Must be awaited because this function contains asynchronous work that needs to complete before the function can return
         }
     }
 
-    async function twist(who)
+    async function twist(who) // Must be async because child functions perform asynchronous work
     {
         console.log(`${who} - twist()`);
         
@@ -156,7 +156,7 @@
         // deal a card
         getCardFromDeck(who);
         dealCard(who);
-        await delayUI(time);
+        await delayUI(time); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
         
         // reveal the card
         showCard(who);
@@ -168,19 +168,18 @@
         pushItemToHistory(who, state[who].cards[latestCard].rank + state[who].cards[latestCard].suit);
         createHistoryItem(who);
         
-        // calculate the value of any aces
-        await calculateAceValue(who);
+        await calculateAceValue(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         evaluateHand(who);
         determineResult();
 
         if(who === "User")
         {
-           userDetermineAvailableActions();
+           determineAvailableActionsForUser();
         }
     }
 
-    async function stick()
+    async function stick() // Must be async because child functions perform asynchronous work
     {
         console.log(`stick()`);
 
@@ -188,12 +187,11 @@
         disableStickButton();
         state.User.stick = true;
 
-        await revealHand("Dealer");
-        // evaluateHand("Dealer");
-        // calculateGameResult();
+        await revealHand("Dealer"); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
+
         if(state.resultGameOver === false)
         {
-            dealerDetermineActions();
+            await determineActionsForDealer(); // Wait for the dealer's turn to finish before ending the game flow
         }
     }
     
@@ -364,7 +362,7 @@
 // Ace Related Functions
 // ////////////////////////////////////////   
 
-    async function calculateAceValue(who)
+    async function calculateAceValue(who) // Must be async because await is used
     {
         console.log(`${who} - calculateAceValue()`);
 
@@ -379,21 +377,21 @@
         if(state[who].count <= 2)
         {
             console.log(`${who}'s hand contains one or more aces in the 'initial deal'`);
-            await handleInitialDealAces(who);
+            await handleInitialDealAces(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
         }
 
         // if a twisted card. is it an ace?
         else if(doesCardContainAce(who, state[who].cards.length -1))
         {
             console.log(`${who} has twisted an ace`);
-            await handleTwistedAce(who);
+            await handleTwistedAce(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
         }
 
         updateScore(who);
         showScore(who);
     }
 
-        async function handleInitialDealAces(who)
+        async function handleInitialDealAces(who) // Must be async because child functions perform asynchronous work
         {
             console.log(`${who} - handleInitialDealAces()`);
 
@@ -410,14 +408,14 @@
             if(state[who].score === 0)
             {
                 console.log(`${who}'s 'initial deal' is double aces`);
-                await handleInitialDealDoubleAces(who);
+                await handleInitialDealDoubleAces(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
             }
 
             // if initial deal contains a single ace
             else
             {
                 console.log(`${who}'s 'initial deal' includes a single ace`);
-                await handleInitialDealSingleAce(who);
+                await handleInitialDealSingleAce(who); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
             }
 
         }
@@ -429,14 +427,14 @@
                 (state[who].cards[0].value === 0) ?  setAceValue(state[who].cards[0], 11) : setAceValue(state[who].cards[1], 11);
             }
 
-            async function handleInitialDealDoubleAces(who)
+            async function handleInitialDealDoubleAces(who) // Must be async because child functions perform asynchronous work
             {
                 console.log(`${who} - handleInitialDealDoubleAces()`);
                 if(who === "User")
                 {
                     for(let i = 0; i <= (state.User.cards.length -1); i++)
                     {
-                        await selectAceValue(i);
+                        await selectAceValue(i); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
                     }
                 }
 
@@ -452,20 +450,20 @@
                 }
             }
 
-            async function handleInitialDealSingleAce(who)
+            async function handleInitialDealSingleAce(who) // Must be async because child functions perform asynchronous work
             {
                 console.log(`${who} - handleInitialDealSingleAce()`);
 
                 if(state[who].cards[0].value === 0)
                 {
                     console.log(`${who}'s first card is an ace`);
-                    (who === "User") ? await selectAceValue(0) : setAceValue(state[who].cards[0], 11);
+                    (who === "User") ? await selectAceValue(0) : setAceValue(state[who].cards[0], 11); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
                 }
 
                 else if(state[who].cards[1].value === 0)
                 {
                     console.log(`${who}'s second card is an ace`);
-                    (who === "User") ? await selectAceValue(1) : setAceValue(state[who].cards[1], 11);
+                    (who === "User") ? await selectAceValue(1) : setAceValue(state[who].cards[1], 11); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
                 }
 
                 if(who === "Dealer")
@@ -475,7 +473,7 @@
                 
             }      
 
-        async function handleTwistedAce(who)
+        async function handleTwistedAce(who) // Must be async because child functions perform asynchronous work
         {
             console.log(`${who} - handleTwistedAce()`);
 
@@ -484,7 +482,7 @@
 
             if(who === "User")
             {
-                await selectAceValue(lastCardIndex);
+                await selectAceValue(lastCardIndex); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
             }
             
             else

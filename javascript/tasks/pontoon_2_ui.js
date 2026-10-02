@@ -174,7 +174,7 @@
 // Ace Related Functions
 // ////////////////////////////////////////
 
-    async function selectAceValue(card)
+    async function selectAceValue(card) // Must be async because child functions perform asynchronous work
     {
 
         console.log(`selectAceValue()`);
@@ -187,7 +187,7 @@
         addHighlightToAce(nodelistOfImages[card], true);
 
         // get the User's input
-        let aceValue = await getAceChoice();
+        let aceValue = await getAceChoice(); // Must be awaited because this function contains asynchronous work that needs to complete before the next line is executed
 
         // assign User's choice to the value of the card
         setAceValue(state.User.cards[card], aceValue);
@@ -256,7 +256,7 @@
         button.classList.toggle("active", shouldItBeActive);
     }    
 
-    async function getActionChoice()
+    async function getActionChoice() // must be async because it returns a promise (which, in this instance, only resolves)
     {
         return new Promise(resolve => {
 
